@@ -5,26 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gap 3D Fit Viewer Case Study | Sambit Nayak</title>
   <link rel="stylesheet" href="case-study.css">
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 </head>
 <body>
   <header class="topbar">
     <nav class="shell nav" aria-label="Primary navigation">
       <a class="brand" href="../portfolio.html#top" aria-label="Home">
-        <span class="brand-mark">SN</span>
-        <span>Sambit Nayak</span>
-        <span>Product Designer</span>
+        <img class="brand-logo" src="../Images/main.jpeg" alt="" aria-hidden="true">
       </a>
       <div class="nav-links">
         <a href="../portfolio.html#work">Work</a>
         <a href="mailto:sambitnayak.ux@gmail.com">Contact</a>
       </div>
-      <a class="resume-link" href="#">Resume</a>
+      <a class="resume-link btn-pill" href="#">Resume</a>
     </nav>
   </header>
 
   <main class="shell project-frame">
     <aside class="case-rail" aria-label="Case study navigation">
-      <a class="back-link" href="../portfolio.html#work">Back</a>
+      <a class="back-link" href="../portfolio.html#work"><span class="iconify" data-icon="pixelarticons:arrow-left" aria-hidden="true"></span> Back</a>
       <nav class="toc">
         <a href="#overview">Overview</a>
         <a href="#problem">Problem</a>
@@ -124,49 +123,71 @@
     </article>
   </main>
 
-  <footer class="shell footer">
-    <div class="footer-top">
-      <div>
-        <p class="footer-title">SamNayak@2026</p>
-        <p class="footer-subtitle">Designed and built by Sambit</p>
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="footer-mountain" aria-hidden="true"></div>
+    <div class="footer-nav">
+      <div class="footer-links-row">
+        <a href="#" class="footer-pill">LinkedIn</a>
+        <a href="#" class="footer-pill">Instagram</a>
+        <a href="mailto:sambitnayak.ux@gmail.com" class="footer-pill">Contact</a>
       </div>
-      <div class="footer-work">
-        <p class="footer-title">Interested to work with me?</p>
-        <a class="footer-email" href="mailto:sambitnayak.ux@gmail.com">sambitnayak.ux@gmail.com</a>
+      <div class="footer-links-row">
+        <a href="#" class="footer-pill">X.com</a>
+        <a href="#" class="footer-pill">Substack</a>
       </div>
-    </div>
-    <div class="footer-middle">
-      <p class="footer-cta">LET'S GET IN TOUCH</p>
-      <div class="socials">
-        <a href="#">Instagram</a>
-        <a href="#">Substack</a>
-        <a href="#">LinkedIN</a>
-        <a href="#">Twitter</a>
-      </div>
-      <time class="footer-time" data-local-time datetime="">9:34:10 pm</time>
     </div>
     <p class="footer-name">Sambit Nayak</p>
   </footer>
   <script>
-    const timeNodes = document.querySelectorAll("[data-local-time]");
+    (function () {
+      var motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
 
-    function updateFooterTime() {
-      const now = new Date();
-      const formatted = new Intl.DateTimeFormat("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true
-      }).format(now).toLowerCase();
+      /* ── Footer: parallax + entrance ── */
+      var footer   = document.querySelector('.site-footer');
+      var footerBg = document.querySelector('.footer-mountain');
+      if (footer) {
+        if (footerBg && motionOk) {
+          var rafF = null;
+          function runFooterParallax() {
+            var rect = footer.getBoundingClientRect(), vh = window.innerHeight;
+            if (rect.bottom < 0 || rect.top > vh) { rafF = null; return; }
+            var offset = ((vh - rect.top) / (vh + rect.height) - 0.5) * 60;
+            footerBg.style.backgroundPositionY = 'calc(40% + ' + offset + 'px)';
+            rafF = null;
+          }
+          window.addEventListener('scroll', function () {
+            if (!rafF) rafF = requestAnimationFrame(runFooterParallax);
+          }, { passive: true });
+          runFooterParallax();
+        }
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) footer.classList.add('in-view');
+          });
+        }, { threshold: 0.08 }).observe(footer);
+      }
 
-      timeNodes.forEach((node) => {
-        node.textContent = formatted;
-        node.setAttribute("datetime", now.toISOString());
-      });
-    }
+      if (!motionOk) return;
 
-    updateFooterTime();
-    window.setInterval(updateFooterTime, 1000);
+      /* ── Case section + card reveals ── */
+      var sObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          el.classList.add('is-vis');
+          el.querySelectorAll('.insight-card, .diagram-card').forEach(function (card, i) {
+            setTimeout(function () { card.classList.add('is-vis'); }, 160 + i * 85);
+          });
+          var qp = el.querySelector('.quote-panel');
+          if (qp) setTimeout(function () { qp.classList.add('is-vis'); }, 180);
+          var vis = el.querySelector('.visual');
+          if (vis) setTimeout(function () { vis.classList.add('is-vis'); }, 120);
+          sObs.unobserve(el);
+        });
+      }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+      document.querySelectorAll('.case-section').forEach(function (el) { sObs.observe(el); });
+
+    })();
   </script>
 </body>
 </html>

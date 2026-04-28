@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask SamAI | Sambit Nayak</title>
+  <meta name="description" content="Ask SamAI, a prototype digital replica sidebar for Sambit Nayak's portfolio.">
+  <link rel="stylesheet" href="site-pages.css">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Primary navigation">
+      <a class="brand" href="portfolio.html#top" aria-label="Home">
+        <img class="brand-logo" src="Images/main.jpeg" alt="" aria-hidden="true">
+      </a>
+      <div class="nav-links">
+        <a href="portfolio.html#work">Work</a>
+        <a href="about.html">About</a>
+        <a href="playground.html">Playground</a>
+      </div>
+      <button class="resume-link" type="button" data-samai-open>SamAI</button>
+    </nav>
+  </header>
+
+  <main class="shell page">
+    <section class="page-hero" aria-labelledby="samai-title">
+      <div>
+        <p class="page-kicker">Ask SamAI</p>
+        <h1 class="page-title" id="samai-title">SamAI lives in the sidebar.</h1>
+        <p class="page-lede">Use the SamAI pill in the top navigation to open the Atlas-style right sidebar. This route stays available as a direct launcher.</p>
+        <p><button class="btn-pill" type="button" data-samai-open>Open SamAI</button></p>
+      </div>
+      <aside class="glass-panel portrait-panel">
+        <p class="micro-label">Mode</p>
+        <div class="signal-grid">
+          <div class="signal"><strong>UI</strong><span>Sidebar prototype</span></div>
+          <div class="signal"><strong>API</strong><span>Connect later</span></div>
+          <div class="signal"><strong>Chat</strong><span>Dummy replies</span></div>
+          <div class="signal"><strong>Sam</strong><span>Portfolio context</span></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="samai-sidebar.js"></script>
+  <script src="site-pages.js"></script>
+  <script>
+    if (window.openSamAI) window.openSamAI();
+  </script>
+</body>
+</html>

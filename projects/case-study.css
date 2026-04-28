@@ -53,6 +53,12 @@ a {
   text-decoration: none;
 }
 
+button {
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
 img,
 video {
   max-width: 100%;
@@ -118,8 +124,9 @@ p,
 
 .nav-links {
   display: flex;
-  gap: 22px;
+  gap: 18px;
   align-items: center;
+  flex-wrap: wrap;
   justify-self: end;
 }
 
@@ -579,19 +586,18 @@ h1 {
   }
 
   .nav {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     gap: 12px;
     min-height: auto;
     padding: 14px 0;
   }
 
-  .resume-link {
-    display: none;
-  }
-
   .nav-links {
     justify-self: end;
     gap: 2px;
+    overflow-x: auto;
+    max-width: calc(100vw - 96px);
+    flex-wrap: nowrap;
   }
 
   .nav-links a {
@@ -674,7 +680,7 @@ h1 {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: clamp(200px, 24vw, 320px);
+  min-height: clamp(360px, 38vw, 560px);
 }
 
 .footer-mountain {
@@ -707,7 +713,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding: clamp(28px, 4vw, 48px) clamp(24px, 2.5vw, 40px) 0;
+  padding: clamp(38px, 5vw, 70px) clamp(24px, 2.5vw, 40px) 0;
 }
 
 .footer-links-row {
@@ -754,14 +760,48 @@ h1 {
 .site-footer .footer-name {
   position: relative;
   z-index: 2;
+  display: block;
+  width: 100%;
+  min-height: clamp(128px, 18vw, 275px);
   margin-top: auto;
   color: #ffffff;
+  font-size: clamp(112px, 17vw, 280px);
+  line-height: 0.68;
+  letter-spacing: -0.075em;
+  white-space: nowrap;
   text-align: center;
   opacity: 0;
+  transform: translateY(clamp(18px, 3.5vw, 58px));
+}
+
+.site-footer .footer-name.pixel-ready {
+  color: transparent;
+}
+
+.footer-name canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .site-footer.in-view .footer-name {
   animation: name-in 1.1s ease 280ms forwards;
+}
+
+@media (max-width: 900px) {
+  .site-footer {
+    min-height: clamp(360px, 72vw, 540px);
+  }
+
+  .site-footer .footer-name {
+    min-height: clamp(92px, 24vw, 160px);
+    font-size: clamp(78px, 24vw, 150px);
+    letter-spacing: -0.085em;
+    transform: translateY(clamp(18px, 6vw, 42px));
+  }
 }
 
 /* ─── Scroll Reveal ─────────────────────────────── */

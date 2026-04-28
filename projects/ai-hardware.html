@@ -15,9 +15,10 @@
       </a>
       <div class="nav-links">
         <a href="../portfolio.html#work">Work</a>
-        <a href="mailto:sambitnayak.ux@gmail.com">Contact</a>
+        <a href="../about.html">About</a>
+        <a href="../playground.html">Playground</a>
       </div>
-      <a class="resume-link btn-pill" href="#">Resume</a>
+      <button class="resume-link btn-pill" type="button" data-samai-open>SamAI</button>
     </nav>
   </header>
 
@@ -173,15 +174,19 @@
       <div class="footer-links-row">
         <a href="#" class="footer-pill">LinkedIn</a>
         <a href="#" class="footer-pill">Instagram</a>
-        <a href="mailto:sambitnayak.ux@gmail.com" class="footer-pill">Contact</a>
       </div>
       <div class="footer-links-row">
+        <a href="../about.html" class="footer-pill">About</a>
+        <a href="../playground.html" class="footer-pill">Playground</a>
+        <button class="footer-pill" type="button" data-samai-open>SamAI</button>
         <a href="#" class="footer-pill">X.com</a>
         <a href="#" class="footer-pill">Substack</a>
       </div>
     </div>
     <p class="footer-name">Sambit Nayak</p>
   </footer>
+  <script src="../footer-pixels.js"></script>
+  <script src="../samai-sidebar.js"></script>
   <script>
     (function () {
       var motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
@@ -210,6 +215,8 @@
           });
         }, { threshold: 0.08 }).observe(footer);
       }
+
+      if (window.initFooterPixelName) window.initFooterPixelName();
 
       if (!motionOk) return;
 

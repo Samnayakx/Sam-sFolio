@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salesforce Trailhead Solve Case Study | Sambit Nayak</title>
+  <link rel="stylesheet" href="case-study.css">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Primary navigation">
+      <a class="brand" href="../portfolio.html#top" aria-label="Home">
+        <span class="brand-mark">SN</span>
+        <span>Sambit Nayak</span>
+        <span>Product Designer</span>
+      </a>
+      <div class="nav-links">
+        <a href="../portfolio.html#work">Work</a>
+        <a href="mailto:sambitnayak.ux@gmail.com">Contact</a>
+      </div>
+      <a class="resume-link" href="#">Resume</a>
+    </nav>
+  </header>
+
+  <main class="shell project-frame">
+    <aside class="case-rail" aria-label="Case study navigation">
+      <a class="back-link" href="../portfolio.html#work">Back</a>
+      <nav class="toc">
+        <a href="#overview">Overview</a>
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#flows">Core Flows</a>
+        <a href="#research">Research</a>
+        <a href="#decisions">Design Decisions</a>
+        <a href="#reflection">Reflection</a>
+      </nav>
+    </aside>
+
+    <article class="case-main">
+      <header class="case-hero">
+        <p class="kicker">Salesforce - Trailhead Platform</p>
+        <h1>Salesforce Trailhead Solve</h1>
+        <div class="meta-grid">
+          <section class="meta-item"><h2>Role</h2><p>Product Designer</p></section>
+          <section class="meta-item"><h2>Timeline</h2><p>Aug 2025 - Present</p></section>
+          <section class="meta-item"><h2>Team</h2><p>Trailhead Platform</p></section>
+          <section class="meta-item"><h2>Skills</h2><p>Research Ops, Strategy, Education UX, Rapid Prototyping</p></section>
+        </div>
+      </header>
+
+      <section class="case-section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <h2>How might Trailhead help learners solve, practice, and retain platform skills?</h2>
+        <p class="lede">Trailhead Solve focuses on research and design for guided learning workflows, including research operations across 650+ users and a shortlist of 72 participants for deeper study.</p>
+        <div class="visual diagram">
+          <div class="diagram-grid">
+            <div class="diagram-card"><span>Mode</span><strong>Edit one thing at a time</strong></div>
+            <div class="diagram-card"><span>Compare</span><strong>Keep context visible</strong></div>
+            <div class="diagram-card"><span>Ship</span><strong>Export without cleanup</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section" id="problem">
+        <h2 class="section-title">Problem</h2>
+        <h2>Desktop creation patterns do not shrink cleanly to a phone.</h2>
+        <p class="body-copy">Small screens punish scattered controls, hidden state, and modal-heavy flows. Users can make quick changes, but they lose confidence when they cannot compare versions or understand what is selected.</p>
+        <div class="three-up">
+          <div class="insight-card"><h3>Selection ambiguity</h3><p>Users struggled when object selection, canvas movement, and edit mode competed for the same gestures.</p></div>
+          <div class="insight-card"><h3>Control overload</h3><p>Full toolbars created visual noise and pushed the actual work area out of focus.</p></div>
+          <div class="insight-card"><h3>Version anxiety</h3><p>People hesitated to experiment when they could not quickly compare or revert changes.</p></div>
+        </div>
+      </section>
+
+      <section class="case-section" id="solution">
+        <h2 class="section-title">Solution</h2>
+        <h2>A compact editor built around modes, previews, and reversible actions.</h2>
+        <p class="body-copy">The prototype uses segmented editing modes, persistent before/after comparison, and predictable bottom-sheet controls. The goal is to make the current task feel obvious without hiding power behind menus.</p>
+        <div class="visual">
+          <img src="../Images/Homepage bg.png" alt="Abstract motion visual used as a project preview.">
+        </div>
+      </section>
+
+      <section class="case-section" id="flows">
+        <h2 class="section-title">Core Flows</h2>
+        <h2>Four flows carry the editing experience.</h2>
+        <div class="two-up">
+          <div class="insight-card"><h3>Open and crop</h3><p>The crop frame has stable handles and predictable snapping, so layout never jumps under the finger.</p></div>
+          <div class="insight-card"><h3>Adjust style</h3><p>Sliders and swatches sit in one bottom sheet, with live preview above the controls.</p></div>
+          <div class="insight-card"><h3>Compare versions</h3><p>A hold-to-preview interaction shows the original without leaving the edit context.</p></div>
+          <div class="insight-card"><h3>Export</h3><p>Presets make output constraints explicit before saving or sharing.</p></div>
+        </div>
+      </section>
+
+      <section class="case-section" id="research">
+        <h2 class="section-title">Research</h2>
+        <h2>Testing showed that confidence mattered more than raw feature count.</h2>
+        <p class="body-copy">I compared mobile editors and watched people make a simple social asset. The fastest users were not the ones with the most tools; they were the ones who always knew what state they were in.</p>
+        <div class="visual diagram">
+          <div class="diagram-grid">
+            <div class="diagram-card"><span>Need</span><strong>Know what is selected</strong></div>
+            <div class="diagram-card"><span>Need</span><strong>Preview before committing</strong></div>
+            <div class="diagram-card"><span>Need</span><strong>Recover from experiments</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section" id="decisions">
+        <h2 class="section-title">Design Decisions</h2>
+        <h2>The final design keeps the canvas visually dominant.</h2>
+        <div class="three-up">
+          <div class="insight-card"><h3>Bottom-first controls</h3><p>Primary controls stay within thumb reach while the work stays visible.</p></div>
+          <div class="insight-card"><h3>One active mode</h3><p>Mode labels reduce accidental edits and make gesture behavior predictable.</p></div>
+          <div class="insight-card"><h3>Preview as habit</h3><p>Comparison is available in every mode, not buried in history.</p></div>
+        </div>
+      </section>
+
+      <section class="case-section" id="reflection">
+        <h2 class="section-title">Reflection</h2>
+        <h2>What I learned</h2>
+        <p class="body-copy">A mobile design tool should feel narrower, not weaker. Constraints helped clarify what belonged in the primary flow and what could wait until users needed more precision.</p>
+        <div class="quote-panel"><p>Small screens reward interfaces that make one action feel unmistakable.</p></div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="shell footer">
+    <div class="footer-top">
+      <div>
+        <p class="footer-title">SamNayak@2026</p>
+        <p class="footer-subtitle">Designed and built by Sambit</p>
+      </div>
+      <div class="footer-work">
+        <p class="footer-title">Interested to work with me?</p>
+        <a class="footer-email" href="mailto:sambitnayak.ux@gmail.com">sambitnayak.ux@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-middle">
+      <p class="footer-cta">LET'S GET IN TOUCH</p>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">Substack</a>
+        <a href="#">LinkedIN</a>
+        <a href="#">Twitter</a>
+      </div>
+      <time class="footer-time" data-local-time datetime="">9:34:10 pm</time>
+    </div>
+    <p class="footer-name">Sambit Nayak</p>
+  </footer>
+  <script>
+    const timeNodes = document.querySelectorAll("[data-local-time]");
+
+    function updateFooterTime() {
+      const now = new Date();
+      const formatted = new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+      }).format(now).toLowerCase();
+
+      timeNodes.forEach((node) => {
+        node.textContent = formatted;
+        node.setAttribute("datetime", now.toISOString());
+      });
+    }
+
+    updateFooterTime();
+    window.setInterval(updateFooterTime, 1000);
+  </script>
+</body>
+</html>

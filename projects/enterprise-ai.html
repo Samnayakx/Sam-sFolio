@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gap 3D Fit Viewer Case Study | Sambit Nayak</title>
+  <link rel="stylesheet" href="case-study.css">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Primary navigation">
+      <a class="brand" href="../portfolio.html#top" aria-label="Home">
+        <span class="brand-mark">SN</span>
+        <span>Sambit Nayak</span>
+        <span>Product Designer</span>
+      </a>
+      <div class="nav-links">
+        <a href="../portfolio.html#work">Work</a>
+        <a href="mailto:sambitnayak.ux@gmail.com">Contact</a>
+      </div>
+      <a class="resume-link" href="#">Resume</a>
+    </nav>
+  </header>
+
+  <main class="shell project-frame">
+    <aside class="case-rail" aria-label="Case study navigation">
+      <a class="back-link" href="../portfolio.html#work">Back</a>
+      <nav class="toc">
+        <a href="#overview">Overview</a>
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#flows">Core Flows</a>
+        <a href="#research">Research</a>
+        <a href="#decisions">Design Decisions</a>
+        <a href="#reflection">Reflection</a>
+      </nav>
+    </aside>
+
+    <article class="case-main">
+      <header class="case-hero">
+        <p class="kicker">Gap Inc. - 3D + Fit Experience</p>
+        <h1>Gap 3D Fit Viewer</h1>
+        <div class="meta-grid">
+          <section class="meta-item"><h2>Role</h2><p>Technical Product Designer</p></section>
+          <section class="meta-item"><h2>Timeline</h2><p>Feb 2022 - Jul 2024</p></section>
+          <section class="meta-item"><h2>Team</h2><p>Gap Inc. 3D and AR Try-On</p></section>
+          <section class="meta-item"><h2>Skills</h2><p>3D Product Visualization, Technical Design, Strategy</p></section>
+        </div>
+      </header>
+
+      <section class="case-section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <h2>How might 3D product visualization improve fit confidence before purchase?</h2>
+        <p class="lede">At Gap Inc., this work focused on improving 3D and fit experiences, supporting AR Try-On initiatives, and helping reduce ecommerce returns through clearer product visualization.</p>
+        <div class="visual diagram">
+          <div class="diagram-grid">
+            <div class="diagram-card"><span>Ask</span><strong>Plain language intake</strong></div>
+            <div class="diagram-card"><span>Verify</span><strong>Source-backed answer</strong></div>
+            <div class="diagram-card"><span>Escalate</span><strong>Clean handoff trail</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section" id="problem">
+        <h2 class="section-title">Problem</h2>
+        <h2>Internal knowledge existed, but it was hard to trust under pressure.</h2>
+        <p class="body-copy">Operators needed fast answers while handling live requests. The old workflow required searching multiple repositories, checking freshness, and rewriting findings into a ticket or message.</p>
+        <div class="three-up">
+          <div class="insight-card"><h3>Slow lookup</h3><p>People lost time translating a customer question into the right internal keyword.</p></div>
+          <div class="insight-card"><h3>Source doubt</h3><p>Even when an answer looked right, teams needed proof before acting on it.</p></div>
+          <div class="insight-card"><h3>Messy handoffs</h3><p>Escalations often missed the reasoning that led to a decision.</p></div>
+        </div>
+      </section>
+
+      <section class="case-section" id="solution">
+        <h2 class="section-title">Solution</h2>
+        <h2>An answer workspace that treats confidence as part of the UI.</h2>
+        <p class="body-copy">The assistant pairs generated answers with highlighted source passages, freshness signals, and an escalation summary. The design avoids a black-box chat experience by making the system's evidence visible.</p>
+        <div class="visual">
+          <img src="../Images/Homepage bg.png" alt="Abstract visual representing an answer workspace.">
+        </div>
+      </section>
+
+      <section class="case-section" id="flows">
+        <h2 class="section-title">Core Flows</h2>
+        <h2>The workflow supports answering, checking, and transferring context.</h2>
+        <div class="two-up">
+          <div class="insight-card"><h3>Question intake</h3><p>Users can paste a messy request and the system extracts the likely policy intent.</p></div>
+          <div class="insight-card"><h3>Evidence review</h3><p>Answers are shown next to source snippets, dates, and document owners.</p></div>
+          <div class="insight-card"><h3>Follow-up prompts</h3><p>The assistant suggests clarifying questions when the source is incomplete.</p></div>
+          <div class="insight-card"><h3>Escalation packet</h3><p>A concise handoff includes the question, answer, citations, and remaining uncertainty.</p></div>
+        </div>
+      </section>
+
+      <section class="case-section" id="research">
+        <h2 class="section-title">Research</h2>
+        <h2>Shadowing sessions revealed that the real job was decision support.</h2>
+        <p class="body-copy">I observed operators handle repeated questions and mapped where they paused. Most delays happened after retrieval, when they needed to determine whether an answer was current enough to use.</p>
+        <div class="visual diagram">
+          <div class="diagram-grid">
+            <div class="diagram-card"><span>Signal</span><strong>Document freshness</strong></div>
+            <div class="diagram-card"><span>Signal</span><strong>Policy owner</strong></div>
+            <div class="diagram-card"><span>Signal</span><strong>Confidence gap</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section" id="decisions">
+        <h2 class="section-title">Design Decisions</h2>
+        <h2>We designed the assistant to slow down at the exact moments risk increased.</h2>
+        <div class="three-up">
+          <div class="insight-card"><h3>Citations by default</h3><p>No answer appears without visible source context.</p></div>
+          <div class="insight-card"><h3>Uncertainty states</h3><p>The UI clearly separates confirmed answers from partial matches.</p></div>
+          <div class="insight-card"><h3>Reusable summaries</h3><p>Operators can transfer a clean explanation into tickets without rewriting.</p></div>
+        </div>
+      </section>
+
+      <section class="case-section" id="reflection">
+        <h2 class="section-title">Reflection</h2>
+        <h2>What I learned</h2>
+        <p class="body-copy">For enterprise AI, speed is only useful when trust keeps up. The strongest design choices made evidence, uncertainty, and ownership visible in the same place as the answer.</p>
+        <div class="quote-panel"><p>Trustworthy AI interfaces show their work before users have to ask.</p></div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="shell footer">
+    <div class="footer-top">
+      <div>
+        <p class="footer-title">SamNayak@2026</p>
+        <p class="footer-subtitle">Designed and built by Sambit</p>
+      </div>
+      <div class="footer-work">
+        <p class="footer-title">Interested to work with me?</p>
+        <a class="footer-email" href="mailto:sambitnayak.ux@gmail.com">sambitnayak.ux@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-middle">
+      <p class="footer-cta">LET'S GET IN TOUCH</p>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">Substack</a>
+        <a href="#">LinkedIN</a>
+        <a href="#">Twitter</a>
+      </div>
+      <time class="footer-time" data-local-time datetime="">9:34:10 pm</time>
+    </div>
+    <p class="footer-name">Sambit Nayak</p>
+  </footer>
+  <script>
+    const timeNodes = document.querySelectorAll("[data-local-time]");
+
+    function updateFooterTime() {
+      const now = new Date();
+      const formatted = new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+      }).format(now).toLowerCase();
+
+      timeNodes.forEach((node) => {
+        node.textContent = formatted;
+        node.setAttribute("datetime", now.toISOString());
+      });
+    }
+
+    updateFooterTime();
+    window.setInterval(updateFooterTime, 1000);
+  </script>
+</body>
+</html>

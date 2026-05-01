@@ -4,84 +4,732 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Playground | Sambit Nayak</title>
-  <meta name="description" content="Design and prototyping playground for Sambit Nayak.">
+  <meta name="description" content="Design artifacts, kits, and experiments by Sambit Nayak.">
   <link rel="stylesheet" href="site-pages.css">
+  <script>try{var t=localStorage.getItem('portfolio-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* ── Page header ── */
+    .pg-header {
+      padding: clamp(56px, 7vw, 88px) 0 clamp(40px, 5vw, 60px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pg-eyebrow {
+      font-family: var(--body-font);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    .pg-title {
+      font-family: var(--display-font);
+      font-size: clamp(38px, 5vw, 72px);
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 0 0 20px;
+    }
+
+    .pg-sub {
+      font-family: var(--body-font);
+      font-size: clamp(14px, 1vw, 16px);
+      line-height: 1.7;
+      color: rgba(246, 240, 230, 0.5);
+      margin: 0;
+      max-width: 560px;
+    }
+
+    [data-theme="light"] .pg-sub { color: rgba(26, 20, 16, 0.5); }
+
+    /* ── Artifact grid ── */
+    .pg-grid {
+      padding: clamp(40px, 5vw, 64px) 0 clamp(64px, 8vw, 96px);
+    }
+
+    .pg-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(16px, 2vw, 28px);
+    }
+
+    .artifact-card {
+      background: transparent;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: border-color 200ms ease;
+    }
+
+    .artifact-card:hover { border-color: rgba(246, 240, 230, 0.35); }
+    [data-theme="light"] .artifact-card:hover { border-color: rgba(26, 20, 16, 0.3); }
+
+    .artifact-card[data-hidden="true"] { display: none; }
+
+    /* Card image area */
+    .card-img {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SVG placeholder graphic fills the cell */
+    .card-graphic {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-family: var(--body-font);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* Card info row */
+    .card-info {
+      padding: 16px 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .card-name {
+      font-family: var(--display-font);
+      font-size: clamp(15px, 1.2vw, 18px);
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 4px;
+      line-height: 1.2;
+    }
+
+    .card-type {
+      font-family: var(--body-font);
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .card-arrow {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: border-color 160ms ease, color 160ms ease, transform 160ms ease;
+      margin-top: 2px;
+    }
+
+    .artifact-card:hover .card-arrow {
+      border-color: var(--ink);
+      color: var(--ink);
+      transform: rotate(45deg);
+    }
+
+    /* ── Artifact detail overlay ── */
+    .artifact-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--bg);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(24px);
+      transition: opacity 300ms ease, transform 300ms ease;
+      overflow-y: auto;
+    }
+
+    .artifact-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+
+    /* Left: media */
+    .ov-media {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: rgba(246, 240, 230, 0.03);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    [data-theme="light"] .ov-media { background: rgba(26, 20, 16, 0.03); }
+
+    .ov-graphic {
+      width: 60%;
+      max-width: 360px;
+    }
+
+    /* Prev / Next */
+    .ov-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink);
+      transition: border-color 160ms ease;
+    }
+
+    .ov-nav-btn:hover { border-color: var(--ink); }
+    .ov-nav-btn.prev { left: 20px; }
+    .ov-nav-btn.next { right: 20px; }
+
+    /* Dot indicator */
+    .ov-dots {
+      position: absolute;
+      bottom: 24px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .ov-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: 0.3;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: opacity 160ms ease;
+    }
+
+    .ov-dot.active { opacity: 1; background: var(--ink); }
+
+    /* Right: info */
+    .ov-info {
+      padding: clamp(56px, 7vw, 80px) clamp(40px, 5vw, 72px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ov-close {
+      align-self: flex-end;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink);
+      margin-bottom: 48px;
+      flex-shrink: 0;
+      transition: border-color 160ms ease;
+    }
+
+    .ov-close:hover { border-color: var(--ink); }
+
+    .ov-type {
+      font-family: var(--body-font);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #f97316;
+      margin: 0 0 14px;
+    }
+
+    .ov-title {
+      font-family: var(--display-font);
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 0 0 20px;
+    }
+
+    .ov-tagline {
+      font-family: var(--body-font);
+      font-size: clamp(14px, 1vw, 16px);
+      line-height: 1.7;
+      color: rgba(246, 240, 230, 0.65);
+      margin: 0 0 36px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    [data-theme="light"] .ov-tagline { color: rgba(26, 20, 16, 0.6); }
+
+    .ov-badge {
+      display: inline-block;
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      color: #f97316;
+      border-radius: 999px;
+      padding: 4px 14px;
+      font-family: var(--body-font);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      margin-bottom: 28px;
+    }
+
+    .ov-desc {
+      font-family: var(--body-font);
+      font-size: clamp(13px, 0.95vw, 15px);
+      line-height: 1.8;
+      color: rgba(246, 240, 230, 0.55);
+      margin: 0 0 28px;
+    }
+
+    [data-theme="light"] .ov-desc { color: rgba(26, 20, 16, 0.55); }
+
+    .ov-specs {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 40px;
+    }
+
+    .ov-specs li {
+      font-family: var(--body-font);
+      font-size: 13px;
+      color: rgba(246, 240, 230, 0.5);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 10px;
+    }
+
+    [data-theme="light"] .ov-specs li { color: rgba(26, 20, 16, 0.5); }
+
+    .ov-specs li::before {
+      content: '—';
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .ov-cta {
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      padding: 16px 32px;
+      font-family: var(--body-font);
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      width: 100%;
+      max-width: 400px;
+      transition: opacity 160ms ease;
+    }
+
+    .ov-cta:hover { opacity: 0.85; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .pg-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 700px) {
+      .artifact-overlay { grid-template-columns: 1fr; }
+      .ov-media { position: relative; height: 50vw; min-height: 260px; }
+    }
+
+    @media (max-width: 480px) {
+      .pg-cards { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
+
   <header class="topbar">
     <nav class="shell nav" aria-label="Primary navigation">
       <a class="brand" href="portfolio.html#top" aria-label="Home">
-        <img class="brand-logo" src="Images/main.jpeg" alt="" aria-hidden="true">
+        <img class="brand-logo" src="Images/logo-chrome.png" alt="" aria-hidden="true">
       </a>
       <div class="nav-links">
         <a href="portfolio.html#work">Work</a>
         <a href="about.html">About</a>
         <a href="playground.html">Playground</a>
+        <a href="https://drive.google.com/file/d/1CUZk1JslQwJWhfeSKr6Z7OB_T4CPGpf5/view" target="_blank" rel="noopener noreferrer">Resume</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">
+          <svg class="theme-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+          <svg class="theme-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
       </div>
-      <button class="resume-link" type="button" data-samai-open>SamAI</button>
+      <button class="ask-sam-btn" type="button" data-samai-open aria-label="Open SamAI">Ask Sam</button>
     </nav>
   </header>
 
-  <main class="shell page">
-    <section class="page-hero" aria-labelledby="playground-title">
-      <div>
-        <p class="page-kicker">Playground</p>
-        <h1 class="page-title" id="playground-title">Small prototypes for future product behavior.</h1>
-        <p class="page-lede">This is a holding space for experiments: interface systems, AI interaction patterns, motion studies, and product ideas that are not full case studies yet.</p>
-      </div>
-      <div class="glass-panel portrait-panel">
-        <p class="micro-label">Current theme</p>
-        <div class="line-scene orbit" aria-hidden="true"></div>
-        <p class="page-lede">Interfaces that reveal context progressively instead of overwhelming users up front.</p>
-      </div>
-    </section>
+  <main>
 
-    <section class="section-grid" aria-labelledby="experiments-title">
-      <p class="micro-label sticky-label" id="experiments-title">Experiments</p>
-      <div class="playground-grid">
-        <article class="glass-panel experiment-card">
-          <div class="experiment-meta"><span>Prototype</span><span>AI UX</span></div>
-          <div class="line-scene orbit" aria-hidden="true"><span></span></div>
-          <div>
-            <h2>Agent Review Loop</h2>
-            <p>A pattern for showing agent confidence, source material, and approval states without turning the UI into a debug console.</p>
-          </div>
-        </article>
-        <article class="glass-panel experiment-card">
-          <div class="experiment-meta"><span>Interface</span><span>Systems</span></div>
-          <div class="line-scene board" aria-hidden="true"><span></span></div>
-          <div>
-            <h2>Dense Ops Board</h2>
-            <p>A compact dashboard study for scanning status, exceptions, and ownership in workflows that repeat all day.</p>
-          </div>
-        </article>
-        <article class="glass-panel experiment-card">
-          <div class="experiment-meta"><span>Motion</span><span>Input</span></div>
-          <div class="line-scene voice" aria-hidden="true"><span></span></div>
-          <div>
-            <h2>Voice Command Layer</h2>
-            <p>A sidebar pattern for natural-language actions that keeps the user anchored in the product context.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
+    <!-- Page header -->
+    <div class="pg-header shell">
+      <p class="pg-eyebrow">Playground</p>
+      <h1 class="pg-title">Artifacts</h1>
+      <p class="pg-sub">Design kits, templates, and experiments I've built and released. Placeholder previews — real files coming soon.</p>
+    </div>
 
-  <footer class="site-footer" aria-label="Site footer">
-    <div class="footer-nav">
-      <div class="footer-links-row">
-        <a href="#" class="footer-pill">LinkedIn</a>
-        <a href="#" class="footer-pill">Instagram</a>
-      </div>
-      <div class="footer-links-row">
-        <a href="about.html" class="footer-pill">About</a>
-        <button class="footer-pill" type="button" data-samai-open>SamAI</button>
+    <!-- Artifact grid -->
+    <div class="pg-grid shell">
+      <div class="pg-cards" id="pg-cards">
+        <!-- Cards injected by JS -->
       </div>
     </div>
-    <p class="footer-name">Sambit Nayak</p>
+
+  </main>
+
+  <!-- Detail overlay -->
+  <div class="artifact-overlay" id="artifact-overlay" role="dialog" aria-modal="true" aria-label="Artifact detail" aria-hidden="true">
+
+    <!-- Left: image -->
+    <div class="ov-media">
+      <svg class="ov-graphic" id="ov-graphic" viewBox="0 0 400 400" aria-hidden="true"></svg>
+      <button class="ov-nav-btn prev" id="ov-prev" aria-label="Previous image">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9,2 4,7 9,12"/></svg>
+      </button>
+      <button class="ov-nav-btn next" id="ov-next" aria-label="Next image">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="5,2 10,7 5,12"/></svg>
+      </button>
+      <div class="ov-dots" id="ov-dots" aria-hidden="true"></div>
+    </div>
+
+    <!-- Right: info -->
+    <div class="ov-info">
+      <button class="ov-close" id="ov-close" aria-label="Close detail view">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/></svg>
+      </button>
+      <p class="ov-type"   id="ov-type"></p>
+      <h2 class="ov-title" id="ov-title"></h2>
+      <p class="ov-tagline" id="ov-tagline"></p>
+      <span class="ov-badge" id="ov-badge"></span>
+      <p class="ov-desc" id="ov-desc"></p>
+      <ul class="ov-specs" id="ov-specs"></ul>
+      <button class="ov-cta" id="ov-cta">Get Artifact →</button>
+    </div>
+
+  </div>
+
+  <footer class="site-footer footer-cosmos" aria-label="Site footer">
+    <div class="footer-mountain" aria-hidden="true"></div>
+    <div class="footer-nav">
+      <div class="footer-intro">
+        <span class="footer-sigil" aria-hidden="true"></span>
+        <p>Designing AI products, systems, and interfaces with care.</p>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Useful</span>
+        <a href="portfolio.html#work">Work</a>
+        <a href="about.html">About</a>
+        <a href="playground.html">Playground</a>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Social</span>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">X.com</a>
+        <a href="#">Substack</a>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Contact</span>
+        <a href="mailto:sambitnayak.ux@gmail.com">Email</a>
+      </div>
+    </div>
+    <p class="footer-name" data-static-wordmark="true">Sambit Nayak</p>
   </footer>
+
+  <script src="theme-toggle.js"></script>
   <script src="footer-pixels.js"></script>
   <script src="samai-sidebar.js"></script>
   <script src="site-pages.js"></script>
+
+  <script>
+  /* ── Artifact data ── */
+  var ARTIFACTS = [
+    {
+      id: 'ai-kit',
+      title: 'AI Interface Kit',
+      type: 'Figma Kit',
+      filter: 'figma',
+      badge: 'Free',
+      tagline: 'Production-ready components built for AI-native products.',
+      desc: 'A Figma component library crafted specifically for AI interfaces — chat UIs, agent dashboards, streaming text, confidence indicators, and more. Every component is auto-layout ready with dark and light variants.',
+      specs: ['92 components', 'Auto layout throughout', 'Dark + light modes', 'Variable typography', 'Covers: chat, agent, streaming, forms'],
+      accent: '#f97316',
+      graphic: 'dots'
+    },
+    {
+      id: 'type-specimen',
+      title: 'Type Specimen No.01',
+      type: 'Typography',
+      filter: 'figma',
+      badge: 'Free',
+      tagline: 'A system for pairing serif display with monospace body type.',
+      desc: 'An exploration in typographic contrast — large serif headlines against tight monospace body. Includes a Figma file with 40+ text styles and specimen prints ready for export.',
+      specs: ['40+ text styles', 'Figma + PDF', '3 scale modes', 'Print-ready A3 poster'],
+      accent: '#e2c08d',
+      graphic: 'type'
+    },
+    {
+      id: 'grid-system',
+      title: 'Grid System v2',
+      type: 'Template',
+      filter: 'templates',
+      badge: 'Free',
+      tagline: 'A 12-column layout grid for product interfaces.',
+      desc: 'A rigorous Figma grid system built for product design teams. Comes with responsive breakpoints, spacing scales, and a companion doc explaining when to break the grid.',
+      specs: ['12-column base', '4 breakpoints', 'Spacing token set', 'Figma + Notion doc'],
+      accent: '#94a3b8',
+      graphic: 'grid'
+    },
+    {
+      id: 'dark-dashboard',
+      title: 'Dark Dashboard',
+      type: 'Template',
+      filter: 'templates',
+      badge: 'Free',
+      tagline: 'A minimal ops dashboard for data-dense products.',
+      desc: 'A clean dark-mode dashboard template for internal tools and data-heavy products. Includes table patterns, stat cards, filter bars, and sidebar navigation — all wired with Figma variables.',
+      specs: ['24 screens', 'Figma variables', 'Dark mode', 'Responsive layout'],
+      accent: '#7c3aed',
+      graphic: 'chart'
+    },
+    {
+      id: 'motion-tokens',
+      title: 'Motion Token Library',
+      type: 'Code',
+      filter: 'code',
+      badge: 'Open Source',
+      tagline: 'A CSS + Figma motion token system for consistent animation.',
+      desc: 'Named timing functions and duration scales extracted from real product work. Includes 12 easing curves, 5 duration tiers, and a Figma plugin that syncs tokens to your design file.',
+      specs: ['12 easing curves', '5 duration tiers', 'CSS custom properties', 'Figma plugin sync', 'npm package'],
+      accent: '#10b981',
+      graphic: 'wave'
+    },
+    {
+      id: 'form-kit',
+      title: 'Form Builder Kit',
+      type: 'Figma Kit',
+      filter: 'figma',
+      badge: 'Free',
+      tagline: 'Every form pattern you\'ll ever need, ready to ship.',
+      desc: 'An exhaustive form component kit covering inputs, selects, checkboxes, radios, file uploads, date pickers, and multi-step flows. Includes error, loading, and empty states throughout.',
+      specs: ['60+ components', 'All interaction states', 'Accessibility annotations', 'Dark + light modes'],
+      accent: '#3b82f6',
+      graphic: 'form'
+    },
+    {
+      id: 'brand-starter',
+      title: 'Brand Starter Pack',
+      type: 'Template',
+      filter: 'templates',
+      badge: 'Free',
+      tagline: 'A minimal brand identity system for early-stage startups.',
+      desc: 'A no-frills brand template covering logo mark, wordmark, color palette, typography, and basic marketing layouts. Built in Figma with a companion one-pager brand guidelines doc.',
+      specs: ['Logo + wordmark variants', 'Color system', 'Type pairing guide', 'Social + print sizes', 'Figma + PDF'],
+      accent: '#f43f5e',
+      graphic: 'brand'
+    },
+    {
+      id: 'llm-chat',
+      title: 'LLM Chat Interface',
+      type: 'Experiment',
+      filter: 'experiments',
+      badge: 'Prototype',
+      tagline: 'A chat UI exploration for streaming, citations, and agent states.',
+      desc: 'An interactive Figma prototype exploring different patterns for LLM chat interfaces — streaming responses, inline citations, tool-use indicators, confidence states, and multi-modal inputs.',
+      specs: ['Interactive prototype', 'Streaming animation patterns', 'Citation display system', 'Agent state indicators', 'Mobile + desktop'],
+      accent: '#f97316',
+      graphic: 'chat'
+    },
+  ];
+
+  /* ── SVG placeholder graphics ── */
+  var GRAPHICS = {
+    dots: function(a) {
+      var s = '';
+      for (var r = 0; r < 8; r++) for (var c = 0; c < 8; c++)
+        s += '<circle cx="' + (50 + c*44) + '" cy="' + (50 + r*44) + '" r="6" fill="' + a + '" opacity="' + (0.12 + (r+c)*0.03) + '"/>';
+      return s;
+    },
+    type: function(a) {
+      return '<text x="200" y="260" font-size="260" font-family="Georgia,serif" fill="' + a + '" opacity="0.18" text-anchor="middle" dominant-baseline="middle">Aa</text>';
+    },
+    grid: function(a) {
+      var s = '';
+      for (var i = 0; i <= 6; i++) {
+        s += '<line x1="' + (i*66) + '" y1="40" x2="' + (i*66) + '" y2="360" stroke="' + a + '" stroke-width="1" opacity="0.3"/>';
+        s += '<line x1="40" y1="' + (40+i*53) + '" x2="360" y2="' + (40+i*53) + '" stroke="' + a + '" stroke-width="1" opacity="0.3"/>';
+      }
+      return s;
+    },
+    chart: function(a) {
+      var bars = [[80,260],[130,180],[180,230],[230,140],[280,200],[330,100]];
+      var s = '';
+      bars.forEach(function(b) { s += '<rect x="' + (b[0]-18) + '" y="' + b[1] + '" width="36" height="' + (320-b[1]) + '" fill="' + a + '" opacity="0.25" rx="3"/>'; });
+      s += '<line x1="60" y1="320" x2="360" y2="320" stroke="' + a + '" stroke-width="1" opacity="0.3"/>';
+      return s;
+    },
+    wave: function(a) {
+      return '<path d="M40 200 C80 100 120 300 160 200 C200 100 240 300 280 200 C320 100 360 300 400 200" fill="none" stroke="' + a + '" stroke-width="2.5" opacity="0.5"/>' +
+             '<path d="M40 240 C80 160 120 320 160 240 C200 160 240 320 280 240 C320 160 360 320 400 240" fill="none" stroke="' + a + '" stroke-width="1.5" opacity="0.2"/>';
+    },
+    form: function(a) {
+      var y = 90, s = '';
+      [100,60,80,60].forEach(function(w) {
+        s += '<rect x="80" y="' + y + '" width="240" height="38" rx="4" fill="none" stroke="' + a + '" stroke-width="1.5" opacity="0.35"/>';
+        s += '<rect x="80" y="' + (y+8) + '" width="' + w + '" height="4" rx="2" fill="' + a + '" opacity="0.15"/>';
+        y += 58;
+      });
+      return s;
+    },
+    brand: function(a) {
+      return '<circle cx="200" cy="170" r="80" fill="none" stroke="' + a + '" stroke-width="2" opacity="0.35"/>' +
+             '<circle cx="200" cy="170" r="48" fill="' + a + '" opacity="0.12"/>' +
+             '<rect x="80" y="270" width="240" height="20" rx="3" fill="' + a + '" opacity="0.2"/>' +
+             '<rect x="120" y="300" width="160" height="12" rx="3" fill="' + a + '" opacity="0.1"/>';
+    },
+    chat: function(a) {
+      return '<rect x="60" y="80" width="220" height="80" rx="12" fill="' + a + '" opacity="0.2"/>' +
+             '<rect x="60" y="100" width="160" height="8" rx="4" fill="' + a + '" opacity="0.3"/>' +
+             '<rect x="60" y="120" width="100" height="8" rx="4" fill="' + a + '" opacity="0.25"/>' +
+             '<rect x="120" y="200" width="220" height="80" rx="12" fill="none" stroke="' + a + '" stroke-width="1.5" opacity="0.35"/>' +
+             '<rect x="134" y="220" width="140" height="8" rx="4" fill="' + a + '" opacity="0.2"/>' +
+             '<rect x="134" y="240" width="180" height="8" rx="4" fill="' + a + '" opacity="0.15"/>' +
+             '<rect x="60" y="310" width="280" height="50" rx="8" fill="none" stroke="' + a + '" stroke-width="1" opacity="0.2"/>';
+    }
+  };
+
+  function makeSVG(graphic, accent) {
+    var fn = GRAPHICS[graphic] || GRAPHICS.dots;
+    return '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">' + fn(accent) + '</svg>';
+  }
+
+  /* ── Build cards ── */
+  var grid = document.getElementById('pg-cards');
+
+  ARTIFACTS.forEach(function(art) {
+    var card = document.createElement('article');
+    card.className = 'artifact-card';
+    card.setAttribute('data-id', art.id);
+    card.setAttribute('data-filter', art.filter);
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', 'View ' + art.title);
+    card.innerHTML =
+      '<div class="card-img">' +
+        '<div class="card-graphic">' + makeSVG(art.graphic, art.accent) + '</div>' +
+        '<span class="card-badge">' + art.badge + '</span>' +
+      '</div>' +
+      '<div class="card-info">' +
+        '<div>' +
+          '<h3 class="card-name">' + art.title + '</h3>' +
+          '<p class="card-type">' + art.type + '</p>' +
+        '</div>' +
+        '<span class="card-arrow" aria-hidden="true">' +
+          '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="10" x2="10" y2="2"/><polyline points="4,2 10,2 10,8"/></svg>' +
+        '</span>' +
+      '</div>';
+
+    card.addEventListener('click', function() { openDetail(art.id); });
+    card.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDetail(art.id); } });
+    grid.appendChild(card);
+  });
+
+  /* ── Detail overlay ── */
+  var overlay = document.getElementById('artifact-overlay');
+  var currentArt = null;
+  var currentSlide = 0;
+  var totalSlides = 3; /* placeholder slide count */
+
+  function openDetail(id) {
+    var art = ARTIFACTS.find(function(a) { return a.id === id; });
+    if (!art) return;
+    currentArt = art;
+    currentSlide = 0;
+
+    document.getElementById('ov-type').textContent    = art.type;
+    document.getElementById('ov-title').textContent   = art.title;
+    document.getElementById('ov-tagline').textContent = art.tagline;
+    document.getElementById('ov-badge').textContent   = art.badge;
+    document.getElementById('ov-desc').textContent    = art.desc;
+
+    var specsEl = document.getElementById('ov-specs');
+    specsEl.innerHTML = art.specs.map(function(s) { return '<li>' + s + '</li>'; }).join('');
+
+    document.getElementById('ov-graphic').innerHTML = (GRAPHICS[art.graphic] || GRAPHICS.dots)(art.accent);
+
+    /* Dots */
+    var dotsEl = document.getElementById('ov-dots');
+    dotsEl.innerHTML = '';
+    for (var i = 0; i < totalSlides; i++) {
+      var dot = document.createElement('button');
+      dot.className = 'ov-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Image ' + (i+1));
+      (function(idx) { dot.addEventListener('click', function() { setSlide(idx); }); })(i);
+      dotsEl.appendChild(dot);
+    }
+
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('ov-close').focus();
+  }
+
+  function closeDetail() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function setSlide(idx) {
+    currentSlide = (idx + totalSlides) % totalSlides;
+    document.querySelectorAll('.ov-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === currentSlide);
+    });
+    /* In production, swap the image src here */
+  }
+
+  document.getElementById('ov-close').addEventListener('click', closeDetail);
+  document.getElementById('ov-prev').addEventListener('click', function() { setSlide(currentSlide - 1); });
+  document.getElementById('ov-next').addEventListener('click', function() { setSlide(currentSlide + 1); });
+
+  document.addEventListener('keydown', function(e) {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') closeDetail();
+    if (e.key === 'ArrowLeft')  setSlide(currentSlide - 1);
+    if (e.key === 'ArrowRight') setSlide(currentSlide + 1);
+  });
+
+  /* Close on backdrop click (media side) */
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeDetail();
+  });
+  </script>
+
 </body>
 </html>

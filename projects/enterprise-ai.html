@@ -5,20 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gap 3D Fit Viewer Case Study | Sambit Nayak</title>
   <link rel="stylesheet" href="case-study.css">
+  <script>try{var t=localStorage.getItem('portfolio-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 </head>
 <body>
   <header class="topbar">
     <nav class="shell nav" aria-label="Primary navigation">
       <a class="brand" href="../portfolio.html#top" aria-label="Home">
-        <img class="brand-logo" src="../Images/main.jpeg" alt="" aria-hidden="true">
+        <img class="brand-logo" src="../Images/logo-chrome.png" alt="" aria-hidden="true">
       </a>
       <div class="nav-links">
         <a href="../portfolio.html#work">Work</a>
         <a href="../about.html">About</a>
         <a href="../playground.html">Playground</a>
+        <a href="https://drive.google.com/file/d/1CUZk1JslQwJWhfeSKr6Z7OB_T4CPGpf5/view" target="_blank" rel="noopener noreferrer">Resume</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">
+          <svg class="theme-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+          <svg class="theme-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
       </div>
-      <button class="resume-link btn-pill" type="button" data-samai-open>SamAI</button>
+      <button class="ask-sam-btn" type="button" data-samai-open aria-label="Open SamAI">Ask Sam</button>
     </nav>
   </header>
 
@@ -28,126 +34,455 @@
       <nav class="toc">
         <a href="#overview">Overview</a>
         <a href="#problem">Problem</a>
-        <a href="#solution">Solution</a>
-        <a href="#flows">Core Flows</a>
         <a href="#research">Research</a>
-        <a href="#decisions">Design Decisions</a>
+        <a href="#design">Design</a>
+        <a href="#results">Results</a>
         <a href="#reflection">Reflection</a>
       </nav>
     </aside>
 
     <article class="case-main">
       <header class="case-hero">
-        <p class="kicker">Gap Inc. - 3D + Fit Experience</p>
+        <p class="kicker">Gap Inc. — 3D + Fit Experience</p>
         <h1>Gap 3D Fit Viewer</h1>
         <div class="meta-grid">
-          <section class="meta-item"><h2>Role</h2><p>Technical Product Designer</p></section>
-          <section class="meta-item"><h2>Timeline</h2><p>Feb 2022 - Jul 2024</p></section>
-          <section class="meta-item"><h2>Team</h2><p>Gap Inc. 3D and AR Try-On</p></section>
-          <section class="meta-item"><h2>Skills</h2><p>3D Product Visualization, Technical Design, Strategy</p></section>
+          <section class="meta-item"><h2><span class="iconify" data-icon="pixelarticons:user" aria-hidden="true"></span> Role</h2><p>Technical Product Designer</p></section>
+          <section class="meta-item"><h2><span class="iconify" data-icon="pixelarticons:calendar" aria-hidden="true"></span> Timeline</h2><p>2021–2024</p></section>
+          <section class="meta-item"><h2><span class="iconify" data-icon="pixelarticons:users" aria-hidden="true"></span> Team</h2><p>Gap Inc. 3D & AR Try-On</p></section>
+          <section class="meta-item"><h2><span class="iconify" data-icon="pixelarticons:briefcase" aria-hidden="true"></span> Skills</h2><p>3D Visualization, UX Research, Technical Design, Strategy</p></section>
         </div>
       </header>
 
+      <!-- ── Overview ───────────────────────────────── -->
       <section class="case-section" id="overview">
-        <h2 class="section-title">Overview</h2>
-        <h2>How might 3D product visualization improve fit confidence before purchase?</h2>
-        <p class="lede">At Gap Inc., this work focused on improving 3D and fit experiences, supporting AR Try-On initiatives, and helping reduce ecommerce returns through clearer product visualization.</p>
-        <div class="visual diagram">
-          <div class="diagram-grid">
-            <div class="diagram-card"><span>Ask</span><strong>Plain language intake</strong></div>
-            <div class="diagram-card"><span>Verify</span><strong>Source-backed answer</strong></div>
-            <div class="diagram-card"><span>Escalate</span><strong>Clean handoff trail</strong></div>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:shapes" aria-hidden="true"></span> Overview</h2>
+        <h2>How might 3D product visualization improve fit confidence and reduce apparel returns?</h2>
+        <p class="lede">Gap Inc. integrated Drapr's 3D fit technology across brands to reduce ecommerce return rates driven by poor fit. I adapted the tool for Old Navy denim — transforming it from a shirt-fit viewer into a denim-focused experience addressing thigh, calf, and inseam complexity.</p>
+        <div class="research-stats">
+          <div class="research-stat" data-tip="120 million total interactions recorded with the 3D fit viewer post-launch">
+            <span class="research-stat-value" data-count="120" data-suffix="M" style="color:var(--dv-p1)">120M</span>
+            <span class="research-stat-label">Total interactions with the fit viewer</span>
+          </div>
+          <div class="research-stat" data-tip="+20.3% increase in page visits after the fit viewer launched">
+            <span class="research-stat-value" data-count="20.3" data-prefix="+" data-suffix="%" style="color:var(--dv-p2)">+20.3%</span>
+            <span class="research-stat-label">Increase in visits post-launch</span>
+          </div>
+          <div class="research-stat" data-tip="+80% click-through rate improvement on the fit viewer call-to-action">
+            <span class="research-stat-value" data-count="80" data-prefix="+" data-suffix="%" style="color:var(--dv-p3)">+80%</span>
+            <span class="research-stat-label">CTR improvement on fit viewer CTA</span>
           </div>
         </div>
       </section>
 
+      <!-- ── Problem ────────────────────────────────── -->
       <section class="case-section" id="problem">
-        <h2 class="section-title">Problem</h2>
-        <h2>Internal knowledge existed, but it was hard to trust under pressure.</h2>
-        <p class="body-copy">Operators needed fast answers while handling live requests. The old workflow required searching multiple repositories, checking freshness, and rewriting findings into a ticket or message.</p>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:warning-diamond" aria-hidden="true"></span> Problem</h2>
+        <h2>Online apparel returns are costing brands billions — and poor fit is the primary driver.</h2>
+        <p class="body-copy">Online returns are a major unsolved problem in fashion retail. For denim specifically, shoppers struggle with inconsistent sizing across styles, an inability to visualize fit across body zones, and a lack of tools that address denim-specific fit complexity like thigh, calf, and inseam.</p>
+
+        <div class="bento-proof">
+          <div class="bento-stats">
+            <div class="bento-stat">
+              <span class="bento-stat-value">$3B</span>
+              <span class="bento-stat-label">Annual loss due to apparel returns</span>
+            </div>
+            <div class="bento-stat">
+              <span class="bento-stat-value">40%</span>
+              <span class="bento-stat-label">Of returns caused by sizing issues</span>
+            </div>
+          </div>
+          <div class="bento-quote">
+            <p class="bento-quote-text">"Online denim shoppers can't touch, try, or trust — the result is a return rate that costs brands billions every year."</p>
+            <div class="bento-attribution">
+              <span class="bento-avatar">GI</span>
+              <span>
+                <span class="bento-attr-name">Research Finding</span>
+                <span class="bento-attr-role">Gap Inc. 3D & Fit Team</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-chart" aria-label="Core sizing problems">
+          <div class="stat-row" data-tip="40% of all online apparel returns are caused by poor fit and sizing mismatches">
+            <span class="stat-label">Returns attributed to sizing issues</span>
+            <div class="stat-track"><div class="stat-fill" style="--pct:40%; --clr:var(--dv-p1)"></div></div>
+            <span class="stat-value">40%</span>
+          </div>
+          <div class="stat-row" data-tip="42 of 50 (84%) users reported inconsistent sizing across denim styles in the same brand">
+            <span class="stat-label">Users reporting inconsistent sizing across denim styles</span>
+            <div class="stat-track"><div class="stat-fill" style="--pct:84%; --clr:var(--dv-p2)"></div></div>
+            <span class="stat-value">84%</span>
+          </div>
+          <div class="stat-row" data-tip="70% of shoppers choose denim size by guesswork — comparing to past purchases or estimating">
+            <span class="stat-label">Shoppers choosing size by guesswork</span>
+            <div class="stat-track"><div class="stat-fill" style="--pct:70%; --clr:var(--dv-p3)"></div></div>
+            <span class="stat-value">70%</span>
+          </div>
+        </div>
+
+        <h3 class="subsection-head"><span class="iconify" data-icon="pixelarticons:warning-diamond" aria-hidden="true"></span> Existing tool limitations</h3>
+        <p class="body-copy">The Drapr viewer was built for shirts — creating a fundamental mismatch in fit complexity and user expectations for denim.</p>
         <div class="three-up">
-          <div class="insight-card"><h3>Slow lookup</h3><p>People lost time translating a customer question into the right internal keyword.</p></div>
-          <div class="insight-card"><h3>Source doubt</h3><p>Even when an answer looked right, teams needed proof before acting on it.</p></div>
-          <div class="insight-card"><h3>Messy handoffs</h3><p>Escalations often missed the reasoning that led to a decision.</p></div>
-        </div>
-      </section>
-
-      <section class="case-section" id="solution">
-        <h2 class="section-title">Solution</h2>
-        <h2>An answer workspace that treats confidence as part of the UI.</h2>
-        <p class="body-copy">The assistant pairs generated answers with highlighted source passages, freshness signals, and an escalation summary. The design avoids a black-box chat experience by making the system's evidence visible.</p>
-        <div class="visual">
-          <img src="../Images/Homepage bg.png" alt="Abstract visual representing an answer workspace.">
-        </div>
-      </section>
-
-      <section class="case-section" id="flows">
-        <h2 class="section-title">Core Flows</h2>
-        <h2>The workflow supports answering, checking, and transferring context.</h2>
-        <div class="two-up">
-          <div class="insight-card"><h3>Question intake</h3><p>Users can paste a messy request and the system extracts the likely policy intent.</p></div>
-          <div class="insight-card"><h3>Evidence review</h3><p>Answers are shown next to source snippets, dates, and document owners.</p></div>
-          <div class="insight-card"><h3>Follow-up prompts</h3><p>The assistant suggests clarifying questions when the source is incomplete.</p></div>
-          <div class="insight-card"><h3>Escalation packet</h3><p>A concise handoff includes the question, answer, citations, and remaining uncertainty.</p></div>
-        </div>
-      </section>
-
-      <section class="case-section" id="research">
-        <h2 class="section-title">Research</h2>
-        <h2>Shadowing sessions revealed that the real job was decision support.</h2>
-        <p class="body-copy">I observed operators handle repeated questions and mapped where they paused. Most delays happened after retrieval, when they needed to determine whether an answer was current enough to use.</p>
-        <div class="visual diagram">
-          <div class="diagram-grid">
-            <div class="diagram-card"><span>Signal</span><strong>Document freshness</strong></div>
-            <div class="diagram-card"><span>Signal</span><strong>Policy owner</strong></div>
-            <div class="diagram-card"><span>Signal</span><strong>Confidence gap</strong></div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:warning-diamond" aria-hidden="true"></span> Too many questions</h3>
+            <p>Confusing avatar setup with no guidance left users unsure how to proceed before they saw any value.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:cancel" aria-hidden="true"></span> Limited inputs</h3>
+            <p>Only chest and height captured — nowhere near sufficient for denim fit complexity across waist, thigh, calf, and inseam.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:bulletlist" aria-hidden="true"></span> Too many screens</h3>
+            <p>Multi-step setup created friction before users experienced the product's core value proposition.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:image" aria-hidden="true"></span> Outdated UI</h3>
+            <p>Not aligned with Old Navy's current visual design language, eroding trust before the fit experience began.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:cancel" aria-hidden="true"></span> Heavy simulation limits</h3>
+            <p>Only one size up or down simulated — built for shirts, unable to handle denim's range of fit variation.</p>
           </div>
         </div>
       </section>
 
-      <section class="case-section" id="decisions">
-        <h2 class="section-title">Design Decisions</h2>
-        <h2>We designed the assistant to slow down at the exact moments risk increased.</h2>
-        <div class="three-up">
-          <div class="insight-card"><h3>Citations by default</h3><p>No answer appears without visible source context.</p></div>
-          <div class="insight-card"><h3>Uncertainty states</h3><p>The UI clearly separates confirmed answers from partial matches.</p></div>
-          <div class="insight-card"><h3>Reusable summaries</h3><p>Operators can transfer a clean explanation into tickets without rewriting.</p></div>
+      <!-- ── Research ───────────────────────────────── -->
+      <section class="case-section" id="research">
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:analytics" aria-hidden="true"></span> Research</h2>
+        <h2>50+ interviews revealed that denim fit is uniquely unpredictable — and users know it.</h2>
+        <p class="body-copy">I conducted 50+ user interviews with male shoppers aged 25–45. No prior denim fit tool existed at Old Navy, so the goal was to understand raw frustrations, unspoken expectations, and the gap between what users needed and what was available.</p>
+
+        <div class="research-stats">
+          <div class="research-stat" data-tip="50+ male shoppers aged 25–45 — no prior denim fit tool existed at Old Navy">
+            <span class="research-stat-value" data-count="50" data-suffix="+" style="color:var(--dv-p1)">50+</span>
+            <span class="research-stat-label">User interviews conducted</span>
+          </div>
+          <div class="research-stat" data-tip="42 out of 50 users (84%) reported inconsistent sizing across denim styles in the same brand">
+            <span class="research-stat-value" style="color:var(--dv-p2)">42/50</span>
+            <span class="research-stat-label">Users reported inconsistent sizing across denim styles</span>
+          </div>
+          <div class="research-stat" data-tip="Primary research cohort: male shoppers aged 25–45, the core Old Navy denim buyer">
+            <span class="research-stat-value" style="color:var(--dv-p3)">25–45</span>
+            <span class="research-stat-label">Age range of male shoppers interviewed</span>
+          </div>
+        </div>
+
+        <div class="rfp-wrap">
+          <p class="rfp-eyebrow">// UX RESEARCH</p>
+          <h3 class="rfp-title">Research Findings</h3>
+          <div class="rfp-tabs" role="tablist">
+            <button class="rfp-tab" role="tab" data-rfp="0">Denim Fit Feels Unpredictable</button>
+            <button class="rfp-tab" role="tab" data-rfp="1">Users Don't Know Their Measurements</button>
+            <button class="rfp-tab" role="tab" data-rfp="2">Returns Create Hesitation</button>
+            <button class="rfp-tab" role="tab" data-rfp="3">Fit Expectations Vary by Body Zone</button>
+          </div>
+          <div class="rfp-stage">
+            <div class="rfp-bg"></div>
+
+            <!-- Finding 0 -->
+            <div class="rfp-finding" id="rfp-0" role="tabpanel">
+              <div class="rfp-chart">
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Slim fit</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:88%;--rfp-clr:var(--dv-p1)"></div></div>
+                  <span class="rfp-chart-val">44/50</span>
+                </div>
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Tapered fit</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:82%;--rfp-clr:var(--dv-p2)"></div></div>
+                  <span class="rfp-chart-val">41/50</span>
+                </div>
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Straight fit</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:76%;--rfp-clr:var(--dv-p3)"></div></div>
+                  <span class="rfp-chart-val">38/50</span>
+                </div>
+              </div>
+              <div class="rfp-obs">
+                <span class="rfp-obs-label">Observation:</span>
+                <span class="rfp-num">42/50</span> participants said sizing felt inconsistent across denim styles (slim, tapered, straight) — even within the same brand.<br>
+                <span class="rfp-hi">Past purchases</span> offered little confidence for future buys.
+              </div>
+            </div>
+
+            <!-- Finding 1 -->
+            <div class="rfp-finding" id="rfp-1" role="tabpanel">
+              <div class="rfp-chart">
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Guessed size</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:74%;--rfp-clr:var(--dv-p1)"></div></div>
+                  <span class="rfp-chart-val">37/50</span>
+                </div>
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Knew waist</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:28%;--rfp-clr:var(--dv-p2)"></div></div>
+                  <span class="rfp-chart-val">14/50</span>
+                </div>
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Knew inseam</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:12%;--rfp-clr:var(--dv-p3)"></div></div>
+                  <span class="rfp-chart-val">6/50</span>
+                </div>
+              </div>
+              <div class="rfp-obs">
+                <span class="rfp-obs-label">Observation:</span>
+                <span class="rfp-num">37/50</span> users guessed their size using gut instinct or prior orders.<br>
+                <span class="rfp-hi">Few knew</span> their actual waist, thigh, or inseam dimensions — especially those who shop across brands.
+              </div>
+            </div>
+
+            <!-- Finding 2 -->
+            <div class="rfp-finding" id="rfp-2" role="tabpanel">
+              <div class="rfp-chart">
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Frustrated by returns</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:68%;--rfp-clr:var(--dv-p1)"></div></div>
+                  <span class="rfp-chart-val">34/50</span>
+                </div>
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Avoid online denim</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:54%;--rfp-clr:var(--dv-p2)"></div></div>
+                  <span class="rfp-chart-val">27/50</span>
+                </div>
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Returned ≥3 pairs</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:44%;--rfp-clr:var(--dv-p3)"></div></div>
+                  <span class="rfp-chart-val">22/50</span>
+                </div>
+              </div>
+              <div class="rfp-obs">
+                <span class="rfp-obs-label">Observation:</span>
+                <span class="rfp-num">34/50</span> found returning jeans especially frustrating due to weight, repackaging, and uncertainty.<br>
+                <span class="rfp-hi">This</span> made many users avoid online denim purchases altogether.
+              </div>
+            </div>
+
+            <!-- Finding 3 -->
+            <div class="rfp-finding" id="rfp-3" role="tabpanel">
+              <div class="rfp-chart">
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Calf snug, thigh relaxed</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:44%;--rfp-clr:var(--dv-p1)"></div></div>
+                  <span class="rfp-chart-val">22/50</span>
+                </div>
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Ease at belly/waistband</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:32%;--rfp-clr:var(--dv-p2)"></div></div>
+                  <span class="rfp-chart-val">16/50</span>
+                </div>
+                <div class="rfp-chart-row">
+                  <span class="rfp-chart-label">Issues at seat/rear</span>
+                  <div class="rfp-chart-track"><div class="rfp-chart-fill" style="--rfp-pct:24%;--rfp-clr:var(--dv-p3)"></div></div>
+                  <span class="rfp-chart-val">12/50</span>
+                </div>
+              </div>
+              <div class="rfp-obs">
+                <span class="rfp-obs-label">Observation:</span>
+                <span class="rfp-num">22/50</span> preferred snug calves and relaxed thighs.<br>
+                <span class="rfp-num">16/50</span> wanted more ease around the belly and waistband.<br>
+                <span class="rfp-num">12/50</span> had issues with how jeans sat at the <span class="rfp-hi">seat or rear</span>.
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
+      <!-- ── Design ─────────────────────────────────── -->
+      <section class="case-section" id="design">
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:pen-square" aria-hidden="true"></span> Design Solution</h2>
+        <h2>A 4-step personalization flow centered on visual fit confidence.</h2>
+        <p class="body-copy">The information architecture was redesigned around clarity, personalization, and ease of decision-making. Users wanted visual confidence, low friction, and the ability to compare sizes dynamically — not another technical questionnaire.</p>
+
+        <div class="flow-chain">
+          <div class="flow-node">
+            <span class="flow-node-num">1</span>
+            <span class="flow-node-label"><span class="iconify" data-icon="pixelarticons:human" aria-hidden="true"></span> Height</span>
+            <span class="flow-node-title">Choose height</span>
+            <p class="flow-node-desc">Carousel-based selection with live 3D preview updating in real time.</p>
+          </div>
+          <div class="flow-node">
+            <span class="flow-node-num">2</span>
+            <span class="flow-node-label"><span class="iconify" data-icon="pixelarticons:settings-cog" aria-hidden="true"></span> Waist</span>
+            <span class="flow-node-title">Choose waist</span>
+            <p class="flow-node-desc">Single input matched to denim sizing conventions, not generic measurements.</p>
+          </div>
+          <div class="flow-node">
+            <span class="flow-node-num">3</span>
+            <span class="flow-node-label"><span class="iconify" data-icon="pixelarticons:user" aria-hidden="true"></span> Avatar</span>
+            <span class="flow-node-title">Adjust avatar</span>
+            <p class="flow-node-desc">Users refine proportions for thigh, calf, and inseam — the zones that matter for denim.</p>
+          </div>
+          <div class="flow-node">
+            <span class="flow-node-num">4</span>
+            <span class="flow-node-label"><span class="iconify" data-icon="pixelarticons:eye" aria-hidden="true"></span> Showcase</span>
+            <span class="flow-node-title">3D fit preview</span>
+            <p class="flow-node-desc">Full 360° denim visualization with size comparison and fit descriptors.</p>
+          </div>
+        </div>
+
+        <h3 class="subsection-head"><span class="iconify" data-icon="pixelarticons:warning-diamond" aria-hidden="true"></span> V1 feedback</h3>
+        <div class="v1-screens">
+          <figure class="v1-screen-fig">
+            <img src="../Images/v1%20design.jpeg" alt="V1 QuickFit Finder — Create Your Avatar setup screen with Chest and Height dropdowns">
+            <figcaption>Setup: 6 questions, only chest &amp; height captured — no denim-specific inputs</figcaption>
+          </figure>
+          <figure class="v1-screen-fig">
+            <img src="../Images/v2%20design.jpeg" alt="V1 QuickFit Finder — 3D viewer with Chest, Armhole, and Belly tightness sliders">
+            <figcaption>Viewer: shirt-centric fit labels (Chest, Belly) — no waist, thigh, calf, or inseam controls</figcaption>
+          </figure>
+        </div>
+        <div class="two-up" style="margin-top:16px">
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:check" aria-hidden="true"></span> What worked</h3>
+            <p>Size comparison was helpful. Visualizing fit changes side-by-side improved confidence and reduced hesitation in sizing decisions significantly.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:warning-diamond" aria-hidden="true"></span> What needed work</h3>
+            <p>Lack of clarity in fit labels. Users were uncertain about recommendation accuracy and needed explanation for "tight" vs "relaxed" — not just a label.</p>
+          </div>
+        </div>
+
+        <h3 class="subsection-head"><span class="iconify" data-icon="pixelarticons:check" aria-hidden="true"></span> V2 improvements</h3>
+        <div class="two-up">
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:info-box" aria-hidden="true"></span> Size explanation layer</h3>
+            <p>Users clicked naturally out of curiosity — we surfaced a panel explaining why a size was recommended in plain language, not technical terms.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:bulletlist" aria-hidden="true"></span> Fit descriptors</h3>
+            <p>Added clear labels for Fitted, Loose, and Relaxed fits — grounded in denim conventions, not generic apparel language that failed in V1.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:settings-cog" aria-hidden="true"></span> Measurement UX</h3>
+            <p>Users preferred entering exact measurements when available. Added optional exact-input alongside the simpler carousel to serve both behaviors.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:settings-cog" aria-hidden="true"></span> Denim zone controls</h3>
+            <p>Exposed explicit controls for thigh, calf, and inseam — the body zones critical to denim fit that were entirely absent in V1.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Results ────────────────────────────────── -->
+      <section class="case-section" id="results">
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:trophy" aria-hidden="true"></span> Results</h2>
+        <h2>Post-launch metrics confirmed that visual fit confidence drives engagement and purchase behavior.</h2>
+        <p class="body-copy">Measured through user testing, A/B experiments, and usability studies — tracking user confidence, engagement depth, and downstream purchase behavior.</p>
+
+        <div class="research-stats">
+          <div class="research-stat" data-tip="120 million total interactions recorded with the 3D fit viewer post-launch">
+            <span class="research-stat-value" data-count="120" data-suffix="M" style="color:var(--dv-p1)">120M</span>
+            <span class="research-stat-label">Total fit viewer interactions post-launch</span>
+          </div>
+          <div class="research-stat" data-tip="+20.3% increase in page visits after the fit viewer launched">
+            <span class="research-stat-value" data-count="20.3" data-prefix="+" data-suffix="%" style="color:var(--dv-p2)">+20.3%</span>
+            <span class="research-stat-label">Increase in page visits</span>
+          </div>
+          <div class="research-stat" data-tip="+80% click-through rate improvement on the fit viewer call-to-action">
+            <span class="research-stat-value" data-count="80" data-prefix="+" data-suffix="%" style="color:var(--dv-p3)">+80%</span>
+            <span class="research-stat-label">CTR on fit viewer call-to-action</span>
+          </div>
+        </div>
+
+        <div class="three-up" style="margin-top:20px">
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:users" aria-hidden="true"></span> User testing</h3>
+            <p>Tracked user confidence and comprehension through moderated sessions measuring hesitation points and decision clarity.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:analytics" aria-hidden="true"></span> A/B experiments</h3>
+            <p>Ran controlled experiments comparing V1 and V2 flows against baseline across engagement, dwell time, and add-to-cart behavior.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:eye" aria-hidden="true"></span> Usability studies</h3>
+            <p>Measured task completion, error rate, and qualitative confidence scores across the 4-step fit personalization flow.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Reflection ─────────────────────────────── -->
       <section class="case-section" id="reflection">
-        <h2 class="section-title">Reflection</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:heart" aria-hidden="true"></span> Reflection</h2>
         <h2>What I learned</h2>
-        <p class="body-copy">For enterprise AI, speed is only useful when trust keeps up. The strongest design choices made evidence, uncertainty, and ownership visible in the same place as the answer.</p>
-        <div class="quote-panel"><p>Trustworthy AI interfaces show their work before users have to ask.</p></div>
+        <p class="body-copy">This project reframed fit from a measurement problem to a visualization and trust problem. Users didn't need more data — they needed contextual fit information, body-zone control, and transparent explanations connecting recommendations to their actual body.</p>
+
+        <div class="three-up">
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:map-pin" aria-hidden="true"></span> Context is everything</h3>
+            <p>Fit visualization must be contextual — thigh room, inseam length, and calf taper are more meaningful than generic size labels.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:message" aria-hidden="true"></span> Explain, don't just recommend</h3>
+            <p>Users need to understand why a size is suggested. Explanation builds trust; a bare recommendation creates doubt and friction.</p>
+          </div>
+          <div class="insight-card">
+            <h3><span class="iconify" data-icon="pixelarticons:lock" aria-hidden="true"></span> Control builds trust</h3>
+            <p>Giving users control over body zone inputs — even when they don't use them — increased overall confidence in the recommendation.</p>
+          </div>
+        </div>
+
+        <div class="bento-proof">
+          <div class="bento-stats">
+            <div class="bento-stat" data-tip="120 million total interactions recorded with the fit viewer across Old Navy denim pages post-launch">
+              <span class="bento-stat-value" data-count="120" data-suffix="M">120M</span>
+              <span class="bento-stat-label">Fit viewer interactions</span>
+            </div>
+            <div class="bento-stat" data-tip="+80% click-through rate improvement on the fit viewer call-to-action after V2 launch">
+              <span class="bento-stat-value" data-count="80" data-prefix="+" data-suffix="%">+80%</span>
+              <span class="bento-stat-label">CTR improvement</span>
+            </div>
+          </div>
+          <div class="bento-quote">
+            <p class="bento-quote-text">"Fit visualization must be contextual — body zones matter more than generic size recommendations."</p>
+            <div class="bento-attribution">
+              <span class="bento-avatar">GI</span>
+              <span>
+                <span class="bento-attr-name">Key Learning</span>
+                <span class="bento-attr-role">Gap Inc. 3D Fit Project</span>
+              </span>
+            </div>
+          </div>
+        </div>
       </section>
     </article>
   </main>
 
-  <footer class="site-footer" aria-label="Site footer">
+  <footer class="site-footer footer-cosmos" aria-label="Site footer">
     <div class="footer-mountain" aria-hidden="true"></div>
     <div class="footer-nav">
-      <div class="footer-links-row">
-        <a href="#" class="footer-pill">LinkedIn</a>
-        <a href="#" class="footer-pill">Instagram</a>
+      <div class="footer-intro">
+        <span class="footer-sigil" aria-hidden="true"></span>
+        <p>Designing AI products, systems, and interfaces with care.</p>
       </div>
-      <div class="footer-links-row">
-        <a href="../about.html" class="footer-pill">About</a>
-        <a href="../playground.html" class="footer-pill">Playground</a>
-        <button class="footer-pill" type="button" data-samai-open>SamAI</button>
-        <a href="#" class="footer-pill">X.com</a>
-        <a href="#" class="footer-pill">Substack</a>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Useful</span>
+        <a href="../portfolio.html#work">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../playground.html">Playground</a>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Social</span>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">X.com</a>
+        <a href="#">Substack</a>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Contact</span>
+        <a href="mailto:sambitnayak.ux@gmail.com">Email</a>
       </div>
     </div>
-    <p class="footer-name">Sambit Nayak</p>
+    <p class="footer-name" data-static-wordmark="true">Sambit Nayak</p>
   </footer>
-  <script src="../footer-pixels.js"></script>
+  <script src="../theme-toggle.js"></script>
   <script src="../samai-sidebar.js"></script>
+  <script src="case-study.js"></script>
   <script>
     (function () {
       var motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
 
-      /* ── Footer: parallax + entrance ── */
       var footer   = document.querySelector('.site-footer');
       var footerBg = document.querySelector('.footer-mountain');
       if (footer) {
@@ -157,7 +492,8 @@
             var rect = footer.getBoundingClientRect(), vh = window.innerHeight;
             if (rect.bottom < 0 || rect.top > vh) { rafF = null; return; }
             var offset = ((vh - rect.top) / (vh + rect.height) - 0.5) * 60;
-            footerBg.style.backgroundPositionY = 'calc(40% + ' + offset + 'px)';
+            footerBg.style.setProperty('--footer-parallax', offset.toFixed(1) + 'px');
+            footerBg.style.setProperty('--footer-bg-y', 'calc(48% + ' + (offset * -0.32).toFixed(1) + 'px)');
             rafF = null;
           }
           window.addEventListener('scroll', function () {
@@ -172,11 +508,8 @@
         }, { threshold: 0.08 }).observe(footer);
       }
 
-      if (window.initFooterPixelName) window.initFooterPixelName();
-
       if (!motionOk) return;
 
-      /* ── Case section + card reveals ── */
       var sObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (!e.isIntersecting) return;
@@ -185,8 +518,8 @@
           el.querySelectorAll('.insight-card, .diagram-card').forEach(function (card, i) {
             setTimeout(function () { card.classList.add('is-vis'); }, 160 + i * 85);
           });
-          var qp = el.querySelector('.quote-panel');
-          if (qp) setTimeout(function () { qp.classList.add('is-vis'); }, 180);
+          var qp = el.querySelector('.quote-panel, .bento-proof');
+          if (qp) setTimeout(function () { qp.style.opacity = '1'; }, 180);
           var vis = el.querySelector('.visual');
           if (vis) setTimeout(function () { vis.classList.add('is-vis'); }, 120);
           sObs.unobserve(el);
@@ -194,6 +527,25 @@
       }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
       document.querySelectorAll('.case-section').forEach(function (el) { sObs.observe(el); });
 
+    })();
+
+    /* ── Research Findings Panel ── */
+    (function () {
+      var tabs     = document.querySelectorAll('.rfp-tab');
+      var findings = document.querySelectorAll('.rfp-finding');
+      if (!tabs.length) return;
+
+      function activate(idx) {
+        tabs.forEach(function (t) { t.classList.remove('rfp-active'); });
+        findings.forEach(function (f) { f.classList.remove('rfp-active'); });
+        tabs[idx].classList.add('rfp-active');
+        findings[idx].classList.add('rfp-active');
+      }
+
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { activate(i); });
+      });
+      activate(0);
     })();
   </script>
 </body>

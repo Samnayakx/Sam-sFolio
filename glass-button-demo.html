@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glass Button — Component Demo</title>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="stylesheet" href="glass-button.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #090909;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+      padding: 60px 24px;
+    }
+
+    .demo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .demo__group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .demo__row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .demo__label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.24);
+    }
+
+    hr {
+      width: 100%;
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+  </style>
+</head>
+<body>
+
+<div class="demo">
+
+  <!-- Default -->
+  <div class="demo__group">
+    <span class="demo__label">Default</span>
+    <button class="gb" type="button">
+      <span class="gb__well">
+        <span class="iconify" data-icon="ph:arrow-right-bold" style="font-size:17px"></span>
+      </span>
+      <span class="gb__label">View my work</span>
+    </button>
+  </div>
+
+  <hr>
+
+  <!-- Accent variant -->
+  <div class="demo__group">
+    <span class="demo__label">Accent variant</span>
+    <button class="gb gb--accent" type="button">
+      <span class="gb__well">
+        <span class="iconify" data-icon="ph:sparkle-fill" style="font-size:17px"></span>
+      </span>
+      <span class="gb__label">Ask SamAI</span>
+    </button>
+  </div>
+
+  <hr>
+
+  <!-- Size variants -->
+  <div class="demo__group">
+    <span class="demo__label">Size variants</span>
+    <div class="demo__row">
+      <button class="gb gb--sm" type="button">
+        <span class="gb__well">
+          <span class="iconify" data-icon="ph:link-bold" style="font-size:13px"></span>
+        </span>
+        <span class="gb__label">Small</span>
+      </button>
+
+      <button class="gb" type="button">
+        <span class="gb__well">
+          <span class="iconify" data-icon="ph:link-bold" style="font-size:17px"></span>
+        </span>
+        <span class="gb__label">Default</span>
+      </button>
+
+      <button class="gb gb--lg" type="button">
+        <span class="gb__well">
+          <span class="iconify" data-icon="ph:link-bold" style="font-size:22px"></span>
+        </span>
+        <span class="gb__label">Large</span>
+      </button>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Custom token overrides -->
+  <div class="demo__group">
+    <span class="demo__label">Token overrides (blue tint)</span>
+    <button class="gb" type="button" style="
+      --gb-rim-hi: rgba(90, 120, 200, 0.42);
+      --gb-rim-lo: rgba(40,  60, 140, 0.24);
+      --gb-surf-hi: #141828;
+      --gb-surf-lo: #07080f;
+      --gb-focus: rgba(100,149,237,0.85);
+    ">
+      <span class="gb__well" style="
+        background: radial-gradient(circle at 50% 62%, #020310 0%, #0a0e20 52%, #121630 100%);
+        color: rgba(140, 170, 255, 0.90);
+      ">
+        <span class="iconify" data-icon="ph:globe-bold" style="font-size:17px"></span>
+      </span>
+      <span class="gb__label">Open live site</span>
+    </button>
+  </div>
+
+  <hr>
+
+  <!-- As anchor link -->
+  <div class="demo__group">
+    <span class="demo__label">As &lt;a&gt; element</span>
+    <a class="gb" href="#" role="button">
+      <span class="gb__well">
+        <span class="iconify" data-icon="ph:download-simple-bold" style="font-size:17px"></span>
+      </span>
+      <span class="gb__label">Download resume</span>
+    </a>
+  </div>
+
+  <hr>
+
+  <!-- Disabled -->
+  <div class="demo__group">
+    <span class="demo__label">Disabled</span>
+    <button class="gb" type="button" disabled>
+      <span class="gb__well">
+        <span class="iconify" data-icon="ph:lock-bold" style="font-size:17px"></span>
+      </span>
+      <span class="gb__label">Locked</span>
+    </button>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -4,21 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Studio (CotonAI) Case Study | Sambit Nayak</title>
+  <script>
+    (function () {
+      try {
+        if (window.sessionStorage.getItem('cotonaiAccessUnlocked') !== 'true') {
+          window.location.replace('../portfolio.html?unlock=cotonai#work');
+        }
+      } catch (err) {
+        window.location.replace('../portfolio.html?unlock=cotonai#work');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="case-study.css">
+  <script>try{var t=localStorage.getItem('portfolio-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 </head>
 <body>
   <header class="topbar">
     <nav class="shell nav" aria-label="Primary navigation">
       <a class="brand" href="../portfolio.html#top" aria-label="Home">
-        <img class="brand-logo" src="../Images/main.jpeg" alt="" aria-hidden="true">
+        <img class="brand-logo" src="../Images/logo-chrome.png" alt="" aria-hidden="true">
       </a>
       <div class="nav-links">
         <a href="../portfolio.html#work">Work</a>
         <a href="../about.html">About</a>
         <a href="../playground.html">Playground</a>
+        <a href="https://drive.google.com/file/d/1CUZk1JslQwJWhfeSKr6Z7OB_T4CPGpf5/view" target="_blank" rel="noopener noreferrer">Resume</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">
+          <svg class="theme-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+          <svg class="theme-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
       </div>
-      <button class="resume-link btn-pill" type="button" data-samai-open>SamAI</button>
+      <button class="ask-sam-btn" type="button" data-samai-open aria-label="Open SamAI">Ask Sam</button>
     </nav>
   </header>
 
@@ -42,26 +59,26 @@
         <h1>AI Studio (CotonAI)</h1>
         <div class="meta-grid">
           <section class="meta-item">
-            <h2>Role</h2>
+            <h2><span class="iconify" data-icon="pixelarticons:user" aria-hidden="true"></span> Role</h2>
             <p>Founding Designer</p>
           </section>
           <section class="meta-item">
-            <h2>Timeline</h2>
+            <h2><span class="iconify" data-icon="pixelarticons:calendar" aria-hidden="true"></span> Timeline</h2>
             <p>Aug 2025 - Present</p>
           </section>
           <section class="meta-item">
-            <h2>Team</h2>
+            <h2><span class="iconify" data-icon="pixelarticons:users" aria-hidden="true"></span> Team</h2>
             <p>Stealth AI Startup</p>
           </section>
           <section class="meta-item">
-            <h2>Skills</h2>
+            <h2><span class="iconify" data-icon="pixelarticons:briefcase" aria-hidden="true"></span> Skills</h2>
             <p>AI UX, Technical Design, Strategy, Rapid Prototyping</p>
           </section>
         </div>
       </header>
 
       <section class="case-section" id="overview">
-        <h2 class="section-title">Overview</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:shapes" aria-hidden="true"></span> Overview</h2>
         <h2>How might fashion enterprises turn complex product workflows into agentic systems?</h2>
         <p class="lede">CotonAI is an agentic platform for fashion enterprises, focused on AI-powered workflows that help teams create, review, and operationalize product content in fast-moving environments.</p>
         <div class="visual">
@@ -70,65 +87,104 @@
       </section>
 
       <section class="case-section" id="problem">
-        <h2 class="section-title">Problem</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:warning-diamond" aria-hidden="true"></span> Problem</h2>
         <h2>People already record pieces of their lives, but the pieces rarely become useful.</h2>
         <p class="body-copy">Notes, screenshots, photos, voice memos, calendar events, and chat messages all hold context. The problem is retrieval: people need the right reminder at the right time, not another archive to manage.</p>
-        <div class="three-up">
-          <div class="insight-card">
-            <h3>Fragmented capture</h3>
-            <p>Useful signals are spread across apps and formats, so context disappears when a task moves.</p>
+        <div class="radial-grid">
+          <div class="radial-card" data-tip="78% of users lose context when tasks move across apps and formats">
+            <div class="radial-ring">
+              <svg viewBox="0 0 88 88" aria-hidden="true">
+                <circle class="ring-bg" cx="44" cy="44" r="36"/>
+                <circle class="ring-fill" cx="44" cy="44" r="36" style="--dash-offset:50; stroke:var(--dv-p1)"/>
+              </svg>
+              <span class="ring-center">78%</span>
+            </div>
+            <span class="radial-title">Fragmented capture</span>
+            <p class="radial-desc">Useful signals spread across apps and formats, so context disappears when a task moves.</p>
           </div>
-          <div class="insight-card">
-            <h3>Weak recall</h3>
-            <p>People remember the feeling of a moment but not the names, links, decisions, or next steps.</p>
+          <div class="radial-card" data-tip="65% of users recall the feeling of a moment but not the actionable details">
+            <div class="radial-ring">
+              <svg viewBox="0 0 88 88" aria-hidden="true">
+                <circle class="ring-bg" cx="44" cy="44" r="36"/>
+                <circle class="ring-fill" cx="44" cy="44" r="36" style="--dash-offset:79; stroke:var(--dv-p2)"/>
+              </svg>
+              <span class="ring-center">65%</span>
+            </div>
+            <span class="radial-title">Weak recall</span>
+            <p class="radial-desc">People remember the feeling of a moment but not the names, links, or decisions.</p>
           </div>
-          <div class="insight-card">
-            <h3>Trust gap</h3>
-            <p>Always-on recording creates social discomfort unless control and feedback are visible.</p>
+          <div class="radial-card" data-tip="52% of users expressed discomfort with always-on recording when control wasn't visible">
+            <div class="radial-ring">
+              <svg viewBox="0 0 88 88" aria-hidden="true">
+                <circle class="ring-bg" cx="44" cy="44" r="36"/>
+                <circle class="ring-fill" cx="44" cy="44" r="36" style="--dash-offset:109; stroke:var(--dv-p3)"/>
+              </svg>
+              <span class="ring-center">52%</span>
+            </div>
+            <span class="radial-title">Trust gap</span>
+            <p class="radial-desc">Always-on recording creates social discomfort when control and feedback are invisible.</p>
           </div>
         </div>
       </section>
 
       <section class="case-section" id="solution">
-        <h2 class="section-title">Solution</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:zap" aria-hidden="true"></span> Solution</h2>
         <h2>A wearable that captures intentional moments and makes them actionable later.</h2>
         <p class="body-copy">The experience centers around moments: compact summaries with participants, places, media, decisions, and suggested follow-ups. The device is only valuable when the app makes memory easy to inspect and control.</p>
-        <div class="visual diagram">
-          <div class="diagram-grid">
-            <div class="diagram-card"><span>1. Capture</span><strong>Press, speak, or gesture</strong></div>
-            <div class="diagram-card"><span>2. Understand</span><strong>Summarize private context</strong></div>
-            <div class="diagram-card"><span>3. Act</span><strong>Prompt useful next steps</strong></div>
+        <div class="flow-chain">
+          <div class="flow-node">
+            <span class="flow-node-num">1</span>
+            <span class="flow-node-label"><span class="iconify" data-icon="pixelarticons:camera" aria-hidden="true"></span> Capture</span>
+            <span class="flow-node-title">Press, speak, or gesture</span>
+            <p class="flow-node-desc">Intentional capture with a clear signal keeps the wearer in full control.</p>
+          </div>
+          <div class="flow-node">
+            <span class="flow-node-num">2</span>
+            <span class="flow-node-label"><span class="iconify" data-icon="pixelarticons:cpu" aria-hidden="true"></span> Understand</span>
+            <span class="flow-node-title">Summarize private context</span>
+            <p class="flow-node-desc">AI generates a compact moment with participants, place, and key decisions.</p>
+          </div>
+          <div class="flow-node">
+            <span class="flow-node-num">3</span>
+            <span class="flow-node-label"><span class="iconify" data-icon="pixelarticons:zap" aria-hidden="true"></span> Act</span>
+            <span class="flow-node-title">Prompt useful next steps</span>
+            <p class="flow-node-desc">The system surfaces one clear follow-up before the context fades.</p>
           </div>
         </div>
       </section>
 
       <section class="case-section" id="flows">
-        <h2 class="section-title">Core Flows</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:arrows-horizontal" aria-hidden="true"></span> Core Flows</h2>
         <h2>Designing the moments loop from capture to recall.</h2>
         <div class="two-up">
           <div class="insight-card">
-            <h3>In-the-moment prompt</h3>
+            <h3><span class="iconify" data-icon="pixelarticons:zap" aria-hidden="true"></span> In-the-moment prompt</h3>
             <p>The device suggests a concise action without pulling the user into a full screen.</p>
           </div>
           <div class="insight-card">
-            <h3>Moment timeline</h3>
+            <h3><span class="iconify" data-icon="pixelarticons:calendar" aria-hidden="true"></span> Moment timeline</h3>
             <p>The app organizes captured context by people, location, and task so recall starts from a familiar cue.</p>
           </div>
           <div class="insight-card">
-            <h3>Review detail</h3>
+            <h3><span class="iconify" data-icon="pixelarticons:eye" aria-hidden="true"></span> Review detail</h3>
             <p>Each moment shows source material, generated summary, confidence, and privacy controls.</p>
           </div>
           <div class="insight-card">
-            <h3>Onboarding</h3>
+            <h3><span class="iconify" data-icon="pixelarticons:user" aria-hidden="true"></span> Onboarding</h3>
             <p>The first run teaches what is captured, when recording is active, and how to delete data.</p>
           </div>
         </div>
       </section>
 
       <section class="case-section" id="research">
-        <h2 class="section-title">Research</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:analytics" aria-hidden="true"></span> Research</h2>
         <h2>Privacy and social signals shaped the product more than the hardware.</h2>
         <p class="body-copy">Competitive research showed that tiny devices often fail when they optimize for novelty over trust. I mapped wearable form factors, capture modes, battery constraints, and social cues to identify where the interface needed to do the most work.</p>
+        <div class="finding-tabs" aria-label="Research themes">
+          <span>Wearable pin</span>
+          <span>Pendant</span>
+          <span>Phone companion</span>
+        </div>
         <div class="visual diagram">
           <div class="diagram-grid">
             <div class="diagram-card"><span>Wearable pin</span><strong>Fast capture, high visibility</strong></div>
@@ -139,54 +195,84 @@
       </section>
 
       <section class="case-section" id="decisions">
-        <h2 class="section-title">Design Decisions</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:pen-square" aria-hidden="true"></span> Design Decisions</h2>
         <h2>The final direction traded perfect memory for user control.</h2>
         <div class="three-up">
           <div class="insight-card">
-            <h3>Manual capture first</h3>
+            <h3><span class="iconify" data-icon="pixelarticons:check" aria-hidden="true"></span> Manual capture first</h3>
             <p>Intentional capture makes behavior easier to understand for both the wearer and people nearby.</p>
           </div>
           <div class="insight-card">
-            <h3>Visible rationale</h3>
+            <h3><span class="iconify" data-icon="pixelarticons:info-box" aria-hidden="true"></span> Visible rationale</h3>
             <p>Every prompt explains why it appeared, using plain cues like person, place, or unfinished task.</p>
           </div>
           <div class="insight-card">
-            <h3>Delete at source</h3>
+            <h3><span class="iconify" data-icon="pixelarticons:delete" aria-hidden="true"></span> Delete at source</h3>
             <p>Users can remove raw media and summaries from the same detail view without hunting through settings.</p>
           </div>
         </div>
       </section>
 
       <section class="case-section" id="reflection">
-        <h2 class="section-title">Reflection</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:heart" aria-hidden="true"></span> Reflection</h2>
         <h2>What I learned</h2>
         <p class="body-copy">The strongest interaction was not the futuristic one. It was the one that made capture obvious, recall fast, and consent visible. A memory product only works when people understand what the system knows and why it is speaking up.</p>
-        <div class="quote-panel">
-          <p>Good AI UX turns uncertainty into clear, reversible choices.</p>
+        <div class="bento-proof">
+          <div class="bento-stats">
+            <div class="bento-stat" data-tip="The entire product experience distills into a 3-step capture-to-action loop">
+              <span class="bento-stat-value" data-count="3">3</span>
+              <span class="bento-stat-label">Step capture-to-action loop</span>
+            </div>
+            <div class="bento-stat" data-tip="User control ranked #1 above novelty, speed, and feature richness in design priorities">
+              <span class="bento-stat-value">#1</span>
+              <span class="bento-stat-label">User control, above all else</span>
+            </div>
+          </div>
+          <div class="bento-quote">
+            <p class="bento-quote-text">"Good AI UX turns uncertainty into clear, reversible choices."</p>
+            <div class="bento-attribution">
+              <span class="bento-avatar">CA</span>
+              <span>
+                <span class="bento-attr-name">Design Research</span>
+                <span class="bento-attr-role">CotonAI Design Sprint</span>
+              </span>
+            </div>
+          </div>
         </div>
       </section>
     </article>
   </main>
 
-  <footer class="site-footer" aria-label="Site footer">
+  <footer class="site-footer footer-cosmos" aria-label="Site footer">
     <div class="footer-mountain" aria-hidden="true"></div>
     <div class="footer-nav">
-      <div class="footer-links-row">
-        <a href="#" class="footer-pill">LinkedIn</a>
-        <a href="#" class="footer-pill">Instagram</a>
+      <div class="footer-intro">
+        <span class="footer-sigil" aria-hidden="true"></span>
+        <p>Designing AI products, systems, and interfaces with care.</p>
       </div>
-      <div class="footer-links-row">
-        <a href="../about.html" class="footer-pill">About</a>
-        <a href="../playground.html" class="footer-pill">Playground</a>
-        <button class="footer-pill" type="button" data-samai-open>SamAI</button>
-        <a href="#" class="footer-pill">X.com</a>
-        <a href="#" class="footer-pill">Substack</a>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Useful</span>
+        <a href="../portfolio.html#work">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../playground.html">Playground</a>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Social</span>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">X.com</a>
+        <a href="#">Substack</a>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Contact</span>
+        <a href="mailto:sambitnayak.ux@gmail.com">Email</a>
       </div>
     </div>
-    <p class="footer-name">Sambit Nayak</p>
+    <p class="footer-name" data-static-wordmark="true">Sambit Nayak</p>
   </footer>
-  <script src="../footer-pixels.js"></script>
+  <script src="../theme-toggle.js"></script>
   <script src="../samai-sidebar.js"></script>
+  <script src="case-study.js"></script>
   <script>
     (function () {
       var motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
@@ -201,7 +287,8 @@
             var rect = footer.getBoundingClientRect(), vh = window.innerHeight;
             if (rect.bottom < 0 || rect.top > vh) { rafF = null; return; }
             var offset = ((vh - rect.top) / (vh + rect.height) - 0.5) * 60;
-            footerBg.style.backgroundPositionY = 'calc(40% + ' + offset + 'px)';
+            footerBg.style.setProperty('--footer-parallax', offset.toFixed(1) + 'px');
+            footerBg.style.setProperty('--footer-bg-y', 'calc(48% + ' + (offset * -0.32).toFixed(1) + 'px)');
             rafF = null;
           }
           window.addEventListener('scroll', function () {
@@ -216,8 +303,6 @@
         }, { threshold: 0.08 }).observe(footer);
       }
 
-      if (window.initFooterPixelName) window.initFooterPixelName();
-
       if (!motionOk) return;
 
       /* ── Case section + card reveals ── */
@@ -229,8 +314,8 @@
           el.querySelectorAll('.insight-card, .diagram-card').forEach(function (card, i) {
             setTimeout(function () { card.classList.add('is-vis'); }, 160 + i * 85);
           });
-          var qp = el.querySelector('.quote-panel');
-          if (qp) setTimeout(function () { qp.classList.add('is-vis'); }, 180);
+          var qp = el.querySelector('.quote-panel, .bento-proof');
+          if (qp) setTimeout(function () { qp.style.opacity = '1'; }, 180);
           var vis = el.querySelector('.visual');
           if (vis) setTimeout(function () { vis.classList.add('is-vis'); }, 120);
           sObs.unobserve(el);

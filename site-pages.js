@@ -1,8 +1,52 @@
 (function () {
+  /* ── Custom cursor dot ── */
+  var cursorDot = document.createElement('div');
+  cursorDot.className = 'cursor-dot';
+  document.body.appendChild(cursorDot);
+
+  document.addEventListener('mousemove', function (e) {
+    cursorDot.style.left = e.clientX + 'px';
+    cursorDot.style.top  = e.clientY + 'px';
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', function () { cursorDot.classList.add('is-hidden'); });
+  document.addEventListener('mouseenter', function () { cursorDot.classList.remove('is-hidden'); });
+
+  document.addEventListener('mouseover', function (e) {
+    if (e.target.closest('a, button, [role="button"], input, textarea, select, label')) {
+      cursorDot.classList.add('is-hover');
+    } else {
+      cursorDot.classList.remove('is-hover');
+    }
+  }, { passive: true });
+})();
+
+(function () {
   var motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
 
   var footer = document.querySelector('.site-footer');
+  var footerBg = document.querySelector('.footer-mountain');
   if (footer) {
+    if (footerBg && motionOk) {
+      var rafFooter = null;
+      function runFooterParallax() {
+        var rect = footer.getBoundingClientRect();
+        var vh = window.innerHeight;
+        if (rect.bottom < 0 || rect.top > vh) {
+          rafFooter = null;
+          return;
+        }
+        var offset = ((vh - rect.top) / (vh + rect.height) - 0.5) * 60;
+        footerBg.style.setProperty('--footer-parallax', offset.toFixed(1) + 'px');
+        footerBg.style.setProperty('--footer-bg-y', 'calc(48% + ' + (offset * -0.32).toFixed(1) + 'px)');
+        rafFooter = null;
+      }
+      window.addEventListener('scroll', function () {
+        if (!rafFooter) rafFooter = requestAnimationFrame(runFooterParallax);
+      }, { passive: true });
+      runFooterParallax();
+    }
+
     new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) footer.classList.add('in-view');
@@ -21,7 +65,7 @@
       });
     }, { threshold: 0.08 });
 
-    document.querySelectorAll('.glass-panel, .statement, .experiment-card').forEach(function (node) {
+    document.querySelectorAll('.glass-panel, .statement, .experiment-card, .summary-card').forEach(function (node) {
       node.style.opacity = '0';
       node.style.transform = 'translateY(18px)';
       node.style.transition = 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)';

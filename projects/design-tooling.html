@@ -5,20 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Salesforce Trailhead Solve Case Study | Sambit Nayak</title>
   <link rel="stylesheet" href="case-study.css">
+  <script>try{var t=localStorage.getItem('portfolio-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 </head>
 <body>
   <header class="topbar">
     <nav class="shell nav" aria-label="Primary navigation">
       <a class="brand" href="../portfolio.html#top" aria-label="Home">
-        <img class="brand-logo" src="../Images/main.jpeg" alt="" aria-hidden="true">
+        <img class="brand-logo" src="../Images/logo-chrome.png" alt="" aria-hidden="true">
       </a>
       <div class="nav-links">
         <a href="../portfolio.html#work">Work</a>
         <a href="../about.html">About</a>
         <a href="../playground.html">Playground</a>
+        <a href="https://drive.google.com/file/d/1CUZk1JslQwJWhfeSKr6Z7OB_T4CPGpf5/view" target="_blank" rel="noopener noreferrer">Resume</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">
+          <svg class="theme-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+          <svg class="theme-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
       </div>
-      <button class="resume-link btn-pill" type="button" data-samai-open>SamAI</button>
+      <button class="ask-sam-btn" type="button" data-samai-open aria-label="Open SamAI">Ask Sam</button>
     </nav>
   </header>
 
@@ -41,108 +47,170 @@
         <p class="kicker">Salesforce - Trailhead Platform</p>
         <h1>Salesforce Trailhead Solve</h1>
         <div class="meta-grid">
-          <section class="meta-item"><h2>Role</h2><p>Product Designer</p></section>
-          <section class="meta-item"><h2>Timeline</h2><p>Aug 2025 - Present</p></section>
-          <section class="meta-item"><h2>Team</h2><p>Trailhead Platform</p></section>
-          <section class="meta-item"><h2>Skills</h2><p>Research Ops, Strategy, Education UX, Rapid Prototyping</p></section>
+          <section class="meta-item"><h2><span class="iconify" data-icon="pixelarticons:user" aria-hidden="true"></span> Role</h2><p>Product Designer</p></section>
+          <section class="meta-item"><h2><span class="iconify" data-icon="pixelarticons:calendar" aria-hidden="true"></span> Timeline</h2><p>Aug 2025 - Present</p></section>
+          <section class="meta-item"><h2><span class="iconify" data-icon="pixelarticons:users" aria-hidden="true"></span> Team</h2><p>Trailhead Platform</p></section>
+          <section class="meta-item"><h2><span class="iconify" data-icon="pixelarticons:briefcase" aria-hidden="true"></span> Skills</h2><p>Research Ops, Strategy, Education UX, Rapid Prototyping</p></section>
         </div>
       </header>
 
       <section class="case-section" id="overview">
-        <h2 class="section-title">Overview</h2>
-        <h2>How might Trailhead help learners solve, practice, and retain platform skills?</h2>
-        <p class="lede">Trailhead Solve focuses on research and design for guided learning workflows, including research operations across 650+ users and a shortlist of 72 participants for deeper study.</p>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:shapes" aria-hidden="true"></span> Overview</h2>
+        <h2>How might Trailhead adapt for advanced users after they reach major career milestones?</h2>
+        <p class="lede">Salesforce Trailhead is an interactive learning platform designed to help users build practical Salesforce skills through guided modules and hands-on challenges. However, as users evolve into experts, their engagement shifts from continuous learning to more sporadic, goal-driven usage. This project explores how Trailhead can adapt to support advanced users and keep them meaningfully engaged over time.</p>
         <div class="visual diagram">
           <div class="diagram-grid">
-            <div class="diagram-card"><span>Mode</span><strong>Edit one thing at a time</strong></div>
-            <div class="diagram-card"><span>Compare</span><strong>Keep context visible</strong></div>
-            <div class="diagram-card"><span>Ship</span><strong>Export without cleanup</strong></div>
+            <div class="diagram-card"><span>Platform</span><strong>Guided learning modules</strong></div>
+            <div class="diagram-card"><span>Shift</span><strong>Expert users become goal-driven</strong></div>
+            <div class="diagram-card"><span>Opportunity</span><strong>Support career progression</strong></div>
           </div>
         </div>
       </section>
 
       <section class="case-section" id="problem">
-        <h2 class="section-title">Problem</h2>
-        <h2>Desktop creation patterns do not shrink cleanly to a phone.</h2>
-        <p class="body-copy">Small screens punish scattered controls, hidden state, and modal-heavy flows. Users can make quick changes, but they lose confidence when they cannot compare versions or understand what is selected.</p>
-        <div class="three-up">
-          <div class="insight-card"><h3>Selection ambiguity</h3><p>Users struggled when object selection, canvas movement, and edit mode competed for the same gestures.</p></div>
-          <div class="insight-card"><h3>Control overload</h3><p>Full toolbars created visual noise and pushed the actual work area out of focus.</p></div>
-          <div class="insight-card"><h3>Version anxiety</h3><p>People hesitated to experiment when they could not quickly compare or revert changes.</p></div>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:warning-diamond" aria-hidden="true"></span> Problem</h2>
+        <h2>Advanced users disengage after certifications and return only when a specific problem appears.</h2>
+        <p class="body-copy">After users reach key milestones, Trailhead becomes less of a daily learning habit and more of a reactive resource. The core gap is that Trailhead does not evolve with the user's career stage.</p>
+        <div class="stat-chart" aria-label="Engagement metrics">
+          <div class="stat-row" data-tip="64% of users disengage from Trailhead after completing major certifications">
+            <span class="stat-label">Engagement drop after key milestones like certifications</span>
+            <div class="stat-track"><div class="stat-fill" style="--pct:64%; --clr:var(--dv-p1)"></div></div>
+            <span class="stat-value">64%</span>
+          </div>
+          <div class="stat-row" data-tip="45% of power users reach for ChatGPT or YouTube before returning to Trailhead">
+            <span class="stat-label">Power users relying on external tools like ChatGPT</span>
+            <div class="stat-track"><div class="stat-fill" style="--pct:45%; --clr:var(--dv-p2)"></div></div>
+            <span class="stat-value">45%</span>
+          </div>
+          <div class="stat-row" data-tip="36% of users feel Trailhead recommendations don't reflect their current role or goals">
+            <span class="stat-label">Personalization gap in adaptive recommendations</span>
+            <div class="stat-track"><div class="stat-fill" style="--pct:36%; --clr:var(--dv-p3)"></div></div>
+            <span class="stat-value">36%</span>
+          </div>
         </div>
       </section>
 
       <section class="case-section" id="solution">
-        <h2 class="section-title">Solution</h2>
-        <h2>A compact editor built around modes, previews, and reversible actions.</h2>
-        <p class="body-copy">The prototype uses segmented editing modes, persistent before/after comparison, and predictable bottom-sheet controls. The goal is to make the current task feel obvious without hiding power behind menus.</p>
-        <div class="visual">
-          <img src="../Images/Homepage bg.png" alt="Abstract motion visual used as a project preview.">
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:zap" aria-hidden="true"></span> Solution</h2>
+        <h2>Reimagine Trailhead as a career-driven, adaptive learning ecosystem.</h2>
+        <p class="body-copy">The direction shifts Trailhead from a static learning platform into a system that helps users solve real problems while continuing to grow their careers.</p>
+        <div class="two-up">
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:grid-3x3" aria-hidden="true"></span> Dashboard Redesign</h3><p>A career-aware interface shows progress, skill gaps, certifications, benchmarks, personalized learning paths, and next steps.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:zap" aria-hidden="true"></span> Trailhead Solve</h3><p>A RAG-powered AI layer answers real Salesforce questions with direct, contextual solutions grounded in community, documentation, and learning resources.</p></div>
         </div>
       </section>
 
       <section class="case-section" id="flows">
-        <h2 class="section-title">Core Flows</h2>
-        <h2>Four flows carry the editing experience.</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:arrows-horizontal" aria-hidden="true"></span> Core Flows</h2>
+        <h2>The experience moves users from asking real questions to building long-term career momentum.</h2>
         <div class="two-up">
-          <div class="insight-card"><h3>Open and crop</h3><p>The crop frame has stable handles and predictable snapping, so layout never jumps under the finger.</p></div>
-          <div class="insight-card"><h3>Adjust style</h3><p>Sliders and swatches sit in one bottom sheet, with live preview above the controls.</p></div>
-          <div class="insight-card"><h3>Compare versions</h3><p>A hold-to-preview interaction shows the original without leaving the edit context.</p></div>
-          <div class="insight-card"><h3>Export</h3><p>Presets make output constraints explicit before saving or sharing.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:search" aria-hidden="true"></span> Search-first entry</h3><p>The user begins with a real-world Salesforce question instead of browsing static learning paths.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:zap" aria-hidden="true"></span> AI-powered resolution</h3><p>Solve returns step-by-step answers pulled from docs, community knowledge, and learning content.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:settings-cog" aria-hidden="true"></span> Adaptive recommendations</h3><p>The system suggests next actions based on skill gaps and assembles custom Trailmixes.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:analytics" aria-hidden="true"></span> Career dashboard loop</h3><p>Certifications, progress, and opportunities stay visible so users keep engaging beyond milestones.</p></div>
         </div>
       </section>
 
       <section class="case-section" id="research">
-        <h2 class="section-title">Research</h2>
-        <h2>Testing showed that confidence mattered more than raw feature count.</h2>
-        <p class="body-copy">I compared mobile editors and watched people make a simple social asset. The fastest users were not the ones with the most tools; they were the ones who always knew what state they were in.</p>
-        <div class="visual diagram">
-          <div class="diagram-grid">
-            <div class="diagram-card"><span>Need</span><strong>Know what is selected</strong></div>
-            <div class="diagram-card"><span>Need</span><strong>Preview before committing</strong></div>
-            <div class="diagram-card"><span>Need</span><strong>Recover from experiments</strong></div>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:analytics" aria-hidden="true"></span> Research</h2>
+        <h2>Power users preferred fast problem-solving over structured learning.</h2>
+        <p class="body-copy">The research combined 11 power user interviews, 6 competitor platform analyses, semi-structured interviews, and behavioral insights. Engagement was tied to immediate utility, career relevance, and visibility into progress and next steps.</p>
+        <div class="finding-tabs" aria-label="Research methods">
+          <span>Power user interviews</span>
+          <span>Competitor analysis</span>
+          <span>Agent stress tests</span>
+          <span>Think-aloud sessions</span>
+        </div>
+        <div class="research-stats">
+          <div class="research-stat" data-tip="11 Salesforce power users interviewed in the discovery phase">
+            <span class="research-stat-value" data-count="11" style="color:var(--dv-p1)">11</span>
+            <span class="research-stat-label">Power users interviewed in discovery phase</span>
+          </div>
+          <div class="research-stat" data-tip="12 AI agents used internally to simulate user flows before external testing">
+            <span class="research-stat-value" data-count="12" style="color:var(--dv-p2)">12</span>
+            <span class="research-stat-label">AI agents used to stress-test flows internally</span>
+          </div>
+          <div class="research-stat" data-tip="8 external users ran think-aloud sessions to validate design decisions">
+            <span class="research-stat-value" data-count="8" style="color:var(--dv-p3)">8</span>
+            <span class="research-stat-label">Users ran external think-aloud sessions</span>
           </div>
         </div>
       </section>
 
       <section class="case-section" id="decisions">
-        <h2 class="section-title">Design Decisions</h2>
-        <h2>The final design keeps the canvas visually dominant.</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:pen-square" aria-hidden="true"></span> Design Decisions</h2>
+        <h2>The final direction prioritizes intent, trust, and career relevance.</h2>
         <div class="three-up">
-          <div class="insight-card"><h3>Bottom-first controls</h3><p>Primary controls stay within thumb reach while the work stays visible.</p></div>
-          <div class="insight-card"><h3>One active mode</h3><p>Mode labels reduce accidental edits and make gesture behavior predictable.</p></div>
-          <div class="insight-card"><h3>Preview as habit</h3><p>Comparison is available in every mode, not buried in history.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:search" aria-hidden="true"></span> Search-first UX</h3><p>Prioritize intent over navigation so users can ask before they browse.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:cpu" aria-hidden="true"></span> AI as interface</h3><p>Shift the primary behavior from browsing content to asking for grounded help.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:briefcase" aria-hidden="true"></span> Career layer</h3><p>Surface what comes next instead of leaving users inside static content lists.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:cpu" aria-hidden="true"></span> Contextual intelligence</h3><p>Use RAG to keep answers grounded in documentation, community, and learning resources.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:analytics" aria-hidden="true"></span> Progress visibility</h3><p>Reinforce habit loops by making progress, skill gaps, and next actions visible.</p></div>
+          <div class="insight-card"><h3><span class="iconify" data-icon="pixelarticons:check" aria-hidden="true"></span> Agent-based testing</h3><p>Simulate user behavior early to stress-test flows before external validation.</p></div>
         </div>
       </section>
 
       <section class="case-section" id="reflection">
-        <h2 class="section-title">Reflection</h2>
+        <h2 class="section-title"><span class="iconify" data-icon="pixelarticons:heart" aria-hidden="true"></span> Reflection</h2>
         <h2>What I learned</h2>
-        <p class="body-copy">A mobile design tool should feel narrower, not weaker. Constraints helped clarify what belonged in the primary flow and what could wait until users needed more precision.</p>
-        <div class="quote-panel"><p>Small screens reward interfaces that make one action feel unmistakable.</p></div>
+        <p class="body-copy">This project reframed learning from a content consumption problem to a career progression problem. By introducing an AI-driven problem-solving layer and a career-aware system, Trailhead becomes less of a learning platform and more of a daily utility.</p>
+        <p class="body-copy">If extended further, the opportunity lies in deep personalization at scale, stronger community integration, and continuous feedback loops to refine AI accuracy.</p>
+        <div class="bento-proof">
+          <div class="bento-stats">
+            <div class="bento-stat" data-tip="11 power users interviewed across discovery and validation phases">
+              <span class="bento-stat-value" data-count="11">11</span>
+              <span class="bento-stat-label">Power users interviewed</span>
+            </div>
+            <div class="bento-stat" data-tip="64% engagement drop observed after users hit major Trailhead milestones">
+              <span class="bento-stat-value" data-count="64" data-suffix="%">64%</span>
+              <span class="bento-stat-label">Engagement drop post-milestone</span>
+            </div>
+          </div>
+          <div class="bento-quote">
+            <p class="bento-quote-text">"Advanced users do not want more content. They want faster answers and clearer direction."</p>
+            <div class="bento-attribution">
+              <span class="bento-avatar">SF</span>
+              <span>
+                <span class="bento-attr-name">Power User Research</span>
+                <span class="bento-attr-role">Salesforce Trailhead</span>
+              </span>
+            </div>
+          </div>
+        </div>
       </section>
     </article>
   </main>
 
-  <footer class="site-footer" aria-label="Site footer">
+  <footer class="site-footer footer-cosmos" aria-label="Site footer">
     <div class="footer-mountain" aria-hidden="true"></div>
     <div class="footer-nav">
-      <div class="footer-links-row">
-        <a href="#" class="footer-pill">LinkedIn</a>
-        <a href="#" class="footer-pill">Instagram</a>
+      <div class="footer-intro">
+        <span class="footer-sigil" aria-hidden="true"></span>
+        <p>Designing AI products, systems, and interfaces with care.</p>
       </div>
-      <div class="footer-links-row">
-        <a href="../about.html" class="footer-pill">About</a>
-        <a href="../playground.html" class="footer-pill">Playground</a>
-        <button class="footer-pill" type="button" data-samai-open>SamAI</button>
-        <a href="#" class="footer-pill">X.com</a>
-        <a href="#" class="footer-pill">Substack</a>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Useful</span>
+        <a href="../portfolio.html#work">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../playground.html">Playground</a>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Social</span>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">X.com</a>
+        <a href="#">Substack</a>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Contact</span>
+        <a href="mailto:sambitnayak.ux@gmail.com">Email</a>
       </div>
     </div>
-    <p class="footer-name">Sambit Nayak</p>
+    <p class="footer-name" data-static-wordmark="true">Sambit Nayak</p>
   </footer>
-  <script src="../footer-pixels.js"></script>
+  <script src="../theme-toggle.js"></script>
   <script src="../samai-sidebar.js"></script>
+  <script src="case-study.js"></script>
   <script>
     (function () {
       var motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
@@ -157,7 +225,8 @@
             var rect = footer.getBoundingClientRect(), vh = window.innerHeight;
             if (rect.bottom < 0 || rect.top > vh) { rafF = null; return; }
             var offset = ((vh - rect.top) / (vh + rect.height) - 0.5) * 60;
-            footerBg.style.backgroundPositionY = 'calc(40% + ' + offset + 'px)';
+            footerBg.style.setProperty('--footer-parallax', offset.toFixed(1) + 'px');
+            footerBg.style.setProperty('--footer-bg-y', 'calc(48% + ' + (offset * -0.32).toFixed(1) + 'px)');
             rafF = null;
           }
           window.addEventListener('scroll', function () {
@@ -172,8 +241,6 @@
         }, { threshold: 0.08 }).observe(footer);
       }
 
-      if (window.initFooterPixelName) window.initFooterPixelName();
-
       if (!motionOk) return;
 
       /* ── Case section + card reveals ── */
@@ -185,8 +252,8 @@
           el.querySelectorAll('.insight-card, .diagram-card').forEach(function (card, i) {
             setTimeout(function () { card.classList.add('is-vis'); }, 160 + i * 85);
           });
-          var qp = el.querySelector('.quote-panel');
-          if (qp) setTimeout(function () { qp.classList.add('is-vis'); }, 180);
+          var qp = el.querySelector('.quote-panel, .bento-proof');
+          if (qp) setTimeout(function () { qp.style.opacity = '1'; }, 180);
           var vis = el.querySelector('.visual');
           if (vis) setTimeout(function () { vis.classList.add('is-vis'); }, 120);
           sObs.unobserve(el);

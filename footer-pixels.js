@@ -2,6 +2,7 @@
   function initFooterPixelName() {
     var node = document.querySelector('.footer-name');
     if (!node || node.dataset.pixelReady === 'true') return;
+    if (node.dataset.staticWordmark === 'true') return;
     if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
 
     var text = (node.textContent || '').trim();
@@ -137,7 +138,7 @@
         p.x += p.vx;
         p.y += p.vy;
 
-        ctx.fillStyle = p.warm > 0.88 ? 'rgba(255, 122, 26, 0.92)' : 'rgba(255, 255, 255, 0.92)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.96)';
         ctx.fillRect(p.x, p.y, particleSize, particleSize);
       }
 

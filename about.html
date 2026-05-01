@@ -4,140 +4,717 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About | Sambit Nayak</title>
-  <meta name="description" content="About Sambit Nayak, a digital designer and builder working across fashion, technology, AI, startups, and retail systems.">
+  <meta name="description" content="About Sambit Nayak — a digital designer building AI products, interfaces, and design systems.">
   <link rel="stylesheet" href="site-pages.css">
+  <script>try{var t=localStorage.getItem('portfolio-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+  <style>
+    /* ── About top section ── */
+    .abt-section {
+      padding: clamp(48px, 7vw, 96px) 0;
+    }
+
+    .abt-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 6vw, 96px);
+      align-items: center;
+    }
+
+    .abt-name-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .abt-name-img {
+      width: clamp(260px, 38vw, 520px);
+      mix-blend-mode: screen;
+      display: block;
+    }
+
+    [data-theme="light"] .abt-name-img {
+      mix-blend-mode: multiply;
+    }
+
+    .abt-text-col {
+      border-left: 1px solid var(--line);
+      padding-left: clamp(32px, 4vw, 64px);
+    }
+
+    .abt-display {
+      margin: 0;
+      font-family: var(--display-font);
+      font-size: clamp(20px, 2.2vw, 34px);
+      font-weight: 400;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
+
+    /* ── Smooth scroll ── */
+    html { scroll-behavior: smooth; }
+
+    /* ── Interests section ── */
+    .abt-interests {
+      padding: clamp(64px, 8vw, 96px) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .int-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 6vw, 96px);
+      align-items: start;
+      padding: clamp(36px, 4.5vw, 56px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .int-row:first-child { border-top: 1px solid var(--line); }
+
+    .int-left {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .int-icon {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      stroke: #f97316;
+      fill: none;
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .int-title {
+      margin: 0;
+      font-family: var(--display-font);
+      font-size: clamp(26px, 2.6vw, 42px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .int-desc {
+      margin: 0;
+      padding-top: 4px;
+      font-family: var(--body-font);
+      font-size: clamp(14px, 1vw, 16px);
+      line-height: 1.78;
+      color: rgba(246, 240, 230, 0.52);
+    }
+
+    [data-theme="light"] .int-desc { color: rgba(26, 20, 16, 0.54); }
+
+    @media (max-width: 700px) {
+      .int-row { grid-template-columns: 1fr; gap: 16px; }
+    }
+
+    /* ── Infinite gallery ── */
+    .abt-gallery {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+      background: #000;
+      border-top: 1px solid var(--line);
+      cursor: grab;
+      user-select: none;
+    }
+
+    .abt-gallery:active { cursor: grabbing; }
+
+    /* Canvas: flex column of rows — intrinsically sized to content */
+    .abt-gallery-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      will-change: transform;
+    }
+
+    .gal-row {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .gal-item {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .gal-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* Caption overlay — revealed on hover */
+    .gal-cap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px 14px 14px;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.72));
+      font-family: var(--body-font);
+      font-size: 11px;
+      line-height: 1.5;
+      color: rgba(246, 240, 230, 0.85);
+      opacity: 0;
+      transition: opacity 0.22s ease;
+      pointer-events: none;
+    }
+
+    .gal-cap strong {
+      display: block;
+      font-weight: 400;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .gal-item:hover .gal-cap { opacity: 1; }
+
+    .abt-gallery-hint {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--body-font);
+      font-size: 11px;
+      letter-spacing: 0.13em;
+      color: rgba(246, 240, 230, 0.32);
+      pointer-events: none;
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .abt-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .abt-name-col {
+        justify-content: flex-start;
+      }
+      .abt-text-col {
+        border-left: none;
+        border-top: 1px solid var(--line);
+        padding-left: 0;
+        padding-top: 40px;
+      }
+    }
+  </style>
 </head>
 <body>
+
   <header class="topbar">
     <nav class="shell nav" aria-label="Primary navigation">
       <a class="brand" href="portfolio.html#top" aria-label="Home">
-        <img class="brand-logo" src="Images/main.jpeg" alt="" aria-hidden="true">
+        <img class="brand-logo" src="Images/logo-chrome.png" alt="" aria-hidden="true">
       </a>
       <div class="nav-links">
         <a href="portfolio.html#work">Work</a>
         <a href="about.html">About</a>
         <a href="playground.html">Playground</a>
+        <a href="https://drive.google.com/file/d/1CUZk1JslQwJWhfeSKr6Z7OB_T4CPGpf5/view" target="_blank" rel="noopener noreferrer">Resume</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">
+          <svg class="theme-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+          <svg class="theme-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
       </div>
-      <button class="resume-link" type="button" data-samai-open>SamAI</button>
+      <button class="ask-sam-btn" type="button" data-samai-open aria-label="Open SamAI">Ask Sam</button>
     </nav>
   </header>
 
-  <main class="shell page">
-    <section class="page-hero" aria-labelledby="about-title">
-      <div>
-        <p class="page-kicker">About Sambit</p>
-        <h1 class="page-title" id="about-title">Digital designer, builder, and problem solver.</h1>
-        <p class="page-lede">I am a digital designer passionate about creating purposeful online experiences for brands and startups. I am a builder who can learn, build, and implement almost anything when the problem is worth solving.</p>
-        <p class="page-lede">My background across fashion, tech, AI, startups, and large retail chains has helped me solve complex problems through design intervention.</p>
-      </div>
-      <aside class="glass-panel portrait-panel" aria-label="Sambit profile snapshot">
-        <img class="portrait-img" src="Images/main.jpeg" alt="Sambit Nayak portrait">
-        <div class="signal-grid">
-          <div class="signal"><strong>AI</strong><span>Product systems and agents</span></div>
-          <div class="signal"><strong>Fash</strong><span>Fashion-centric thinking</span></div>
-          <div class="signal"><strong>0-1</strong><span>Startup builder mindset</span></div>
-          <div class="signal"><strong>Retail</strong><span>Large-scale commerce systems</span></div>
+  <main>
+    <section class="abt-section" aria-label="About Sambit">
+      <div class="shell abt-inner">
+        <div class="abt-name-col">
+          <img class="abt-name-img" src="Images/sambit-odia-2.png" alt="Sambit written in Odia script" draggable="false">
         </div>
-      </aside>
-    </section>
-
-    <section class="section-grid" aria-labelledby="principles-title">
-      <p class="micro-label sticky-label" id="principles-title">Builder Mindset</p>
-      <div class="statement-stack">
-        <article class="statement">
-          <span class="statement-number">01</span>
-          <div>
-            <h2>I design with the confidence that anything can be learned.</h2>
-            <p>My process is built around fast learning, rapid implementation, and making unclear systems usable. I like moving from ambiguity to something real people can touch, test, and trust.</p>
-          </div>
-        </article>
-        <article class="statement">
-          <span class="statement-number">02</span>
-          <div>
-            <h2>I use design as an intervention, not decoration.</h2>
-            <p>Whether the context is fashion, AI, retail, or enterprise tooling, I look for the point where a design decision can reduce friction, clarify behavior, or change how a team works.</p>
-          </div>
-        </article>
-        <article class="statement">
-          <span class="statement-number">03</span>
-          <div>
-            <h2>I care about brands, but I build for systems.</h2>
-            <p>Good digital experiences need taste, but they also need structure. I bring a fashion-aware visual eye into products that must scale, operate, and evolve.</p>
-          </div>
-        </article>
+        <div class="abt-text-col">
+          <h1 class="abt-display">a designer who builds at the edge of craft and code, turning complexity into clarity</h1>
+        </div>
       </div>
     </section>
+    <!-- ── Interests & passions ── -->
+    <section class="abt-interests shell" aria-label="Interests and passions">
 
-    <section class="section-grid" aria-labelledby="now-title">
-      <p class="micro-label sticky-label" id="now-title">Background</p>
-      <div class="statement-stack">
-        <article class="statement">
-          <span class="statement-number">A</span>
-          <div>
-            <h3>MS HCI, Indiana University.</h3>
-            <p>Human-computer interaction shaped how I think about systems, behavior, research, and the responsibility of designing technology people rely on.</p>
-          </div>
-        </article>
-        <article class="statement">
-          <span class="statement-number">B</span>
-          <div>
-            <h3>B.Des, NIFT Delhi.</h3>
-            <p>Design school gave me a fashion-centric foundation: material culture, visual systems, brand behavior, and the instinct to connect aesthetics with use.</p>
-          </div>
-        </article>
-        <article class="statement">
-          <span class="statement-number">C</span>
-          <div>
-            <h3>Clients and teams across startups, AI, fashion, tech, and retail.</h3>
-            <p>I have worked across early-stage startup contexts, large retail chains, AI products, and design problems where business complexity needs a clear user experience.</p>
-          </div>
-        </article>
+      <!-- Traveling -->
+      <div class="int-row">
+        <div class="int-left">
+          <svg class="int-icon" viewBox="0 0 46 46" aria-hidden="true">
+            <circle cx="23" cy="23" r="18"/>
+            <line x1="23" y1="5"  x2="23" y2="11"/>
+            <line x1="23" y1="35" x2="23" y2="41"/>
+            <line x1="5"  y1="23" x2="11" y2="23"/>
+            <line x1="35" y1="23" x2="41" y2="23"/>
+            <!-- needle -->
+            <path d="M23 10 L26 23 L23 36 L20 23 Z" stroke="#f97316" fill="rgba(249,115,22,0.12)" stroke-width="1.2"/>
+            <circle cx="23" cy="23" r="2.5" fill="#f97316" stroke="none"/>
+          </svg>
+          <h2 class="int-title">Traveling</h2>
+        </div>
+        <p class="int-desc">Moving through unfamiliar places resets my perspective. Every new city, coast, or mountain trail sharpens how I see space, people, and the small details that make design feel human.</p>
       </div>
+
+      <!-- Video Games -->
+      <div class="int-row">
+        <div class="int-left">
+          <svg class="int-icon" viewBox="0 0 46 46" aria-hidden="true">
+            <path d="M8 19 C8 15 11 13 15 13 L31 13 C35 13 38 15 38 19 L39 28 C39.5 32 37 36 33 36 L31 36 C29 36 28 35 27 34 L25 31 L21 31 L19 34 C18 35 17 36 15 36 L13 36 C9 36 6.5 32 7 28 Z"/>
+            <line x1="15" y1="20" x2="15" y2="27"/>
+            <line x1="11.5" y1="23.5" x2="18.5" y2="23.5"/>
+            <circle cx="29" cy="21" r="1.6"/>
+            <circle cx="33" cy="24.5" r="1.6"/>
+            <circle cx="29" cy="28" r="1.6"/>
+            <circle cx="25" cy="24.5" r="1.6"/>
+          </svg>
+          <h2 class="int-title">Video Games</h2>
+        </div>
+        <p class="int-desc">Games taught me more about feedback loops, progression, and delight than most design textbooks. I still believe the best UX lessons come from a well-designed level.</p>
+      </div>
+
+      <!-- Fashion Design -->
+      <div class="int-row">
+        <div class="int-left">
+          <svg class="int-icon" viewBox="0 0 46 46" aria-hidden="true">
+            <!-- Dress form / mannequin -->
+            <ellipse cx="23" cy="11" rx="5.5" ry="5"/>
+            <path d="M17.5 16 C14 21 11 28 9 37 L37 37 C35 28 32 21 28.5 16"/>
+            <line x1="9"  y1="37" x2="9"  y2="41"/>
+            <line x1="37" y1="37" x2="37" y2="41"/>
+            <line x1="6"  y1="41" x2="40" y2="41"/>
+            <!-- waist seam -->
+            <line x1="13" y1="27" x2="33" y2="27" stroke-opacity="0.45"/>
+            <!-- center line -->
+            <line x1="23" y1="16" x2="23" y2="37" stroke-opacity="0.35"/>
+          </svg>
+          <h2 class="int-title">Fashion Design</h2>
+        </div>
+        <p class="int-desc">Fashion is where I first understood that design is never just visual — it's tactile, temporal, and cultural. Those years shaped how I think about texture, identity, and narrative in everything I make.</p>
+      </div>
+
+      <!-- Graphic Design -->
+      <div class="int-row">
+        <div class="int-left">
+          <svg class="int-icon" viewBox="0 0 46 46" aria-hidden="true">
+            <!-- Bezier curve with anchor points -->
+            <path d="M8 37 C12 20 28 26 38 9" stroke="#f97316" stroke-width="1.6" fill="none"/>
+            <!-- Anchor nodes -->
+            <rect x="5.5" y="34.5" width="5" height="5" rx="1"/>
+            <rect x="35.5" y="6.5"  width="5" height="5" rx="1"/>
+            <!-- Control handles -->
+            <line x1="8"  y1="37" x2="16" y2="24" stroke-opacity="0.38"/>
+            <line x1="38" y1="9"  x2="28" y2="22" stroke-opacity="0.38"/>
+            <circle cx="16" cy="24" r="2" stroke-opacity="0.5"/>
+            <circle cx="28" cy="22" r="2" stroke-opacity="0.5"/>
+          </svg>
+          <h2 class="int-title">Graphic Design</h2>
+        </div>
+        <p class="int-desc">Before screens, there were grids, type, and ink. Graphic design gave me a rigorous foundation — the kind that makes you obsessive about alignment, hierarchy, and whitespace.</p>
+      </div>
+
+      <!-- Creative Coding -->
+      <div class="int-row">
+        <div class="int-left">
+          <svg class="int-icon" viewBox="0 0 46 46" aria-hidden="true">
+            <!-- Terminal window -->
+            <rect x="4" y="7" width="38" height="32" rx="3.5"/>
+            <line x1="4" y1="15" x2="42" y2="15"/>
+            <!-- traffic lights -->
+            <circle cx="9.5"  cy="11" r="1.5" fill="#f97316" stroke="none"/>
+            <circle cx="14.5" cy="11" r="1.5" fill="#f97316" stroke="none" opacity="0.55"/>
+            <circle cx="19.5" cy="11" r="1.5" fill="#f97316" stroke="none" opacity="0.25"/>
+            <!-- prompt chevron -->
+            <path d="M10 23 L15 27 L10 31"/>
+            <!-- cursor line -->
+            <line x1="17" y1="27" x2="26" y2="27" stroke-width="1.8"/>
+            <!-- second line of code, faded -->
+            <line x1="10" y1="34" x2="30" y2="34" stroke-opacity="0.3"/>
+          </svg>
+          <h2 class="int-title">Creative Coding</h2>
+        </div>
+        <p class="int-desc">Code is my second sketchbook. From generative art to interactive prototypes, I use it to explore ideas that static tools can't hold — and to build the things I can only imagine.</p>
+      </div>
+
     </section>
 
-    <section class="section-grid" aria-labelledby="life-title">
-      <p class="micro-label sticky-label" id="life-title">Outside Work</p>
-      <div class="statement-stack">
-        <article class="statement">
-          <span class="statement-number">01</span>
-          <div>
-            <h3>Travel keeps my visual memory alive.</h3>
-            <p>I love travelling because it resets how I see environments, culture, interfaces, and the small rituals that shape everyday behavior.</p>
-          </div>
-        </article>
-        <article class="statement">
-          <span class="statement-number">02</span>
-          <div>
-            <h3>Heavy gamer, heavy systems thinker.</h3>
-            <p>Games influence how I think about feedback loops, progression, spatial interfaces, interaction timing, and how complex systems teach themselves.</p>
-          </div>
-        </article>
-        <article class="statement">
-          <span class="statement-number">03</span>
-          <div>
-            <h3>Metal and rock are part of the operating system.</h3>
-            <p>The energy, contrast, and texture of heavy music show up in how I think about momentum, edge, and visual rhythm.</p>
-          </div>
-        </article>
+    <!-- ── Infinite canvas gallery ── -->
+    <div class="abt-gallery" id="abt-gallery" aria-label="Travel photography — drag to explore">
+
+      <!-- Dense 3-row grid — 5 images repeated across ~2400px, no blank space -->
+      <div class="abt-gallery-canvas" id="gal-canvas">
+
+        <!-- Row 1  h=300  widths: 280,380,260,340,280,400,412 = 2352 + 6×8 = 2400 -->
+        <div class="gal-row" style="height:300px">
+          <div class="gal-item" style="width:280px"><img src="Images/travel%20about/_%20%281%29.webp" alt="Travel"><span class="gal-cap"><strong>Into the deep</strong>Thailand coast, 2024</span></div>
+          <div class="gal-item" style="width:380px"><img src="Images/travel%20about/_%20%282%29.jpeg" alt="Travel"><span class="gal-cap"><strong>Afternoon light</strong>Between here and there</span></div>
+          <div class="gal-item" style="width:260px"><img src="Images/travel%20about/_%20%283%29.jpeg" alt="Travel"><span class="gal-cap"><strong>Green hours</strong>Hill country, Thailand</span></div>
+          <div class="gal-item" style="width:340px"><img src="Images/travel%20about/Jan%20De%20Rycke%20%F0%9F%93%8DThailand%20_%20Back%20to%20where%20it%20all%20started%2C%20hello%20Koh%20Chang%20%F0%9F%8F%9D%EF%B8%8F%20%23kohchang%20%23kohchangisland%20%23thailand%20%23thailand_allshots%20%23kaibae%20%23canonphotography%E2%80%A6%20_%20Instagram.webp" alt="Koh Chang"><span class="gal-cap"><strong>Koh Chang</strong>Back to where it all started</span></div>
+          <div class="gal-item" style="width:280px"><img src="Images/travel%20about/Thailand%20aesthetics%20___%20_%20_%20Have%20the%20trip%20of%20a%20lifetime%20like%20%40venice_caila%20and%20fill%20your%20phone%20with%20pics%20like%20these%21%20%F0%9F%A4%A9_%20_%20Does%20it%20get%20better%20than%20this_%20%F0%9F%90%98_%20_%20Check%20out%20link%20in%20bio%20for%20more%20on%20our%20Thai%20Adventure%20group%20trip%20%F0%9F%92%9A.webp" alt="Thailand"><span class="gal-cap"><strong>Thai vibes</strong>Canon photography, 2024</span></div>
+          <div class="gal-item" style="width:400px"><img src="Images/travel%20about/_%20%281%29.webp" alt="Travel"><span class="gal-cap"><strong>Dusk on the water</strong>Thailand, 2024</span></div>
+          <div class="gal-item" style="width:412px"><img src="Images/travel%20about/_%20%282%29.jpeg" alt="Travel"><span class="gal-cap"><strong>Wide open</strong>SE Asia, 2024</span></div>
+        </div>
+
+        <!-- Row 2  h=330  widths: 360,280,400,260,380,280,392 = 2352 + 6×8 = 2400 -->
+        <div class="gal-row" style="height:330px">
+          <div class="gal-item" style="width:360px"><img src="Images/travel%20about/_%20%283%29.jpeg" alt="Travel"><span class="gal-cap"><strong>The long road</strong>Countryside, Thailand</span></div>
+          <div class="gal-item" style="width:280px"><img src="Images/travel%20about/Jan%20De%20Rycke%20%F0%9F%93%8DThailand%20_%20Back%20to%20where%20it%20all%20started%2C%20hello%20Koh%20Chang%20%F0%9F%8F%9D%EF%B8%8F%20%23kohchang%20%23kohchangisland%20%23thailand%20%23thailand_allshots%20%23kaibae%20%23canonphotography%E2%80%A6%20_%20Instagram.webp" alt="Koh Chang"><span class="gal-cap"><strong>Island morning</strong>Koh Chang, Thailand</span></div>
+          <div class="gal-item" style="width:400px"><img src="Images/travel%20about/Thailand%20aesthetics%20___%20_%20_%20Have%20the%20trip%20of%20a%20lifetime%20like%20%40venice_caila%20and%20fill%20your%20phone%20with%20pics%20like%20these%21%20%F0%9F%A4%A9_%20_%20Does%20it%20get%20better%20than%20this_%20%F0%9F%90%98_%20_%20Check%20out%20link%20in%20bio%20for%20more%20on%20our%20Thai%20Adventure%20group%20trip%20%F0%9F%92%9A.webp" alt="Thailand"><span class="gal-cap"><strong>Golden light</strong>Thailand, 2024</span></div>
+          <div class="gal-item" style="width:260px"><img src="Images/travel%20about/_%20%281%29.webp" alt="Travel"><span class="gal-cap"><strong>Still waters</strong>2024</span></div>
+          <div class="gal-item" style="width:380px"><img src="Images/travel%20about/_%20%282%29.jpeg" alt="Travel"><span class="gal-cap"><strong>Before dark</strong>SE Asia, 2024</span></div>
+          <div class="gal-item" style="width:280px"><img src="Images/travel%20about/_%20%283%29.jpeg" alt="Travel"><span class="gal-cap"><strong>Quiet valley</strong>Thailand</span></div>
+          <div class="gal-item" style="width:392px"><img src="Images/travel%20about/Jan%20De%20Rycke%20%F0%9F%93%8DThailand%20_%20Back%20to%20where%20it%20all%20started%2C%20hello%20Koh%20Chang%20%F0%9F%8F%9D%EF%B8%8F%20%23kohchang%20%23kohchangisland%20%23thailand%20%23thailand_allshots%20%23kaibae%20%23canonphotography%E2%80%A6%20_%20Instagram.webp" alt="Koh Chang"><span class="gal-cap"><strong>Kaibae beach</strong>Koh Chang, 2024</span></div>
+        </div>
+
+        <!-- Row 3  h=290  widths: 400,260,340,380,280,260,432 = 2352 + 6×8 = 2400 -->
+        <div class="gal-row" style="height:290px">
+          <div class="gal-item" style="width:400px"><img src="Images/travel%20about/Thailand%20aesthetics%20___%20_%20_%20Have%20the%20trip%20of%20a%20lifetime%20like%20%40venice_caila%20and%20fill%20your%20phone%20with%20pics%20like%20these%21%20%F0%9F%A4%A9_%20_%20Does%20it%20get%20better%20than%20this_%20%F0%9F%90%98_%20_%20Check%20out%20link%20in%20bio%20for%20more%20on%20our%20Thai%20Adventure%20group%20trip%20%F0%9F%92%9A.webp" alt="Thailand"><span class="gal-cap"><strong>Wandering</strong>Thailand, 2024</span></div>
+          <div class="gal-item" style="width:260px"><img src="Images/travel%20about/_%20%281%29.webp" alt="Travel"><span class="gal-cap"><strong>Shoreline</strong>Thai coast, 2024</span></div>
+          <div class="gal-item" style="width:340px"><img src="Images/travel%20about/_%20%282%29.jpeg" alt="Travel"><span class="gal-cap"><strong>Golden hour</strong>Between islands</span></div>
+          <div class="gal-item" style="width:380px"><img src="Images/travel%20about/_%20%283%29.jpeg" alt="Travel"><span class="gal-cap"><strong>Hill country</strong>Northern Thailand</span></div>
+          <div class="gal-item" style="width:280px"><img src="Images/travel%20about/Jan%20De%20Rycke%20%F0%9F%93%8DThailand%20_%20Back%20to%20where%20it%20all%20started%2C%20hello%20Koh%20Chang%20%F0%9F%8F%9D%EF%B8%8F%20%23kohchang%20%23kohchangisland%20%23thailand%20%23thailand_allshots%20%23kaibae%20%23canonphotography%E2%80%A6%20_%20Instagram.webp" alt="Koh Chang"><span class="gal-cap"><strong>Hello again</strong>Koh Chang</span></div>
+          <div class="gal-item" style="width:260px"><img src="Images/travel%20about/Thailand%20aesthetics%20___%20_%20_%20Have%20the%20trip%20of%20a%20lifetime%20like%20%40venice_caila%20and%20fill%20your%20phone%20with%20pics%20like%20these%21%20%F0%9F%A4%A9_%20_%20Does%20it%20get%20better%20than%20this_%20%F0%9F%90%98_%20_%20Check%20out%20link%20in%20bio%20for%20more%20on%20our%20Thai%20Adventure%20group%20trip%20%F0%9F%92%9A.webp" alt="Thailand"><span class="gal-cap"><strong>Thai life</strong>2024</span></div>
+          <div class="gal-item" style="width:432px"><img src="Images/travel%20about/_%20%281%29.webp" alt="Travel"><span class="gal-cap"><strong>Open water</strong>Thailand coast</span></div>
+        </div>
+
       </div>
-    </section>
+
+      <div class="abt-gallery-hint" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.6">
+          <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          <polyline points="4.5,3.5 7,1 9.5,3.5"/><polyline points="4.5,10.5 7,13 9.5,10.5"/>
+          <polyline points="3.5,4.5 1,7 3.5,9.5"/><polyline points="10.5,4.5 13,7 10.5,9.5"/>
+        </svg>
+        HOVER &nbsp;/&nbsp; DRAG TO EXPLORE
+      </div>
+
+    </div>
+
   </main>
 
-  <footer class="site-footer" aria-label="Site footer">
+  <footer class="site-footer footer-cosmos" aria-label="Site footer">
+    <div class="footer-mountain" aria-hidden="true"></div>
     <div class="footer-nav">
-      <div class="footer-links-row">
-        <a href="#" class="footer-pill">LinkedIn</a>
-        <a href="#" class="footer-pill">Instagram</a>
+      <div class="footer-intro">
+        <span class="footer-sigil" aria-hidden="true"></span>
+        <p>Designing AI products, systems, and interfaces with care.</p>
       </div>
-      <div class="footer-links-row">
-        <a href="playground.html" class="footer-pill">Playground</a>
-        <button class="footer-pill" type="button" data-samai-open>SamAI</button>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Useful</span>
+        <a href="portfolio.html#work">Work</a>
+        <a href="about.html">About</a>
+        <a href="playground.html">Playground</a>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Social</span>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">X.com</a>
+        <a href="#">Substack</a>
+      </div>
+      <div class="footer-link-group">
+        <span class="footer-group-label">Contact</span>
+        <a href="mailto:sambitnayak.ux@gmail.com">Email</a>
       </div>
     </div>
-    <p class="footer-name">Sambit Nayak</p>
+    <p class="footer-name" data-static-wordmark="true">Sambit Nayak</p>
   </footer>
+
+
+  <script src="theme-toggle.js"></script>
   <script src="footer-pixels.js"></script>
   <script src="samai-sidebar.js"></script>
   <script src="site-pages.js"></script>
+
+  <script>
+  /* ── Bounded gallery pan — no blank space ever ── */
+  (function () {
+    var frame  = document.getElementById('abt-gallery');
+    var canvas = document.getElementById('gal-canvas');
+    if (!frame || !canvas) return;
+
+    var x = 0, y = 0, targetX = 0, targetY = 0;
+    var minX = 0, minY = 0;
+    var isDragging = false;
+    var rafId = null;
+
+    function calcBounds() {
+      minX = Math.min(0, frame.offsetWidth  - canvas.offsetWidth);
+      minY = Math.min(0, frame.offsetHeight - canvas.offsetHeight);
+    }
+
+    function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+    function lerp(a, b, t)    { return a + (b - a) * t; }
+
+    function tick() {
+      x = lerp(x, targetX, 0.09);
+      y = lerp(y, targetY, 0.09);
+      canvas.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+      if (Math.abs(targetX - x) > 0.15 || Math.abs(targetY - y) > 0.15) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        x = targetX; y = targetY;
+        canvas.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+        rafId = null;
+      }
+    }
+
+    function moveTo(nx, ny) {
+      targetX = clamp(nx, minX, 0);
+      targetY = clamp(ny, minY, 0);
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    }
+
+    /* Hover: mouse position maps to pan position within bounds.
+       Left mouse = see left edge, right mouse = see right edge.
+       Impossible to pan to black. */
+    frame.addEventListener('mousemove', function (e) {
+      if (isDragging) return;
+      calcBounds();
+      var rect = frame.getBoundingClientRect();
+      var mx = (e.clientX - rect.left) / rect.width;
+      var my = (e.clientY - rect.top)  / rect.height;
+      moveTo(mx * minX, my * minY);
+    });
+
+    /* Drag: free pan within clamped bounds */
+    var dragStartX, dragStartY, dragBaseX, dragBaseY;
+
+    frame.addEventListener('mousedown', function (e) {
+      isDragging = true;
+      dragStartX = e.clientX; dragStartY = e.clientY;
+      dragBaseX  = targetX;   dragBaseY  = targetY;
+      frame.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+      moveTo(dragBaseX + e.clientX - dragStartX,
+             dragBaseY + e.clientY - dragStartY);
+    });
+
+    window.addEventListener('mouseup', function () {
+      if (isDragging) { isDragging = false; frame.style.cursor = 'grab'; }
+    });
+
+    frame.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      moveTo(targetX - e.deltaX, targetY - e.deltaY);
+    }, { passive: false });
+
+    var tx0, ty0, tbx, tby;
+    frame.addEventListener('touchstart', function (e) {
+      tx0 = e.touches[0].clientX; ty0 = e.touches[0].clientY;
+      tbx = targetX; tby = targetY;
+      e.preventDefault();
+    }, { passive: false });
+
+    frame.addEventListener('touchmove', function (e) {
+      moveTo(tbx + e.touches[0].clientX - tx0,
+             tby + e.touches[0].clientY - ty0);
+      e.preventDefault();
+    }, { passive: false });
+
+    window.addEventListener('load', function () {
+      calcBounds();
+      /* Start vertically centred so rows 1+2 are both visible */
+      x = 0; y = minY / 2; targetX = x; targetY = y;
+      canvas.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+    });
+
+    window.addEventListener('resize', function () { calcBounds(); });
+  })();
+  </script>
+
+  <script>
+  /* ── Pixel flower bouquet ── */
+  (function () {
+    var canvas = document.getElementById('flower-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+
+    var CELL = 10; /* screen px per macro-pixel */
+
+    /* Color palette — sunflower */
+    var C = {
+      pt:  '#fef08a', /* petal tip — bright yellow   */
+      pm:  '#fbbf24', /* petal mid — golden           */
+      pb:  '#d97706', /* petal base — amber           */
+      cd:  '#78350f', /* center disc dark brown       */
+      cx:  '#292524', /* center core — near-black     */
+      mg:  '#166534', /* medium green                 */
+      lg:  '#15803d', /* lighter green                */
+      llg: '#16a34a', /* bright leaf green            */
+    };
+
+    /* Stem & leaf pixels: [gx, gy, color] */
+    var stemPixels = [
+      /* Main stem x=11, y=9..37 */
+      [11,9,C.mg],[11,10,C.lg],[11,11,C.mg],[11,12,C.lg],
+      [11,13,C.mg],[11,14,C.lg],[11,15,C.mg],[11,16,C.lg],
+      [11,17,C.mg],[11,18,C.lg],[11,19,C.mg],[11,20,C.lg],
+      [11,21,C.mg],[11,22,C.lg],[11,23,C.mg],[11,24,C.lg],
+      [11,25,C.mg],[11,26,C.lg],[11,27,C.mg],[11,28,C.lg],
+      [11,29,C.mg],[11,30,C.lg],[11,31,C.mg],[11,32,C.lg],
+      [11,33,C.mg],[11,34,C.lg],[11,35,C.mg],[11,36,C.lg],[11,37,C.mg],
+
+      /* Left stem from (7,14) curving to (11,22) */
+      [7,14,C.lg],[7,15,C.mg],[7,16,C.lg],
+      [8,17,C.mg],[8,18,C.lg],[8,19,C.mg],
+      [9,20,C.lg],[9,21,C.mg],
+      [10,22,C.lg],
+
+      /* Right stem from (15,12) curving to (11,21) */
+      [15,12,C.lg],[15,13,C.mg],
+      [14,14,C.lg],[14,15,C.mg],
+      [13,16,C.lg],[13,17,C.mg],
+      [12,18,C.lg],[12,19,C.mg],
+      [12,20,C.lg],
+
+      /* Leaves — right of main stem, upper */
+      [12,16,C.llg],[13,15,C.lg],[14,14,C.llg],
+      /* Leaves — left of main stem, upper */
+      [10,20,C.llg],[9,19,C.lg],[8,18,C.llg],
+      /* Leaves — right lower */
+      [12,26,C.llg],[13,27,C.lg],
+      /* Leaves — left lower */
+      [10,30,C.llg],[9,31,C.lg],
+    ];
+
+    /* Flower definitions — sunflower variant */
+    /* Sunflowers: 8 petals at 45° intervals, long narrow rays, large dark center */
+    var RCLOSED = 1.2;
+    var flowers = [
+      /* Main (center, tallest) — 8 petals */
+      { cx:11, cy:6,  rOpen:5.2, nP:8, cols:[C.cx,C.pb,C.pm,C.pt], ao: Math.PI/8 },
+      /* Left — 7 petals */
+      { cx:7,  cy:12, rOpen:3.8, nP:7, cols:[C.cx,C.pb,C.pm,C.pt], ao: 0.2 },
+      /* Right — 7 petals */
+      { cx:15, cy:10, rOpen:3.8, nP:7, cols:[C.cx,C.pb,C.pm,C.pt], ao:-0.2 },
+    ];
+
+    /* Animation */
+    var t = 0;
+    var animTarget = 0, animStartT = 0, animStartMs = null, rafId = null;
+    var DUR_OPEN = 700, DUR_CLOSE = 450;
+
+    function easeOut(x) { return 1 - Math.pow(1 - x, 3); }
+    function easeIn(x)  { return x * x * x; }
+
+    function drawFlower(fl, t) {
+      var cx = fl.cx, cy = fl.cy;
+      var r  = RCLOSED + t * (fl.rOpen - RCLOSED);
+
+      for (var p = 0; p < fl.nP; p++) {
+        var angle = fl.ao + (p / fl.nP) * Math.PI * 2;
+
+        for (var i = 1; i <= 4; i++) {
+          var frac = i / 4;
+          var pixR = r * frac;
+          var px = cx + pixR * Math.cos(angle);
+          var py = cy + pixR * Math.sin(angle);
+          var gx = Math.round(px);
+          var gy = Math.round(py);
+
+          /* Darker near center, lighter at tip */
+          var ci = Math.min(fl.cols.length - 1, Math.floor((1 - frac) * fl.cols.length));
+          ctx.fillStyle = fl.cols[ci];
+          ctx.fillRect(gx * CELL, gy * CELL, CELL, CELL);
+
+          /* Width pixel (perpendicular) for the inner two steps */
+          if (i <= 2) {
+            var pa = angle + Math.PI / 2;
+            var wx = Math.round(px + Math.cos(pa));
+            var wy = Math.round(py + Math.sin(pa));
+            if (wx !== gx || wy !== gy) {
+              var ci2 = Math.min(fl.cols.length - 1, ci + 1);
+              ctx.fillStyle = fl.cols[ci2];
+              ctx.fillRect(wx * CELL, wy * CELL, CELL, CELL);
+            }
+          }
+        }
+      }
+
+      /* Sunflower disc — large dark brown circle */
+      var discPixels = [
+        [-1,-2],[0,-2],[1,-2],
+        [-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],
+        [-2,0], [-1,0], [0,0], [1,0], [2,0],
+        [-2,1], [-1,1], [0,1], [1,1], [2,1],
+        [-1,2], [0,2], [1,2],
+      ];
+      for (var d = 0; d < discPixels.length; d++) {
+        var dp2 = discPixels[d];
+        var dist = Math.sqrt(dp2[0]*dp2[0] + dp2[1]*dp2[1]);
+        ctx.fillStyle = dist < 1.2 ? C.cx : C.cd;
+        ctx.fillRect((cx + dp2[0]) * CELL, (cy + dp2[1]) * CELL, CELL, CELL);
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      /* Stems (background) */
+      for (var s = 0; s < stemPixels.length; s++) {
+        var sp = stemPixels[s];
+        ctx.fillStyle = sp[2];
+        ctx.fillRect(sp[0] * CELL, sp[1] * CELL, CELL, CELL);
+      }
+
+      /* Flowers: back to front */
+      drawFlower(flowers[1], t);
+      drawFlower(flowers[2], t);
+      drawFlower(flowers[0], t);
+    }
+
+    function animFrame(now) {
+      if (animStartMs === null) animStartMs = now;
+      var elapsed = now - animStartMs;
+      var dur = animTarget === 1 ? DUR_OPEN : DUR_CLOSE;
+      var raw = Math.min(1, elapsed / dur);
+      var eased = animTarget === 1 ? easeOut(raw) : easeIn(raw);
+      t = animStartT + (animTarget - animStartT) * eased;
+      draw();
+      if (raw < 1) {
+        rafId = requestAnimationFrame(animFrame);
+      } else {
+        t = animTarget;
+        draw();
+        rafId = null;
+      }
+    }
+
+    function startAnim(target) {
+      if (rafId) cancelAnimationFrame(rafId);
+      animTarget  = target;
+      animStartT  = t;
+      animStartMs = null;
+      rafId = requestAnimationFrame(animFrame);
+    }
+
+    canvas.addEventListener('mouseenter', function () { startAnim(1); });
+    canvas.addEventListener('mouseleave', function () { startAnim(0); });
+
+    draw();
+  })();
+  </script>
+
 </body>
 </html>

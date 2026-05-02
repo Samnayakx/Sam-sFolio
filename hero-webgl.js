@@ -304,6 +304,51 @@
     }
     window.addEventListener('resize', function () { resize(); });
 
+    /* ─── Gyroscope parallax (mobile) ───────────────────────────── */
+    var gyroActive = false;
+    var baseGamma  = null;
+    var baseBeta   = null;
+    var GYRO_RANGE = 18; // degrees of tilt = full 0→1 travel
+
+    function onDeviceOrientation(e) {
+      if (e.gamma === null || e.gamma === undefined) return;
+      var g = e.gamma;
+      var b = (e.beta  !== null && e.beta  !== undefined) ? e.beta  : 0;
+
+      // Calibrate on first valid reading
+      if (baseGamma === null) { baseGamma = g; baseBeta = b; return; }
+
+      var dx = (g - baseGamma) / GYRO_RANGE;
+      var dy = (b - baseBeta)  / GYRO_RANGE;
+      tX = Math.max(0.05, Math.min(0.95, 0.5 + dx * 0.5));
+      tY = Math.max(0.05, Math.min(0.95, 0.5 - dy * 0.5));
+    }
+
+    function resetGyroBaseline() { baseGamma = null; baseBeta = null; }
+
+    function startGyro() {
+      if (gyroActive) return;
+      gyroActive = true;
+      window.addEventListener('deviceorientation', onDeviceOrientation, { passive: true });
+      window.addEventListener('orientationchange', resetGyroBaseline);
+    }
+
+    var isTouchDevice = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    if (isTouchDevice && window.DeviceOrientationEvent) {
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        // iOS 13+ requires a user-gesture to grant permission
+        document.addEventListener('touchstart', function askGyro() {
+          document.removeEventListener('touchstart', askGyro);
+          DeviceOrientationEvent.requestPermission()
+            .then(function (s) { if (s === 'granted') startGyro(); })
+            .catch(function () {});
+        }, { passive: true, once: true });
+      } else {
+        startGyro(); // Android / other — no permission needed
+      }
+    }
+    /* ─────────────────────────────────────────────────────────── */
+
     resize();
     tick();
 
@@ -316,6 +361,10 @@
         if (heroEl) {
           heroEl.removeEventListener('mousemove',  onMouseMove);
           heroEl.removeEventListener('mouseleave', onMouseLeave);
+        }
+        if (gyroActive) {
+          window.removeEventListener('deviceorientation', onDeviceOrientation);
+          window.removeEventListener('orientationchange', resetGyroBaseline);
         }
         try { gl.deleteTexture(tex0); gl.deleteTexture(tex1);
               gl.deleteBuffer(buf);   gl.deleteProgram(prog); } catch(e) {}

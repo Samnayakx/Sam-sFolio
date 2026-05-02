@@ -736,30 +736,31 @@
       overflow: visible;
     }
 
-    .sparrow-wrap {
+    .hummingbird-wrap {
       position: absolute;
       top: -18px;
       right: -22px;
       pointer-events: none;
       z-index: 4;
-      animation: sparrow-orbit 7s ease-in-out infinite;
+      animation: hummingbird-orbit 7s ease-in-out infinite;
       will-change: transform;
     }
 
-    .sparrow-svg {
+    .hummingbird-svg {
       display: block;
-      width: 66px;
+      width: 72px;
       height: auto;
-      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.40));
+      filter: drop-shadow(0 2px 8px rgba(0, 180, 80, 0.35));
+      shape-rendering: crispEdges;
     }
 
-    .sparrow-wing {
+    .hummingbird-wings {
       transform-box: fill-box;
-      transform-origin: 0% 50%;
-      animation: sparrow-flap 0.30s ease-in-out infinite;
+      transform-origin: right center;
+      animation: hummingbird-flap 0.08s ease-in-out infinite alternate;
     }
 
-    @keyframes sparrow-orbit {
+    @keyframes hummingbird-orbit {
       0%   { transform: translate(0px, 0px) rotate(-2deg); }
       9%   { transform: translate(18px, -40px) rotate(-10deg); }
       20%  { transform: translate(52px, -26px) rotate(4deg); }
@@ -772,25 +773,22 @@
       100% { transform: translate(0px, 0px) rotate(-2deg); }
     }
 
-    @keyframes sparrow-flap {
-      0%   { transform: rotate(0deg); }
-      28%  { transform: rotate(-22deg); }
-      56%  { transform: rotate(0deg); }
-      78%  { transform: rotate(12deg); }
-      100% { transform: rotate(0deg); }
+    @keyframes hummingbird-flap {
+      from { transform: rotate(-30deg); }
+      to   { transform: rotate(30deg); }
     }
 
     @media (max-width: 768px) {
-      .sparrow-svg { width: 50px; }
-      .sparrow-wrap { top: -12px; right: -14px; }
+      .hummingbird-svg { width: 54px; }
+      .hummingbird-wrap { top: -12px; right: -14px; }
     }
 
     @media (max-width: 480px) {
-      .sparrow-wrap { display: none; }
+      .hummingbird-wrap { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .sparrow-wrap { display: none; }
+      .hummingbird-wrap { display: none; }
     }
     /* ───────────────────────────────────────────────────────── */
 
@@ -2178,43 +2176,39 @@
                   <img class="hero-business-card-face hero-business-card-back" src="Images/BC2.svg" alt="" aria-hidden="true" draggable="false">
                 </div>
               </div>
-              <!-- Animated sparrow -->
-              <div class="sparrow-wrap" aria-hidden="true">
-                <svg class="sparrow-svg" viewBox="0 0 84 60" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Tail feathers -->
-                  <path d="M64 29 C72 23 80 20 78 14 C76 8 70 12 64 22" fill="#4A2E14"/>
-                  <path d="M64 31 C74 27 82 26 80 20 C78 14 71 18 64 27" fill="#5C3A1C"/>
-                  <path d="M64 34 C73 37 81 38 79 32 C77 26 70 28 64 32" fill="#4A2E14"/>
-                  <!-- Body -->
-                  <ellipse cx="46" cy="34" rx="22" ry="13" fill="#8B5E35" transform="rotate(-7 46 34)"/>
-                  <!-- Breast -->
-                  <ellipse cx="37" cy="37" rx="13" ry="9" fill="#D4B090" transform="rotate(-4 37 37)"/>
-                  <!-- Wing (animated) -->
-                  <path class="sparrow-wing" d="M28 27 Q46 16 64 23 Q66 29 58 33 Q44 38 28 36 Z" fill="#6B4226"/>
-                  <!-- Wing bar detail -->
-                  <path d="M32 33 Q46 26 60 30" stroke="#D4A97A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-                  <path d="M33 36 Q47 30 61 34" stroke="#A07040" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.7"/>
-                  <!-- Head -->
-                  <circle cx="23" cy="26" r="12" fill="#8B5E35"/>
-                  <!-- Crown cap -->
-                  <path d="M13 22 Q23 13 33 20 Q28 14 23 14 Q17 13 13 22 Z" fill="#4A2E14"/>
-                  <!-- Eye stripe -->
-                  <path d="M12 27 Q20 24 28 27" stroke="#3A1E0A" stroke-width="2" fill="none" stroke-linecap="round"/>
-                  <!-- Supercilium -->
-                  <path d="M14 22 Q22 18 30 21" stroke="#F0D4A8" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85"/>
+              <!-- Animated hummingbird (pixel art) -->
+              <div class="hummingbird-wrap" aria-hidden="true">
+                <svg class="hummingbird-svg" viewBox="0 0 110 65" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+                  <!-- Tail (dark green, forked) -->
+                  <rect x="80" y="20" width="5" height="5" fill="#0D5228"/>
+                  <rect x="80" y="25" width="10" height="5" fill="#0D5228"/>
+                  <rect x="80" y="30" width="10" height="5" fill="#0D5228"/>
+                  <rect x="80" y="35" width="5" height="5" fill="#0D5228"/>
+                  <rect x="85" y="35" width="5" height="5" fill="#0D5228"/>
+                  <!-- Body (iridescent green) -->
+                  <rect x="35" y="25" width="45" height="5" fill="#1E7A3C"/>
+                  <rect x="35" y="30" width="45" height="5" fill="#1E7A3C"/>
+                  <rect x="35" y="35" width="40" height="5" fill="#1E7A3C"/>
+                  <rect x="35" y="40" width="30" height="5" fill="#1E7A3C"/>
+                  <rect x="45" y="45" width="15" height="5" fill="#1E7A3C"/>
+                  <!-- Gorget (ruby red throat patch) -->
+                  <rect x="25" y="25" width="10" height="5" fill="#C81800"/>
+                  <rect x="25" y="30" width="5" height="5" fill="#C81800"/>
+                  <!-- Head (iridescent green) -->
+                  <rect x="20" y="15" width="15" height="5" fill="#1E7A3C"/>
+                  <rect x="20" y="20" width="25" height="5" fill="#1E7A3C"/>
+                  <!-- Beak (long, thin, dark) -->
+                  <rect x="0"  y="10" width="20" height="5" fill="#1C1408"/>
+                  <rect x="0"  y="15" width="20" height="5" fill="#1C1408"/>
                   <!-- Eye -->
-                  <circle cx="20" cy="25" r="3" fill="#0A0400"/>
-                  <circle cx="19" cy="24" r="1" fill="rgba(255,255,255,0.65)"/>
-                  <!-- Beak -->
-                  <path d="M12 26 L2 23 L12 29 Z" fill="#C8991C"/>
-                  <!-- Legs -->
-                  <line x1="41" y1="45" x2="38" y2="55" stroke="#A07040" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="47" y1="46" x2="45" y2="56" stroke="#A07040" stroke-width="1.5" stroke-linecap="round"/>
-                  <!-- Toes -->
-                  <line x1="38" y1="55" x2="32" y2="58" stroke="#A07040" stroke-width="1.2" stroke-linecap="round"/>
-                  <line x1="38" y1="55" x2="42" y2="58" stroke="#A07040" stroke-width="1.2" stroke-linecap="round"/>
-                  <line x1="45" y1="56" x2="39" y2="59" stroke="#A07040" stroke-width="1.2" stroke-linecap="round"/>
-                  <line x1="45" y1="56" x2="49" y2="59" stroke="#A07040" stroke-width="1.2" stroke-linecap="round"/>
+                  <rect x="30" y="20" width="5" height="5" fill="#020100"/>
+                  <rect x="30" y="20" width="2" height="2" fill="rgba(255,255,255,0.75)"/>
+                  <!-- Wings (fast-flapping animated group) -->
+                  <g class="hummingbird-wings">
+                    <rect x="0" y="25" width="25" height="5" fill="#52C280"/>
+                    <rect x="0" y="30" width="25" height="5" fill="#52C280"/>
+                    <rect x="0" y="35" width="25" height="5" fill="#52C280"/>
+                  </g>
                 </svg>
               </div>
             </div>

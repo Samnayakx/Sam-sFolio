@@ -1585,12 +1585,12 @@ img {
 /* ── Mobile breakpoint: swap to hamburger ── */
 @media (max-width: 768px) {
   .nav {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr;
     gap: 12px;
   }
-  .nav-links          { display: none !important; }
+  .nav-links           { display: none !important; }
   .topbar .ask-sam-btn { display: none !important; }
-  .nav-hamburger      { display: flex; }
+  .nav-hamburger       { display: flex; justify-self: end; margin-left: auto; }
 }
 
 /* ── Stagger links in on open ── */

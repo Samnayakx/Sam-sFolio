@@ -2,7 +2,6 @@
   function initFooterPixelName() {
     var node = document.querySelector('.footer-name');
     if (!node || node.dataset.pixelReady === 'true') return;
-    if (node.dataset.staticWordmark === 'true') return;
     if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
 
     var text = (node.textContent || '').trim();
@@ -11,16 +10,18 @@
     node.dataset.pixelReady = 'true';
     node.setAttribute('aria-label', text);
 
+    node.dataset.pixelText = text;
+
     var canvas = document.createElement('canvas');
     canvas.setAttribute('aria-hidden', 'true');
-    node.appendChild(canvas);
-
     var ctx = canvas.getContext('2d');
     var particles = [];
     var mouse = { x: -9999, y: -9999, active: false };
     var raf = null;
     var dpr = 1;
     var particleSize = 4;
+    var spread = 0;
+    var particleColor = 'rgba(246, 240, 230, 0.82)';
 
     function parseLetterSpacing(value, fontSize) {
       if (!value || value === 'normal') return 0;
@@ -53,15 +54,21 @@
       if (!rect.width || !rect.height) return;
 
       dpr = Math.min(window.devicePixelRatio || 1, 2);
+      spread = Math.min(280, Math.max(96, rect.height * 1.25));
+      var canvasHeight = rect.height + spread * 2;
       canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-      canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+      canvas.height = Math.max(1, Math.floor(canvasHeight * dpr));
       canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
+      canvas.style.height = canvasHeight + 'px';
+      canvas.style.top = -spread + 'px';
 
       var computed = window.getComputedStyle(node);
       var fontSize = parseFloat(computed.fontSize) || Math.min(rect.width / 7, rect.height * 0.9);
       var fontFamily = computed.fontFamily || '"Doto", monospace';
       var letterSpacing = parseLetterSpacing(computed.letterSpacing, fontSize);
+      particleColor = document.documentElement.getAttribute('data-theme') === 'light'
+        ? 'rgba(14, 14, 14, 0.90)'
+        : 'rgba(246, 240, 230, 0.82)';
 
       var offscreen = document.createElement('canvas');
       offscreen.width = canvas.width;
@@ -84,11 +91,11 @@
         off.font = '900 ' + (fontSize * dpr) + 'px ' + fontFamily;
       }
 
-      fillSpacedText(off, text, offscreen.width / 2, offscreen.height * 0.52, spacing);
+      fillSpacedText(off, text, offscreen.width / 2, (spread + rect.height * 0.52) * dpr, spacing);
 
       var image = off.getImageData(0, 0, offscreen.width, offscreen.height).data;
       var step = Math.max(4, Math.round(Math.min(rect.width, 1180) / 210)) * dpr;
-      particleSize = Math.max(2, Math.ceil(step * 0.72));
+      particleSize = Math.max(2, Math.ceil(step * 0.78));
       particles = [];
 
       for (var y = 0; y < offscreen.height; y += step) {
@@ -100,8 +107,8 @@
               y: y,
               ox: x,
               oy: y,
-              vx: (Math.random() - 0.5) * 0.45,
-              vy: (Math.random() - 0.5) * 0.45,
+              vx: (Math.random() - 0.5) * 0.35,
+              vy: (Math.random() - 0.5) * 0.35,
               warm: Math.random()
             });
           }
@@ -112,7 +119,7 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      var radius = 132 * dpr;
+      var radius = 230 * dpr;
       var radiusSq = radius * radius;
       var mx = mouse.x * dpr;
       var my = mouse.y * dpr;
@@ -125,20 +132,21 @@
 
         if (mouse.active && distSq < radiusSq) {
           var dist = Math.sqrt(distSq) || 1;
-          var force = (1 - dist / radius) * 2.9;
-          p.vx += (dx / dist) * force;
-          p.vy += (dy / dist) * force + 0.18 * dpr;
+          var force = Math.pow(1 - dist / radius, 1.55) * 8.6;
+          p.vx += (dx / dist) * force + (Math.random() - 0.5) * 0.48 * dpr;
+          p.vy += (dy / dist) * force + (Math.random() - 0.5) * 0.48 * dpr;
         }
 
-        p.vx += (p.ox - p.x) * 0.018;
-        p.vy += (p.oy - p.y) * 0.018;
-        p.vy += mouse.active ? 0.012 * dpr : 0;
-        p.vx *= 0.86;
-        p.vy *= 0.86;
+        var spring = mouse.active ? 0.0045 : 0.011;
+        var drag = mouse.active ? 0.935 : 0.905;
+        p.vx += (p.ox - p.x) * spring;
+        p.vy += (p.oy - p.y) * spring;
+        p.vx *= drag;
+        p.vy *= drag;
         p.x += p.vx;
         p.y += p.vy;
 
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.96)';
+        ctx.fillStyle = particleColor;
         ctx.fillRect(p.x, p.y, particleSize, particleSize);
       }
 
@@ -162,13 +170,18 @@
       buildParticles();
     }
 
-    node.addEventListener('pointermove', updateMouse);
-    node.addEventListener('pointerleave', clearMouse);
+    window.addEventListener('pointermove', updateMouse, { passive: true });
+    window.addEventListener('pointerleave', clearMouse);
     window.addEventListener('resize', rebuild, { passive: true });
 
+    var themeObserver = new MutationObserver(function () { rebuild(); });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
     var start = function () {
-      buildParticles();
       node.classList.add('pixel-ready');
+      node.textContent = '';
+      node.appendChild(canvas);
+      buildParticles();
       if (!raf) draw();
     };
 

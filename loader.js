@@ -5,6 +5,16 @@
   var content = document.getElementById('site-content');
   if (!loader) return;
 
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('skipLoader') === '1') {
+    if (content) content.classList.add('ldr-revealed');
+    loader.remove();
+    params.delete('skipLoader');
+    var cleanUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
+    window.history.replaceState(null, '', cleanUrl);
+    return;
+  }
+
   /* ── Dot config ─────────────────────────────────────────────── */
   var DOT_COUNT = 420;
   var DOT_R     = 1.2;

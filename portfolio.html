@@ -10,6 +10,7 @@
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap");
     @import url("https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap");
+    @import url("https://api.fontshare.com/v2/css?f[]=creato-display@400,500,600,700&display=swap");
 
     :root {
       --bg: #000000;
@@ -22,7 +23,7 @@
       --blue: #8ea4ff;
       --footer-orange: #ff7a1a;
       --display-font: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      --body-font: "American Typewriter", "Courier New", Courier, monospace;
+      --body-font: "Creato Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --max: 1180px;
       --hero-type: 58px;
       --hero-leading: 0.88;
@@ -259,6 +260,170 @@
     .theme-icon-moon { display: none; }
     [data-theme="light"] .theme-icon-sun { display: none; }
     [data-theme="light"] .theme-icon-moon { display: block; }
+
+    .nav-hamburger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      background: none;
+      border: 1px solid rgba(246, 240, 230, 0.20);
+      border-radius: 10px;
+      color: var(--ink);
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      transition: border-color 160ms ease, background 160ms ease;
+      flex-shrink: 0;
+    }
+
+    .nav-hamburger:hover {
+      border-color: rgba(246, 240, 230, 0.48);
+      background: rgba(246, 240, 230, 0.05);
+    }
+
+    [data-theme="light"] .nav-hamburger { border-color: rgba(26, 20, 16, 0.20); }
+    [data-theme="light"] .nav-hamburger:hover {
+      border-color: rgba(26, 20, 16, 0.45);
+      background: rgba(26, 20, 16, 0.04);
+    }
+
+    .nav-hamburger .hb-line {
+      display: block;
+      width: 18px;
+      height: 1.6px;
+      background: currentColor;
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity   0.28s ease,
+                  width     0.28s ease;
+    }
+
+    .nav-hamburger.is-open .hb-line:nth-child(1) { transform: translateY(6.6px) rotate(45deg); }
+    .nav-hamburger.is-open .hb-line:nth-child(2) { opacity: 0; width: 0; }
+    .nav-hamburger.is-open .hb-line:nth-child(3) { transform: translateY(-6.6px) rotate(-45deg); }
+
+    .mobile-nav-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 190;
+      background: rgba(0, 0, 0, 0.52);
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.32s ease;
+    }
+
+    .mobile-nav-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(320px, 84vw);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      background: rgba(9, 9, 11, 0.97);
+      backdrop-filter: blur(24px);
+      border-left: 1px solid rgba(246, 240, 230, 0.09);
+      transform: translateX(110%);
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .mobile-nav.is-open { transform: translateX(0); }
+
+    [data-theme="light"] .mobile-nav {
+      background: rgba(248, 244, 236, 0.98);
+      border-left-color: rgba(26, 20, 16, 0.10);
+    }
+
+    .mobile-nav-top {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 14px 18px;
+      min-height: 64px;
+      border-bottom: 1px solid rgba(246, 240, 230, 0.07);
+      flex-shrink: 0;
+    }
+
+    [data-theme="light"] .mobile-nav-top { border-bottom-color: rgba(26, 20, 16, 0.07); }
+
+    .mobile-nav-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: 1px solid rgba(246, 240, 230, 0.18);
+      border-radius: 50%;
+      color: var(--ink);
+      cursor: pointer;
+      transition: border-color 150ms ease, background 150ms ease;
+    }
+
+    .mobile-nav-close:hover {
+      border-color: rgba(246, 240, 230, 0.48);
+      background: rgba(246, 240, 230, 0.06);
+    }
+
+    [data-theme="light"] .mobile-nav-close { border-color: rgba(26, 20, 16, 0.22); }
+    [data-theme="light"] .mobile-nav-close:hover {
+      border-color: rgba(26, 20, 16, 0.50);
+      background: rgba(26, 20, 16, 0.05);
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      padding: 28px 28px 20px;
+      flex: 1;
+    }
+
+    .mobile-nav-links a {
+      display: block;
+      font-family: var(--display-font);
+      font-size: clamp(28px, 7vw, 38px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: rgba(246, 240, 230, 0.82);
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(246, 240, 230, 0.07);
+      transition: color 160ms ease, transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .mobile-nav-links a:last-child { border-bottom: none; }
+    .mobile-nav-links a:hover { color: #fff; transform: translateX(6px); }
+
+    [data-theme="light"] .mobile-nav-links a {
+      color: rgba(26, 20, 16, 0.72);
+      border-bottom-color: rgba(26, 20, 16, 0.07);
+    }
+
+    [data-theme="light"] .mobile-nav-links a:hover { color: var(--ink); }
+
+    .mobile-nav-bottom {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 28px 44px;
+      border-top: 1px solid rgba(246, 240, 230, 0.07);
+      flex-shrink: 0;
+    }
+
+    [data-theme="light"] .mobile-nav-bottom { border-top-color: rgba(26, 20, 16, 0.08); }
+    .mobile-nav-bottom .ask-sam-btn { flex: 1; justify-content: center; }
 
     [data-theme="light"] .topbar {
       background: rgba(244, 240, 232, 0.92);
@@ -528,7 +693,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 0;
     }
 
     .hero-identity-img {
@@ -547,7 +712,7 @@
     }
 
     .hero-identity-caption {
-      margin: 0;
+      margin: -18px 0 0;
       font-family: var(--body-font);
       font-size: clamp(13px, 0.95vw, 15px);
       font-weight: 400;
@@ -1175,7 +1340,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      min-height: clamp(390px, 44vw, 520px);
+      min-height: clamp(300px, 32vw, 390px);
       background:
         radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 0.026), transparent 30%),
         #000;
@@ -1217,8 +1382,8 @@
       grid-template-columns: minmax(240px, 1.5fr) repeat(3, minmax(110px, 0.45fr));
       gap: clamp(26px, 5vw, 82px);
       width: min(100% - 56px, 980px);
-      margin: clamp(128px, 18vw, 190px) auto 0;
-      padding: clamp(28px, 4vw, 44px) 0 clamp(18px, 3vw, 34px);
+      margin: clamp(64px, 9vw, 104px) auto 0;
+      padding: clamp(20px, 3vw, 30px) 0 clamp(12px, 2vw, 20px);
       border-top: 1px solid rgba(246, 240, 230, 0.08);
       color: rgba(246, 240, 230, 0.82);
       opacity: 0;
@@ -1292,7 +1457,7 @@
       z-index: 2;
       display: block;
       width: 100%;
-      margin: 0 0 -0.12em;
+      margin: auto 0 -0.12em;
       overflow: hidden;
       color: rgba(246, 240, 230, 0.46);
       font-family: "Doto", var(--body-font);
@@ -1310,6 +1475,30 @@
     .site-footer .footer-name:hover {
       color: rgba(255, 122, 26, 0.62);
       text-shadow: 0 0 18px rgba(255, 122, 26, 0.12);
+    }
+
+    .footer-name.pixel-ready {
+      overflow: visible;
+      color: transparent;
+      text-shadow: none;
+    }
+
+    .footer-name.pixel-ready:hover {
+      color: transparent;
+      text-shadow: none;
+    }
+
+    .footer-name.pixel-ready::before {
+      display: block;
+      visibility: hidden;
+      content: attr(aria-label);
+    }
+
+    .footer-name.pixel-ready canvas {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
     }
 
     [data-theme="light"] .site-footer {
@@ -1365,6 +1554,12 @@
     [data-theme="light"] .site-footer .footer-name:hover {
       color: rgba(255, 122, 26, 0.78);
       text-shadow: 0 0 18px rgba(255, 122, 26, 0.1);
+    }
+
+    [data-theme="light"] .site-footer .footer-name.pixel-ready,
+    [data-theme="light"] .site-footer .footer-name.pixel-ready:hover {
+      color: transparent;
+      text-shadow: none;
     }
 
     .site-footer.in-view .footer-nav {
@@ -1460,6 +1655,14 @@
       .hero-title-spatial {
         --hero-copy-size: clamp(27px, 5.8vw, 36px);
         --hero-copy-width: 24ch;
+      }
+
+      .hero-identity-img {
+        margin-bottom: -44px;
+      }
+
+      .hero-identity-caption {
+        margin-top: -22px;
       }
 
       .shell {
@@ -1581,14 +1784,14 @@
       }
 
       .site-footer {
-        min-height: 520px;
+        min-height: 420px;
       }
 
       .footer-nav {
         grid-template-columns: 1fr 1fr;
         gap: 28px;
         width: min(100% - 32px, 520px);
-        margin-top: 160px;
+        margin-top: 76px;
       }
 
       .footer-intro {
@@ -1622,6 +1825,14 @@
       .hero-title-spatial {
         --hero-copy-size: clamp(22px, 7.2vw, 30px);
         --hero-copy-width: 20ch;
+      }
+
+      .hero-identity-img {
+        margin-bottom: -40px;
+      }
+
+      .hero-identity-caption {
+        margin-top: -20px;
       }
 
       .work-heading {
@@ -1820,9 +2031,9 @@
   <section class="hero" id="top" aria-labelledby="intro-title">
     <div class="hero-bg-wrap" aria-hidden="true">
       <canvas id="hero-webgl-canvas"
-        data-img-dark="Images/hero bg dark.png"
+        data-img-dark="Images/forest%20dark.png"
         data-img-light="Images/hero bg light.png"></canvas>
-      <img class="hero-bg-img hero-bg-img-dark" src="Images/hero bg dark.png" alt="" fetchpriority="high">
+      <img class="hero-bg-img hero-bg-img-dark" src="Images/forest%20dark.png" alt="" fetchpriority="high">
       <img class="hero-bg-img hero-bg-img-light" src="Images/hero bg light.png" alt="" fetchpriority="high">
       <div class="hero-bg-overlay"></div>
     </div>
@@ -1991,6 +2202,7 @@
   </footer>
   </div><!-- /site-content -->
   <script src="theme-toggle.js"></script>
+  <script src="home-mobile-nav.js"></script>
   <script src="footer-pixels.js"></script>
   <script src="samai-sidebar.js"></script>
   <script src="loader.js"></script>

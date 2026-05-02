@@ -1,3 +1,4 @@
+@import url("https://api.fontshare.com/v2/css?f[]=creato-display@400,500,600,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap");
 
@@ -11,7 +12,7 @@
   --blue: #8ea4ff;
   --green: #71d29e;
   --display-font: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  --body-font: "American Typewriter", "Courier New", Courier, monospace;
+  --body-font: "Creato Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --max: 1180px;
 }
 
@@ -967,7 +968,7 @@ img {
 .site-footer {
   position: relative;
   display: flex;
-  min-height: clamp(390px, 44vw, 520px);
+  min-height: clamp(300px, 32vw, 390px);
   overflow: hidden;
   flex-direction: column;
   background:
@@ -1011,8 +1012,8 @@ img {
   grid-template-columns: minmax(240px, 1.5fr) repeat(3, minmax(110px, 0.45fr));
   gap: clamp(26px, 5vw, 82px);
   width: min(100% - 56px, 980px);
-  margin: clamp(128px, 18vw, 190px) auto 0;
-  padding: clamp(28px, 4vw, 44px) 0 clamp(18px, 3vw, 34px);
+  margin: clamp(64px, 9vw, 104px) auto 0;
+  padding: clamp(20px, 3vw, 30px) 0 clamp(12px, 2vw, 20px);
   border-top: 1px solid rgba(246, 240, 230, 0.08);
   color: rgba(246, 240, 230, 0.82);
   opacity: 0;
@@ -1078,7 +1079,7 @@ img {
   z-index: 2;
   display: block;
   width: 100%;
-  margin: 0 0 -0.12em;
+  margin: auto 0 -0.12em;
   overflow: hidden;
   color: rgba(246, 240, 230, 0.46);
   font-family: "Doto", var(--body-font);
@@ -1096,6 +1097,30 @@ img {
 .site-footer .footer-name:hover {
   color: rgba(255, 122, 26, 0.62);
   text-shadow: 0 0 18px rgba(255, 122, 26, 0.12);
+}
+
+.footer-name.pixel-ready {
+  overflow: visible;
+  color: transparent;
+  text-shadow: none;
+}
+
+.footer-name.pixel-ready:hover {
+  color: transparent;
+  text-shadow: none;
+}
+
+.footer-name.pixel-ready::before {
+  display: block;
+  visibility: hidden;
+  content: attr(aria-label);
+}
+
+.footer-name.pixel-ready canvas {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
 }
 
 [data-theme="light"] .site-footer {
@@ -1151,6 +1176,12 @@ img {
 [data-theme="light"] .site-footer .footer-name:hover {
   color: rgba(255, 122, 26, 0.78);
   text-shadow: 0 0 18px rgba(255, 122, 26, 0.1);
+}
+
+[data-theme="light"] .site-footer .footer-name.pixel-ready,
+[data-theme="light"] .site-footer .footer-name.pixel-ready:hover {
+  color: transparent;
+  text-shadow: none;
 }
 
 .site-footer.in-view .footer-nav {
@@ -1228,14 +1259,14 @@ img {
   }
 
   .site-footer {
-    min-height: 520px;
+    min-height: 420px;
   }
 
   .footer-nav {
     grid-template-columns: 1fr 1fr;
     gap: 28px;
     width: min(100% - 32px, 520px);
-    margin-top: 160px;
+    margin-top: 76px;
   }
 
   .footer-intro {

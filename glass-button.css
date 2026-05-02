@@ -1,3 +1,5 @@
+@import url("https://api.fontshare.com/v2/css?f[]=creato-display@400,500,600,700&display=swap");
+
 /*
  * glass-button.css — Reusable liquid glass pill button
  *
@@ -38,8 +40,7 @@
   --gb-pad-end:     30px;
   --gb-gap:         14px;
   --gb-label-size:  15px;
-  --gb-label-font:  -apple-system, BlinkMacSystemFont, "SF Pro Text",
-                    "Helvetica Neue", system-ui, sans-serif;
+  --gb-label-font: "Creato Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --gb-text:        #ffffff;
   --gb-focus:       rgba(110, 168, 254, 0.80);
 

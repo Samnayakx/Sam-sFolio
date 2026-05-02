@@ -8,157 +8,258 @@
   <link rel="stylesheet" href="site-pages.css">
   <script>try{var t=localStorage.getItem('portfolio-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
   <style>
-    /* ── Editorial about section ── */
-    .abt-editorial {
-      display: grid;
-      grid-template-columns: 44fr 56fr;
-      min-height: 92vh;
-      border-bottom: 1px solid var(--line);
-    }
-
-    /* Left column */
-    .abt-ed-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: clamp(64px, 9vh, 120px) clamp(24px, 5vw, 72px) clamp(40px, 6vh, 72px) clamp(24px, 5vw, 80px);
-    }
-
-    .abt-ed-body {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(24px, 3.5vh, 44px);
-      max-width: 500px;
-      padding-top: clamp(40px, 8vh, 100px);
-    }
-
-    .abt-ed-para {
-      margin: 0;
-      font-family: var(--body-font);
-      font-size: clamp(15px, 1.1vw, 18px);
-      line-height: 1.78;
-      color: var(--ink);
-      letter-spacing: 0.005em;
-    }
-
-    /* Bottom metadata */
-    .abt-ed-meta {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px 32px;
-      padding-top: 40px;
-    }
-
-    .abt-ed-meta-col {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .abt-ed-meta-label {
-      font-family: var(--body-font);
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .abt-ed-meta-val {
-      font-family: var(--body-font);
-      font-size: clamp(11px, 0.85vw, 13px);
-      font-style: italic;
-      line-height: 1.65;
-      color: var(--muted);
-    }
-
-    /* Right column — image panel */
-    .abt-ed-right {
-      position: relative;
+    /* ── About hero artwork ── */
+    .abt-hero-art {
       overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
     }
 
-    .abt-ed-img-wrap {
-      position: absolute;
-      top: clamp(32px, 5vh, 56px);
-      left: 0;
-      right: 0;
-      height: 500px;
-    }
-
-    .abt-ed-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 15%;
+    .abt-hero-picture,
+    .abt-hero-img {
       display: block;
-      filter: grayscale(100%);
+      width: 100%;
     }
 
-    /* Light theme image background */
-    .abt-ed-right { background: #f0ebe1; }
-    [data-theme="light"] .abt-ed-right { background: #ece7dd; }
+    .abt-hero-img {
+      height: auto;
+    }
 
     /* ── Smooth scroll ── */
     html { scroll-behavior: smooth; }
 
     /* ── Interests section ── */
     .abt-interests {
-      padding: clamp(64px, 8vw, 96px) 0;
+      padding: clamp(72px, 9vw, 116px) 0;
       border-top: 1px solid var(--line);
     }
 
-    .int-row {
+    .abt-interests-kicker {
+      display: block;
+      margin-bottom: 12px;
+      font-family: var(--body-font);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .int-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(48px, 6vw, 96px);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(18px, 2.4vw, 34px);
       align-items: start;
-      padding: clamp(36px, 4.5vw, 56px) 0;
-      border-bottom: 1px solid var(--line);
     }
 
-    .int-row:first-child { border-top: 1px solid var(--line); }
-
-    .int-left {
-      display: flex;
-      align-items: center;
-      gap: 28px;
+    .int-stamp {
+      --stamp-paper: #f6f2ea;
+      --stamp-ink: #080806;
+      --stamp-muted: rgba(8, 8, 6, 0.72);
+      --stamp-image: #d85d3f;
+      position: relative;
+      display: grid;
+      min-height: clamp(410px, 42vw, 560px);
+      overflow: hidden;
+      color: var(--stamp-ink);
+      background: var(--stamp-paper);
+      filter: drop-shadow(0 22px 54px rgba(0, 0, 0, 0.22));
+      transition: background 220ms ease, color 220ms ease, filter 220ms ease, transform 220ms ease;
+      clip-path: polygon(
+        0 10px, 10px 10px, 10px 0, 22px 0, 22px 10px, 34px 10px, 34px 0, 46px 0, 46px 10px, 58px 10px, 58px 0, 70px 0, 70px 10px, 82px 10px, 82px 0, 94px 0, 94px 10px, calc(100% - 94px) 10px, calc(100% - 94px) 0, calc(100% - 82px) 0, calc(100% - 82px) 10px, calc(100% - 70px) 10px, calc(100% - 70px) 0, calc(100% - 58px) 0, calc(100% - 58px) 10px, calc(100% - 46px) 10px, calc(100% - 46px) 0, calc(100% - 34px) 0, calc(100% - 34px) 10px, calc(100% - 22px) 10px, calc(100% - 22px) 0, calc(100% - 10px) 0, calc(100% - 10px) 10px, 100% 10px,
+        100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), calc(100% - 10px) 100%, calc(100% - 22px) 100%, calc(100% - 22px) calc(100% - 10px), calc(100% - 34px) calc(100% - 10px), calc(100% - 34px) 100%, calc(100% - 46px) 100%, calc(100% - 46px) calc(100% - 10px), calc(100% - 58px) calc(100% - 10px), calc(100% - 58px) 100%, calc(100% - 70px) 100%, calc(100% - 70px) calc(100% - 10px), calc(100% - 82px) calc(100% - 10px), calc(100% - 82px) 100%, calc(100% - 94px) 100%, calc(100% - 94px) calc(100% - 10px), 94px calc(100% - 10px), 94px 100%, 82px 100%, 82px calc(100% - 10px), 70px calc(100% - 10px), 70px 100%, 58px 100%, 58px calc(100% - 10px), 46px calc(100% - 10px), 46px 100%, 34px 100%, 34px calc(100% - 10px), 22px calc(100% - 10px), 22px 100%, 10px 100%, 10px calc(100% - 10px), 0 calc(100% - 10px)
+      );
     }
 
-    .int-icon {
-      width: 46px;
-      height: 46px;
-      flex-shrink: 0;
-      stroke: #f97316;
-      fill: none;
-      stroke-width: 1.4;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .int-stamp::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle, var(--bg) 0 6px, transparent 6.5px) top -6px left 10px / 24px 12px repeat-x,
+        radial-gradient(circle, var(--bg) 0 6px, transparent 6.5px) bottom -6px left 10px / 24px 12px repeat-x,
+        radial-gradient(circle, var(--bg) 0 6px, transparent 6.5px) left -6px top 10px / 12px 24px repeat-y,
+        radial-gradient(circle, var(--bg) 0 6px, transparent 6.5px) right -6px top 10px / 12px 24px repeat-y;
+    }
+
+    .int-stamp:nth-child(even) {
+      margin-top: 0;
+    }
+
+    .int-stamp--dark {
+      --stamp-paper: #050505;
+      --stamp-ink: #f8f4eb;
+      --stamp-muted: rgba(248, 244, 235, 0.72);
+      --stamp-image: #168eb3;
+    }
+
+    .int-stamp--blue {
+      --stamp-image: #1b89bb;
+    }
+
+    .int-stamp--green {
+      --stamp-image: #5fa86f;
+    }
+
+    .int-stamp--sand {
+      --stamp-image: #d7b76a;
+    }
+
+    .int-stamp--rose {
+      --stamp-image: #d97979;
+    }
+
+    .int-stamp:hover {
+      transform: translateY(-4px);
+      filter: drop-shadow(0 26px 58px rgba(0, 0, 0, 0.28));
+    }
+
+    .int-stamp--rose:hover {
+      --stamp-paper: #f3c9b2;
+      --stamp-ink: #2d1209;
+      --stamp-muted: rgba(45, 18, 9, 0.68);
+      --stamp-image: #275f48;
+    }
+
+    .int-stamp--blue:hover {
+      --stamp-paper: #d9ecff;
+      --stamp-ink: #071f4f;
+      --stamp-muted: rgba(7, 31, 79, 0.68);
+      --stamp-image: #ff8b4a;
+    }
+
+    .int-stamp--dark.int-stamp--blue:hover {
+      --stamp-paper: #112a5c;
+      --stamp-ink: #fff6de;
+      --stamp-muted: rgba(255, 246, 222, 0.74);
+      --stamp-image: #f4d35e;
+    }
+
+    .int-stamp--green:hover {
+      --stamp-paper: #143d31;
+      --stamp-ink: #fff8e5;
+      --stamp-muted: rgba(255, 248, 229, 0.72);
+      --stamp-image: #e46f3c;
+    }
+
+    .int-stamp--sand:hover {
+      --stamp-paper: #fff0b8;
+      --stamp-ink: #332000;
+      --stamp-muted: rgba(51, 32, 0, 0.68);
+      --stamp-image: #234f9a;
+    }
+
+    .int-stamp-copy {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      min-height: clamp(260px, 25vw, 340px);
+      padding: clamp(24px, 2.7vw, 34px) clamp(22px, 2.5vw, 32px) clamp(16px, 2vw, 22px);
     }
 
     .int-title {
+      max-width: 8.8ch;
       margin: 0;
       font-family: var(--display-font);
-      font-size: clamp(26px, 2.6vw, 42px);
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      color: var(--ink);
+      font-size: clamp(34px, 3.5vw, 56px);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.07em;
+      color: var(--stamp-ink);
     }
 
     .int-desc {
-      margin: 0;
-      padding-top: 4px;
+      max-width: 24ch;
+      margin: clamp(18px, 2.5vw, 28px) 0 0;
       font-family: var(--body-font);
-      font-size: clamp(14px, 1vw, 16px);
-      line-height: 1.78;
-      color: rgba(246, 240, 230, 0.52);
+      font-size: clamp(13px, 1.05vw, 16px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      color: var(--stamp-muted);
     }
 
-    [data-theme="light"] .int-desc { color: rgba(26, 20, 16, 0.54); }
+    .int-stamp-metric {
+      display: grid;
+      grid-template-columns: 0.7fr 1fr;
+      gap: 20px;
+      align-items: end;
+      margin-top: clamp(30px, 3.8vw, 56px);
+    }
 
-    @media (max-width: 700px) {
-      .int-row { grid-template-columns: 1fr; gap: 16px; }
+    .int-code {
+      font-family: var(--display-font);
+      font-size: clamp(36px, 3.8vw, 58px);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+      color: var(--stamp-ink);
+    }
+
+    .int-native {
+      justify-self: end;
+      font-family: var(--display-font);
+      font-size: clamp(30px, 3.2vw, 50px);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.08em;
+      color: var(--stamp-ink);
+    }
+
+    .int-stamp-meta {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      margin-top: 14px;
+      font-family: var(--body-font);
+      font-size: clamp(8px, 0.72vw, 10px);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: var(--stamp-ink);
+    }
+
+    .int-stamp-image {
+      min-height: clamp(150px, 17vw, 220px);
+      border-top: 1px solid color-mix(in srgb, var(--stamp-ink) 16%, transparent);
+      background: var(--stamp-image);
+    }
+
+    [data-theme="light"] .int-stamp {
+      filter: drop-shadow(0 18px 42px rgba(26, 20, 16, 0.16));
+    }
+
+    @media (max-width: 980px) {
+      .int-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: none;
+      }
+
+      .int-stamp:nth-child(even) {
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .int-grid {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .abt-interests {
+        padding: 56px 0;
+      }
+
+      .int-stamp {
+        min-height: 480px;
+      }
+
+      .int-stamp-copy {
+        min-height: 300px;
+      }
     }
 
     /* ── Infinite gallery ── */
@@ -246,30 +347,10 @@
       white-space: nowrap;
     }
 
-    /* Responsive */
-    @media (max-width: 860px) {
-      .abt-editorial {
-        grid-template-columns: 1fr;
+    @media (max-width: 680px) {
+      .abt-hero-img {
         min-height: auto;
       }
-      .abt-ed-right {
-        height: 56vw;
-        min-height: 280px;
-        order: -1; /* image above text on mobile */
-      }
-      .abt-ed-img-wrap {
-        position: relative;
-        top: 0; left: 0; right: 0; bottom: 0;
-        width: 100%; height: 100%;
-      }
-      .abt-ed-left {
-        padding: 40px clamp(20px, 5vw, 40px) 48px;
-      }
-      .abt-ed-body { padding-top: 0; }
-      .abt-ed-meta { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 480px) {
-      .abt-ed-meta { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -295,145 +376,64 @@
   </header>
 
   <main>
-    <section class="abt-editorial" aria-label="About Sambit">
-
-      <!-- Left: text + metadata -->
-      <div class="abt-ed-left">
-        <div class="abt-ed-body">
-          <p class="abt-ed-para">A product designer building at the frontier of AI — turning raw capability into experiences that feel human, intuitive, and inevitable. I work where careful craft meets the ability to ship.</p>
-          <p class="abt-ed-para">I came up through fashion, through graphic design, through years of obsessing over the details nobody notices but everyone feels. That foundation shapes everything I make — systems that hold up, interfaces that breathe, products people reach for without thinking.</p>
-          <p class="abt-ed-para">The best design isn't decoration. It's the moment a complex thing becomes obvious.</p>
-        </div>
-
-        <div class="abt-ed-meta">
-          <div class="abt-ed-meta-col">
-            <span class="abt-ed-meta-val">Sambit Nayak</span>
-            <span class="abt-ed-meta-val">2024</span>
-          </div>
-          <div class="abt-ed-meta-col">
-            <span class="abt-ed-meta-label">Disciplines</span>
-            <span class="abt-ed-meta-val">AI Product Design</span>
-            <span class="abt-ed-meta-val">Design Systems</span>
-            <span class="abt-ed-meta-val">Frontend Development</span>
-          </div>
-          <div class="abt-ed-meta-col">
-            <span class="abt-ed-meta-label">Based in</span>
-            <span class="abt-ed-meta-val">SF / NYC / Remote</span>
-          </div>
-          <div class="abt-ed-meta-col">
-            <span class="abt-ed-meta-label">Contact</span>
-            <span class="abt-ed-meta-val">sambitnayak.ux@gmail.com</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: portrait image -->
-      <div class="abt-ed-right">
-        <div class="abt-ed-img-wrap">
-          <img class="abt-ed-img" src="Images/sambit-portrait.png" alt="Sambit Nayak" draggable="false">
-        </div>
-      </div>
-
+    <section class="abt-hero-art" aria-label="About Sambit">
+      <picture class="abt-hero-picture">
+        <source media="(max-width: 680px)" srcset="Images/about%20mobile.png">
+        <img class="abt-hero-img" src="Images/about%20wide.png" alt="About Sambit Nayak" draggable="false">
+      </picture>
     </section>
+
     <!-- ── Interests & passions ── -->
     <section class="abt-interests shell" aria-label="Interests and passions">
+      <span class="abt-interests-kicker">Beyond Work</span>
+      <div class="int-grid">
+        <article class="int-stamp int-stamp--rose">
+          <div class="int-stamp-copy">
+            <h2 class="int-title">Traveling</h2>
+            <p class="int-desc">Moving through unfamiliar places resets my perspective and sharpens how I see space, people, and detail.</p>
+            <div class="int-stamp-metric">
+              <span class="int-code">01c</span>
+              <span class="int-native">旅行</span>
+            </div>
+            <div class="int-stamp-meta">
+              <span>SB.NYK&nbsp;&nbsp;000125</span>
+              <span>Traveling</span>
+            </div>
+          </div>
+          <div class="int-stamp-image" aria-label="Traveling image placeholder"></div>
+        </article>
 
-      <!-- Traveling -->
-      <div class="int-row">
-        <div class="int-left">
-          <svg class="int-icon" viewBox="0 0 46 46" aria-hidden="true">
-            <circle cx="23" cy="23" r="18"/>
-            <line x1="23" y1="5"  x2="23" y2="11"/>
-            <line x1="23" y1="35" x2="23" y2="41"/>
-            <line x1="5"  y1="23" x2="11" y2="23"/>
-            <line x1="35" y1="23" x2="41" y2="23"/>
-            <!-- needle -->
-            <path d="M23 10 L26 23 L23 36 L20 23 Z" stroke="#f97316" fill="rgba(249,115,22,0.12)" stroke-width="1.2"/>
-            <circle cx="23" cy="23" r="2.5" fill="#f97316" stroke="none"/>
-          </svg>
-          <h2 class="int-title">Traveling</h2>
-        </div>
-        <p class="int-desc">Moving through unfamiliar places resets my perspective. Every new city, coast, or mountain trail sharpens how I see space, people, and the small details that make design feel human.</p>
-      </div>
+        <article class="int-stamp int-stamp--dark int-stamp--blue">
+          <div class="int-stamp-copy">
+            <h2 class="int-title">Video Games</h2>
+            <p class="int-desc">Games taught me feedback loops, progression, and delight better than most design textbooks.</p>
+            <div class="int-stamp-metric">
+              <span class="int-code">02c</span>
+              <span class="int-native">遊戯</span>
+            </div>
+            <div class="int-stamp-meta">
+              <span>SB.NYK&nbsp;&nbsp;000226</span>
+              <span>Video Games</span>
+            </div>
+          </div>
+          <div class="int-stamp-image" aria-label="Video games image placeholder"></div>
+        </article>
 
-      <!-- Video Games -->
-      <div class="int-row">
-        <div class="int-left">
-          <svg class="int-icon" viewBox="0 0 46 46" aria-hidden="true">
-            <path d="M8 19 C8 15 11 13 15 13 L31 13 C35 13 38 15 38 19 L39 28 C39.5 32 37 36 33 36 L31 36 C29 36 28 35 27 34 L25 31 L21 31 L19 34 C18 35 17 36 15 36 L13 36 C9 36 6.5 32 7 28 Z"/>
-            <line x1="15" y1="20" x2="15" y2="27"/>
-            <line x1="11.5" y1="23.5" x2="18.5" y2="23.5"/>
-            <circle cx="29" cy="21" r="1.6"/>
-            <circle cx="33" cy="24.5" r="1.6"/>
-            <circle cx="29" cy="28" r="1.6"/>
-            <circle cx="25" cy="24.5" r="1.6"/>
-          </svg>
-          <h2 class="int-title">Video Games</h2>
-        </div>
-        <p class="int-desc">Games taught me more about feedback loops, progression, and delight than most design textbooks. I still believe the best UX lessons come from a well-designed level.</p>
-      </div>
-
-      <!-- Fashion Design -->
-      <div class="int-row">
-        <div class="int-left">
-          <svg class="int-icon" viewBox="0 0 46 46" aria-hidden="true">
-            <!-- Dress form / mannequin -->
-            <ellipse cx="23" cy="11" rx="5.5" ry="5"/>
-            <path d="M17.5 16 C14 21 11 28 9 37 L37 37 C35 28 32 21 28.5 16"/>
-            <line x1="9"  y1="37" x2="9"  y2="41"/>
-            <line x1="37" y1="37" x2="37" y2="41"/>
-            <line x1="6"  y1="41" x2="40" y2="41"/>
-            <!-- waist seam -->
-            <line x1="13" y1="27" x2="33" y2="27" stroke-opacity="0.45"/>
-            <!-- center line -->
-            <line x1="23" y1="16" x2="23" y2="37" stroke-opacity="0.35"/>
-          </svg>
-          <h2 class="int-title">Fashion Design</h2>
-        </div>
-        <p class="int-desc">Fashion is where I first understood that design is never just visual — it's tactile, temporal, and cultural. Those years shaped how I think about texture, identity, and narrative in everything I make.</p>
-      </div>
-
-      <!-- Graphic Design -->
-      <div class="int-row">
-        <div class="int-left">
-          <svg class="int-icon" viewBox="0 0 46 46" aria-hidden="true">
-            <!-- Bezier curve with anchor points -->
-            <path d="M8 37 C12 20 28 26 38 9" stroke="#f97316" stroke-width="1.6" fill="none"/>
-            <!-- Anchor nodes -->
-            <rect x="5.5" y="34.5" width="5" height="5" rx="1"/>
-            <rect x="35.5" y="6.5"  width="5" height="5" rx="1"/>
-            <!-- Control handles -->
-            <line x1="8"  y1="37" x2="16" y2="24" stroke-opacity="0.38"/>
-            <line x1="38" y1="9"  x2="28" y2="22" stroke-opacity="0.38"/>
-            <circle cx="16" cy="24" r="2" stroke-opacity="0.5"/>
-            <circle cx="28" cy="22" r="2" stroke-opacity="0.5"/>
-          </svg>
-          <h2 class="int-title">Graphic Design</h2>
-        </div>
-        <p class="int-desc">Before screens, there were grids, type, and ink. Graphic design gave me a rigorous foundation — the kind that makes you obsessive about alignment, hierarchy, and whitespace.</p>
-      </div>
-
-      <!-- Creative Coding -->
-      <div class="int-row">
-        <div class="int-left">
-          <svg class="int-icon" viewBox="0 0 46 46" aria-hidden="true">
-            <!-- Terminal window -->
-            <rect x="4" y="7" width="38" height="32" rx="3.5"/>
-            <line x1="4" y1="15" x2="42" y2="15"/>
-            <!-- traffic lights -->
-            <circle cx="9.5"  cy="11" r="1.5" fill="#f97316" stroke="none"/>
-            <circle cx="14.5" cy="11" r="1.5" fill="#f97316" stroke="none" opacity="0.55"/>
-            <circle cx="19.5" cy="11" r="1.5" fill="#f97316" stroke="none" opacity="0.25"/>
-            <!-- prompt chevron -->
-            <path d="M10 23 L15 27 L10 31"/>
-            <!-- cursor line -->
-            <line x1="17" y1="27" x2="26" y2="27" stroke-width="1.8"/>
-            <!-- second line of code, faded -->
-            <line x1="10" y1="34" x2="30" y2="34" stroke-opacity="0.3"/>
-          </svg>
-          <h2 class="int-title">Creative Coding</h2>
-        </div>
-        <p class="int-desc">Code is my second sketchbook. From generative art to interactive prototypes, I use it to explore ideas that static tools can't hold — and to build the things I can only imagine.</p>
+        <article class="int-stamp int-stamp--sand">
+          <div class="int-stamp-copy">
+            <h2 class="int-title">Fashion Design</h2>
+            <p class="int-desc">Fashion taught me that design is tactile, temporal, cultural, and always carried by identity.</p>
+            <div class="int-stamp-metric">
+              <span class="int-code">03c</span>
+              <span class="int-native">服飾</span>
+            </div>
+            <div class="int-stamp-meta">
+              <span>SB.NYK&nbsp;&nbsp;000327</span>
+              <span>Fashion Design</span>
+            </div>
+          </div>
+          <div class="int-stamp-image" aria-label="Fashion design image placeholder"></div>
+        </article>
       </div>
 
     </section>

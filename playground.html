@@ -58,25 +58,94 @@
     }
 
     .artifact-card {
-      background: transparent;
-      border: 1px solid var(--line);
+      --stamp-paper: #141414;
+      --stamp-ink: #f0ece4;
+      --stamp-muted: rgba(240, 236, 228, 0.62);
+      --stamp-accent: #d85d3f;
+      position: relative;
+      display: grid;
+      min-height: 500px;
+      overflow: hidden;
+      color: var(--stamp-ink);
+      background: var(--stamp-paper);
+      border: 0;
+      padding: 0;
       cursor: pointer;
-      transition: border-color 200ms ease;
+      filter: drop-shadow(0 22px 54px rgba(0, 0, 0, 0.22));
+      transition: background 220ms ease, color 220ms ease, filter 220ms ease, transform 220ms ease;
+      clip-path: polygon(
+        0 10px, 10px 10px, 10px 0, 22px 0, 22px 10px, 34px 10px, 34px 0, 46px 0, 46px 10px, 58px 10px, 58px 0, 70px 0, 70px 10px, 82px 10px, 82px 0, 94px 0, 94px 10px, calc(100% - 94px) 10px, calc(100% - 94px) 0, calc(100% - 82px) 0, calc(100% - 82px) 10px, calc(100% - 70px) 10px, calc(100% - 70px) 0, calc(100% - 58px) 0, calc(100% - 58px) 10px, calc(100% - 46px) 10px, calc(100% - 46px) 0, calc(100% - 34px) 0, calc(100% - 34px) 10px, calc(100% - 22px) 10px, calc(100% - 22px) 0, calc(100% - 10px) 0, calc(100% - 10px) 10px, 100% 10px,
+        100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), calc(100% - 10px) 100%, calc(100% - 22px) 100%, calc(100% - 22px) calc(100% - 10px), calc(100% - 34px) calc(100% - 10px), calc(100% - 34px) 100%, calc(100% - 46px) 100%, calc(100% - 46px) calc(100% - 10px), calc(100% - 58px) calc(100% - 10px), calc(100% - 58px) 100%, calc(100% - 70px) 100%, calc(100% - 70px) calc(100% - 10px), calc(100% - 82px) calc(100% - 10px), calc(100% - 82px) 100%, calc(100% - 94px) 100%, calc(100% - 94px) calc(100% - 10px), 94px calc(100% - 10px), 94px 100%, 82px 100%, 82px calc(100% - 10px), 70px calc(100% - 10px), 70px 100%, 58px 100%, 58px calc(100% - 10px), 46px calc(100% - 10px), 46px 100%, 34px 100%, 34px calc(100% - 10px), 22px calc(100% - 10px), 22px 100%, 10px 100%, 10px calc(100% - 10px), 0 calc(100% - 10px)
+      );
     }
 
-    .artifact-card:hover { border-color: rgba(246, 240, 230, 0.35); }
-    [data-theme="light"] .artifact-card:hover { border-color: rgba(26, 20, 16, 0.3); }
+    .artifact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle, var(--bg) 0 6px, transparent 6.5px) top -6px left 10px / 24px 12px repeat-x,
+        radial-gradient(circle, var(--bg) 0 6px, transparent 6.5px) bottom -6px left 10px / 24px 12px repeat-x,
+        radial-gradient(circle, var(--bg) 0 6px, transparent 6.5px) left -6px top 10px / 12px 24px repeat-y,
+        radial-gradient(circle, var(--bg) 0 6px, transparent 6.5px) right -6px top 10px / 12px 24px repeat-y;
+    }
+
+    .artifact-card:hover {
+      transform: translateY(-4px);
+      filter: drop-shadow(0 26px 58px rgba(0, 0, 0, 0.28));
+    }
+
+    .artifact-card:nth-child(4n + 1) {
+      --stamp-paper: #0e0e0e;
+      --stamp-ink: #e8e4dc;
+      --stamp-muted: rgba(232, 228, 220, 0.62);
+    }
+
+    .artifact-card:nth-child(4n + 2) {
+      --stamp-paper: #222222;
+      --stamp-ink: #f2ede5;
+      --stamp-muted: rgba(242, 237, 229, 0.65);
+    }
+
+    .artifact-card:nth-child(4n + 3) {
+      --stamp-paper: #2e2e2e;
+      --stamp-ink: #f5f1e9;
+      --stamp-muted: rgba(245, 241, 233, 0.65);
+    }
+
+    .artifact-card:nth-child(4n) {
+      --stamp-paper: #1a1a1a;
+      --stamp-ink: #ece8e0;
+      --stamp-muted: rgba(236, 232, 224, 0.65);
+    }
 
     .artifact-card[data-hidden="true"] { display: none; }
+
+    .artifact-card:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--stamp-ink) 72%, transparent);
+      outline-offset: 4px;
+    }
+
+    .card-copy {
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto auto;
+      min-height: 100%;
+      padding: clamp(24px, 2.6vw, 32px) clamp(22px, 2.4vw, 30px) clamp(16px, 2vw, 22px);
+    }
 
     /* Card image area */
     .card-img {
       position: relative;
-      aspect-ratio: 1 / 1;
+      min-height: 180px;
+      margin: clamp(22px, 2.4vw, 28px) 0 0;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-top: 1px solid color-mix(in srgb, var(--stamp-ink) 16%, transparent);
+      background: color-mix(in srgb, var(--stamp-accent) 86%, white 14%);
     }
 
     /* SVG placeholder graphic fills the cell */
@@ -85,65 +154,110 @@
       height: 100%;
       position: absolute;
       inset: 0;
+      opacity: 0.92;
     }
 
     .card-badge {
-      position: absolute;
-      top: 14px; right: 14px;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
       padding: 3px 10px;
       font-family: var(--body-font);
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
-
-    /* Card info row */
-    .card-info {
-      padding: 16px 18px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      border-top: 1px solid var(--line);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--stamp-ink);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      border: 1px solid color-mix(in srgb, var(--stamp-ink) 18%, transparent);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--stamp-paper) 86%, white 14%);
     }
 
     .card-name {
+      max-width: 8.8ch;
+      margin: 16px 0 0;
       font-family: var(--display-font);
-      font-size: clamp(15px, 1.2vw, 18px);
-      font-weight: 400;
-      color: var(--ink);
-      margin: 0 0 4px;
-      line-height: 1.2;
+      font-size: clamp(34px, 3.2vw, 52px);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.07em;
+      color: var(--stamp-ink);
     }
 
     .card-type {
+      max-width: 24ch;
+      margin: 16px 0 0;
       font-family: var(--body-font);
-      font-size: 12px;
-      color: var(--muted);
-      margin: 0;
+      font-size: clamp(13px, 1vw, 15px);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      color: var(--stamp-muted);
+    }
+
+    .card-info {
+      display: grid;
+      grid-template-columns: 0.72fr 1fr;
+      gap: 20px;
+      align-items: end;
+      margin-top: 18px;
+    }
+
+    .card-code {
+      font-family: var(--display-font);
+      font-size: clamp(36px, 3.4vw, 56px);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+      color: var(--stamp-ink);
+    }
+
+    .card-family {
+      justify-self: end;
+      font-family: var(--display-font);
+      font-size: clamp(28px, 2.6vw, 44px);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.08em;
+      color: var(--stamp-ink);
+    }
+
+    .card-footer {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      margin-top: 14px;
+      font-family: var(--body-font);
+      font-size: clamp(8px, 0.72vw, 10px);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: var(--stamp-ink);
     }
 
     .card-arrow {
-      flex-shrink: 0;
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      display: flex;
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      z-index: 1;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--muted);
-      transition: border-color 160ms ease, color 160ms ease, transform 160ms ease;
-      margin-top: 2px;
+      width: 28px;
+      height: 28px;
+      border: 1px solid color-mix(in srgb, var(--stamp-ink) 20%, transparent);
+      border-radius: 999px;
+      color: var(--stamp-ink);
+      background: color-mix(in srgb, var(--stamp-paper) 88%, white 12%);
+      transition: transform 160ms ease, border-color 160ms ease;
     }
 
     .artifact-card:hover .card-arrow {
-      border-color: var(--ink);
-      color: var(--ink);
       transform: rotate(45deg);
+      border-color: color-mix(in srgb, var(--stamp-ink) 48%, transparent);
+    }
+
+    [data-theme="light"] .artifact-card {
+      filter: drop-shadow(0 18px 42px rgba(26, 20, 16, 0.16));
     }
 
     /* ── Artifact detail overlay ── */
@@ -633,27 +747,36 @@
   var grid = document.getElementById('pg-cards');
 
   ARTIFACTS.forEach(function(art) {
+    var idx = ARTIFACTS.indexOf(art) + 1;
     var card = document.createElement('article');
     card.className = 'artifact-card';
+    card.style.setProperty('--stamp-accent', art.accent);
     card.setAttribute('data-id', art.id);
     card.setAttribute('data-filter', art.filter);
     card.setAttribute('tabindex', '0');
     card.setAttribute('role', 'button');
     card.setAttribute('aria-label', 'View ' + art.title);
     card.innerHTML =
-      '<div class="card-img">' +
-        '<div class="card-graphic">' + makeSVG(art.graphic, art.accent) + '</div>' +
+      '<div class="card-copy">' +
         '<span class="card-badge">' + art.badge + '</span>' +
-      '</div>' +
-      '<div class="card-info">' +
-        '<div>' +
-          '<h3 class="card-name">' + art.title + '</h3>' +
-          '<p class="card-type">' + art.type + '</p>' +
+        '<h3 class="card-name">' + art.title + '</h3>' +
+        '<p class="card-type">' + art.tagline + '</p>' +
+        '<div class="card-img">' +
+          '<div class="card-graphic">' + makeSVG(art.graphic, art.accent) + '</div>' +
+          '<span class="card-arrow" aria-hidden="true">' +
+            '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="10" x2="10" y2="2"/><polyline points="4,2 10,2 10,8"/></svg>' +
+          '</span>' +
         '</div>' +
-        '<span class="card-arrow" aria-hidden="true">' +
-          '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="10" x2="10" y2="2"/><polyline points="4,2 10,2 10,8"/></svg>' +
-        '</span>' +
-      '</div>';
+        '<div class="card-info">' +
+          '<span class="card-code">' + String(idx).padStart(2, '0') + 'c</span>' +
+          '<span class="card-family">' + art.type.split(' ')[0] + '</span>' +
+        '</div>' +
+        '<div class="card-footer">' +
+          '<span>SB.NYK&nbsp;&nbsp;000' + (100 + idx) + '</span>' +
+          '<span>' + art.type + '</span>' +
+        '</div>' +
+      '</div>' +
+      '';
 
     card.addEventListener('click', function() { openDetail(art.id); });
     card.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDetail(art.id); } });

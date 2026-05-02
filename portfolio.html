@@ -221,7 +221,7 @@
       height: var(--button-h);
       padding: 0 18px;
       border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
+      border-radius: 999px;
       background: transparent;
       font-size: 14px;
       font-family: var(--body-font);
@@ -2305,7 +2305,20 @@
         }, { threshold: 0.08 }).observe(footer);
       }
 
-      if (window.initFooterPixelName) window.initFooterPixelName();
+      /* initFooterPixelName must run after #site-content is visible;
+         calling it while display:none gives zero-size rects and an empty canvas */
+      (function () {
+        var sc = document.getElementById('site-content');
+        function tryInit() { if (window.initFooterPixelName) window.initFooterPixelName(); }
+        if (!sc || sc.classList.contains('ldr-revealed')) {
+          tryInit();
+        } else {
+          var obs = new MutationObserver(function () {
+            if (sc.classList.contains('ldr-revealed')) { obs.disconnect(); tryInit(); }
+          });
+          obs.observe(sc, { attributes: true, attributeFilter: ['class'] });
+        }
+      })();
 
       if (!motionOk) return;
 

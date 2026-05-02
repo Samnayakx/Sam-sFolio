@@ -8,50 +8,95 @@
   <link rel="stylesheet" href="site-pages.css">
   <script>try{var t=localStorage.getItem('portfolio-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
   <style>
-    /* ── About top section ── */
-    .abt-section {
-      padding: clamp(48px, 7vw, 96px) 0;
+    /* ── Editorial about section ── */
+    .abt-editorial {
+      display: grid;
+      grid-template-columns: 44fr 56fr;
+      min-height: 92vh;
+      border-bottom: 1px solid var(--line);
     }
 
-    .abt-inner {
+    /* Left column */
+    .abt-ed-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(64px, 9vh, 120px) clamp(24px, 5vw, 72px) clamp(40px, 6vh, 72px) clamp(24px, 5vw, 80px);
+    }
+
+    .abt-ed-body {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(24px, 3.5vh, 44px);
+      max-width: 500px;
+      padding-top: clamp(40px, 8vh, 100px);
+    }
+
+    .abt-ed-para {
+      margin: 0;
+      font-family: var(--body-font);
+      font-size: clamp(15px, 1.1vw, 18px);
+      line-height: 1.78;
+      color: var(--ink);
+      letter-spacing: 0.005em;
+    }
+
+    /* Bottom metadata */
+    .abt-ed-meta {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: clamp(48px, 6vw, 96px);
-      align-items: center;
+      gap: 20px 32px;
+      padding-top: 40px;
     }
 
-    .abt-name-col {
+    .abt-ed-meta-col {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    .abt-name-img {
-      width: clamp(260px, 38vw, 520px);
-      mix-blend-mode: screen;
+    .abt-ed-meta-label {
+      font-family: var(--body-font);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .abt-ed-meta-val {
+      font-family: var(--body-font);
+      font-size: clamp(11px, 0.85vw, 13px);
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* Right column — image panel */
+    .abt-ed-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .abt-ed-img-wrap {
+      position: absolute;
+      top: clamp(32px, 5vh, 56px);
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .abt-ed-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
       display: block;
     }
 
-    [data-theme="light"] .abt-name-img {
-      mix-blend-mode: multiply;
-    }
-
-    .abt-text-col {
-      border-left: 1px solid var(--line);
-      padding-left: clamp(32px, 4vw, 64px);
-    }
-
-    .abt-display {
-      margin: 0;
-      font-family: var(--display-font);
-      font-size: clamp(20px, 2.2vw, 34px);
-      font-weight: 400;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      max-width: 100%;
-      overflow-wrap: break-word;
-    }
+    /* Light theme image background */
+    .abt-ed-right { background: #f0ebe1; }
+    [data-theme="light"] .abt-ed-right { background: #ece7dd; }
 
     /* ── Smooth scroll ── */
     html { scroll-behavior: smooth; }
@@ -202,19 +247,28 @@
 
     /* Responsive */
     @media (max-width: 860px) {
-      .abt-inner {
+      .abt-editorial {
         grid-template-columns: 1fr;
-        gap: 48px;
+        min-height: auto;
       }
-      .abt-name-col {
-        justify-content: flex-start;
+      .abt-ed-right {
+        height: 56vw;
+        min-height: 280px;
+        order: -1; /* image above text on mobile */
       }
-      .abt-text-col {
-        border-left: none;
-        border-top: 1px solid var(--line);
-        padding-left: 0;
-        padding-top: 40px;
+      .abt-ed-img-wrap {
+        position: relative;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100%; height: 100%;
       }
+      .abt-ed-left {
+        padding: 40px clamp(20px, 5vw, 40px) 48px;
+      }
+      .abt-ed-body { padding-top: 0; }
+      .abt-ed-meta { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .abt-ed-meta { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -240,15 +294,46 @@
   </header>
 
   <main>
-    <section class="abt-section" aria-label="About Sambit">
-      <div class="shell abt-inner">
-        <div class="abt-name-col">
-          <img class="abt-name-img" src="Images/sambit-odia-2.png" alt="Sambit written in Odia script" draggable="false">
+    <section class="abt-editorial" aria-label="About Sambit">
+
+      <!-- Left: text + metadata -->
+      <div class="abt-ed-left">
+        <div class="abt-ed-body">
+          <p class="abt-ed-para">A product designer building at the frontier of AI — turning raw capability into experiences that feel human, intuitive, and inevitable. I work where careful craft meets the ability to ship.</p>
+          <p class="abt-ed-para">I came up through fashion, through graphic design, through years of obsessing over the details nobody notices but everyone feels. That foundation shapes everything I make — systems that hold up, interfaces that breathe, products people reach for without thinking.</p>
+          <p class="abt-ed-para">The best design isn't decoration. It's the moment a complex thing becomes obvious.</p>
         </div>
-        <div class="abt-text-col">
-          <h1 class="abt-display">a designer who builds at the edge of craft and code, turning complexity into clarity</h1>
+
+        <div class="abt-ed-meta">
+          <div class="abt-ed-meta-col">
+            <span class="abt-ed-meta-val">Sambit Nayak</span>
+            <span class="abt-ed-meta-val">2024</span>
+          </div>
+          <div class="abt-ed-meta-col">
+            <span class="abt-ed-meta-label">Disciplines</span>
+            <span class="abt-ed-meta-val">AI Product Design</span>
+            <span class="abt-ed-meta-val">Design Systems</span>
+            <span class="abt-ed-meta-val">Frontend Development</span>
+          </div>
+          <div class="abt-ed-meta-col">
+            <span class="abt-ed-meta-label">Based in</span>
+            <span class="abt-ed-meta-val">India</span>
+            <span class="abt-ed-meta-val">Open to opportunities</span>
+          </div>
+          <div class="abt-ed-meta-col">
+            <span class="abt-ed-meta-label">Contact</span>
+            <span class="abt-ed-meta-val">sambitnayak.ux@gmail.com</span>
+          </div>
         </div>
       </div>
+
+      <!-- Right: portrait image -->
+      <div class="abt-ed-right">
+        <div class="abt-ed-img-wrap">
+          <img class="abt-ed-img" src="Images/sambit-portrait.png" alt="Sambit Nayak" draggable="false">
+        </div>
+      </div>
+
     </section>
     <!-- ── Interests & passions ── -->
     <section class="abt-interests shell" aria-label="Interests and passions">
